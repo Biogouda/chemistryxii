@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alcohols, Phenols, and Ethers MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Alcohols, Phenols, and Ethers MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "The IUPAC name of CH₃CH₂OH is:",
+        options: ["Ethanol", "Methanol", "Ethyl alcohol", "Propanol"],
+        correct: 0
+      },
+      {
+        question: "Primary alcohols have the general formula:",
+        options: ["RCH₂OH", "R₂CHOH", "R₃COH", "ROH"],
+        correct: 0
+      },
+      {
+        question: "Ethanol can be prepared by hydration of:",
+        options: ["Ethene", "Ethane", "Ethyne", "Ethyl chloride"],
+        correct: 0
+      },
+      {
+        question: "The boiling point of alcohols is higher than alkanes due to:",
+        options: ["Covalent bonding", "Hydrogen bonding", "Ionic bonding", "Van der Waals forces"],
+        correct: 1
+      },
+      {
+        question: "Primary alcohols react with Na to produce:",
+        options: ["H₂ gas", "CO₂ gas", "O₂ gas", "No reaction"],
+        correct: 0
+      },
+      {
+        question: "The mechanism of dehydration of primary alcohols involves:",
+        options: ["E1 mechanism", "E2 mechanism", "SN1 mechanism", "SN2 mechanism"],
+        correct: 0
+      },
+      {
+        question: "Methanol is used as a:",
+        options: ["Solvent", "Pesticide", "Refrigerant", "Antiseptic"],
+        correct: 0
+      },
+      {
+        question: "Lucas test is used to distinguish between:",
+        options: ["Primary, secondary, tertiary alcohols", "Alcohols and phenols", "Alcohols and ethers", "Phenols and ethers"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of C₆H₅OH is:",
+        options: ["Phenol", "Phenyl alcohol", "Hydroxybenzene", "Benzyl alcohol"],
+        correct: 0
+      },
+      {
+        question: "Phenols are more acidic than alcohols due to:",
+        options: ["Resonance stabilization of phenoxide ion", "Higher boiling point", "Hydrogen bonding", "Covalent bonding"],
+        correct: 0
+      },
+      {
+        question: "Ethers have the general formula:",
+        options: ["ROR'", "ROH", "RCOOR'", "RCHO"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃OCH₃ is:",
+        options: ["Dimethyl ether", "Methyl ether", "Methoxymethane", "Ethoxymethane"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is prepared industrially by fermentation of:",
+        options: ["Sugars", "Alkenes", "Alkanes", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The solubility of alcohols in water is due to:",
+        options: ["Hydrogen bonding", "Covalent bonding", "Ionic bonding", "Van der Waals forces"],
+        correct: 0
+      },
+      {
+        question: "Dehydration of ethanol with conc. H₂SO₄ at 140°C produces:",
+        options: ["Ethene", "Diethyl ether", "Ethanal", "Ethane"],
+        correct: 1
+      },
+      {
+        question: "The test to identify primary alcohols involves oxidation to:",
+        options: ["Aldehydes", "Ketones", "Carboxylic acids", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "Phenol reacts with Br₂ in CS₂ to form:",
+        options: ["2,4,6-Tribromophenol", "o-Bromophenol", "p-Bromophenol", "Both o- and p-Bromophenol"],
+        correct: 3
+      },
+      {
+        question: "Ethers are prepared by Williamson’s synthesis using:",
+        options: ["Alkyl halide and sodium alkoxide", "Alcohol and H₂SO₄", "Alkene and water", "Phenol and NaOH"],
+        correct: 0
+      },
+      {
+        question: "The acidic nature of phenol is due to:",
+        options: ["O-H bond polarity", "Resonance in benzene ring", "Delocalization of phenoxide ion", "High boiling point"],
+        correct: 2
+      },
+      {
+        question: "Methanol is toxic because it is metabolized to:",
+        options: ["Formaldehyde", "Acetaldehyde", "Acetic acid", "Ethanol"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂OCH₂CH₃ is:",
+        options: ["Diethyl ether", "Ethoxyethane", "Ethyl ether", "Methoxyethane"],
+        correct: 1
+      },
+      {
+        question: "Primary alcohols are oxidized by PCC to form:",
+        options: ["Aldehydes", "Ketones", "Carboxylic acids", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "Phenol is prepared industrially by:",
+        options: ["Dow’s process", "Wurtz reaction", "Finkelstein reaction", "Sandmeyer reaction"],
+        correct: 0
+      },
+      {
+        question: "The boiling point of ethers is lower than alcohols due to:",
+        options: ["Lack of hydrogen bonding", "Stronger C-O bond", "Higher molecular weight", "Ionic bonding"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is used as a:",
+        options: ["Fuel", "Pesticide", "Refrigerant", "Antiseptic"],
+        correct: 0
+      },
+      {
+        question: "The Victor Meyer’s test distinguishes alcohols by forming:",
+        options: ["Nitrolic acids", "Esters", "Ethers", "Alkenes"],
+        correct: 0
+      },
+      {
+        question: "Phenol reacts with HNO₃ to form:",
+        options: ["o-Nitrophenol", "p-Nitrophenol", "2,4,6-Trinitrophenol", "Both o- and p-Nitrophenol"],
+        correct: 2
+      },
+      {
+        question: "Ethers are generally used as:",
+        options: ["Solvents", "Pesticides", "Fuels", "Antiseptics"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of (CH₃)₂CHOH is:",
+        options: ["Propan-2-ol", "Propan-1-ol", "Isopropyl alcohol", "Methyl ethanol"],
+        correct: 0
+      },
+      {
+        question: "Dehydration of primary alcohols requires:",
+        options: ["Mild heating", "Strong heating with conc. H₂SO₄", "Dilute H₂SO₄", "No heating"],
+        correct: 1
+      },
+      {
+        question: "Phenol is less soluble in water than alcohols due to:",
+        options: ["Hydrophobic benzene ring", "Stronger O-H bond", "Lack of hydrogen bonding", "Higher polarity"],
+        correct: 0
+      },
+      {
+        question: "The product of ethanol with Na is:",
+        options: ["Sodium ethoxide", "Ethyl sodium", "Ethane", "Ethene"],
+        correct: 0
+      },
+      {
+        question: "The mechanism of dehydration of primary alcohols involves formation of:",
+        options: ["Carbocation", "Carbanion", "Protonated alcohol", "Free radical"],
+        correct: 2
+      },
+      {
+        question: "Methanol is prepared industrially by:",
+        options: ["Catalytic reduction of CO", "Hydration of ethene", "Fermentation", "Dow’s process"],
+        correct: 0
+      },
+      {
+        question: "The test to identify tertiary alcohols uses:",
+        options: ["Lucas reagent", "FeCl₃", "Iodoform test", "Schiff’s reagent"],
+        correct: 0
+      },
+      {
+        question: "Phenol reacts with CHCl₃ and NaOH to form:",
+        options: ["Salicylaldehyde", "Benzoic acid", "Benzaldehyde", "Phthalic acid"],
+        correct: 0
+      },
+      {
+        question: "Ethers are cleaved by HI to form:",
+        options: ["Alcohols and alkyl iodides", "Alkenes", "Aldehydes", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of C₆H₅OCH₃ is:",
+        options: ["Methoxybenzene", "Phenyl methyl ether", "Anisole", "Methyl phenol"],
+        correct: 0
+      },
+      {
+        question: "Ethanol reacts with CH₃COOH to form:",
+        options: ["Ethyl acetate", "Methyl acetate", "Ethyl formate", "Methyl formate"],
+        correct: 0
+      },
+      {
+        question: "Phenol is used in the manufacture of:",
+        options: ["Bakelite", "Ethanol", "Ethers", "Alkenes"],
+        correct: 0
+      },
+      {
+        question: "The product of diethyl ether with conc. H₂SO₄ at 140°C is:",
+        options: ["Ethanol", "Ethene", "Ethyl hydrogen sulfate", "Ethanal"],
+        correct: 0
+      },
+      {
+        question: "Primary alcohols are oxidized by KMnO₄ to form:",
+        options: ["Aldehydes", "Ketones", "Carboxylic acids", "Ethers"],
+        correct: 2
+      },
+      {
+        question: "Phenol gives a violet colour with:",
+        options: ["FeCl₃", "Lucas reagent", "Iodoform", "Schiff’s reagent"],
+        correct: 0
+      },
+      {
+        question: "Ethers are prepared by dehydration of alcohols at:",
+        options: ["140°C with conc. H₂SO₄", "180°C with conc. H₂SO₄", "100°C with dilute H₂SO₄", "Room temperature"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂CH₂OH is:",
+        options: ["Propan-1-ol", "Propan-2-ol", "Propyl alcohol", "Ethanol"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with Zn dust is:",
+        options: ["Benzene", "Toluene", "Aniline", "Benzoic acid"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is used in:",
+        options: ["Antifreeze", "Pesticides", "Refrigerants", "Fertilizers"],
+        correct: 0
+      },
+      {
+        question: "The mechanism of electrophilic substitution in phenol involves:",
+        options: ["Carbocation formation", "Carbanion formation", "Sigma complex", "Free radical"],
+        correct: 2
+      },
+      {
+        question: "The product of methanol with PCl₅ is:",
+        options: ["CH₃Cl", "CH₃OH", "CH₂Cl₂", "CHCl₃"],
+        correct: 0
+      },
+      {
+        question: "Phenol is prepared from chlorobenzene by:",
+        options: ["Dow’s process", "Wurtz reaction", "Finkelstein reaction", "Sandmeyer reaction"],
+        correct: 0
+      },
+      {
+        question: "Ethers are less reactive than alcohols due to:",
+        options: ["Strong C-O-C bond", "Weak C-O bond", "Hydrogen bonding", "High polarity"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of (CH₃)₃COH is:",
+        options: ["2-Methylpropan-2-ol", "Tert-butanol", "Propan-2-ol", "Butan-1-ol"],
+        correct: 0
+      },
+      {
+        question: "The product of ethanol with HBr is:",
+        options: ["Ethyl bromide", "Ethene", "Ethanal", "Ethyl chloride"],
+        correct: 0
+      },
+      {
+        question: "Phenol reacts with CH₃COCl to form:",
+        options: ["Phenyl acetate", "Aspirin", "Salicylic acid", "Benzoic acid"],
+        correct: 0
+      },
+      {
+        question: "Ethers are used as anaesthetics, e.g.,:",
+        options: ["Diethyl ether", "Methanol", "Phenol", "Ethanol"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH(OH)CH₃ is:",
+        options: ["Propan-2-ol", "Propan-1-ol", "Isopropyl alcohol", "Ethanol"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with conc. HNO₃ is:",
+        options: ["2,4,6-Trinitrophenol", "o-Nitrophenol", "p-Nitrophenol", "Nitrobenzene"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is prepared from ethene using:",
+        options: ["Conc. H₂SO₄ followed by H₂O", "Dilute H₂SO₄", "HCl", "NaOH"],
+        correct: 0
+      },
+      {
+        question: "The test to identify phenols uses:",
+        options: ["FeCl₃", "Lucas reagent", "Iodoform test", "Schiff’s reagent"],
+        correct: 0
+      },
+      {
+        question: "The product of diethyl ether with PCl₅ is:",
+        options: ["Ethyl chloride", "Ethanol", "Ethene", "Ethanal"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of C₆H₅CH₂OH is:",
+        options: ["Benzyl alcohol", "Phenol", "Phenylmethanol", "Toluene alcohol"],
+        correct: 0
+      },
+      {
+        question: "The product of methanol with HI is:",
+        options: ["Methyl iodide", "Methane", "Methanal", "Methyl chloride"],
+        correct: 0
+      },
+      {
+        question: "Phenol is used as an:",
+        options: ["Antiseptic", "Pesticide", "Refrigerant", "Fuel"],
+        correct: 0
+      },
+      {
+        question: "The product of ethanol with CrO₃ is:",
+        options: ["Ethanal", "Ethanoic acid", "Ethene", "Ethyl acetate"],
+        correct: 0
+      },
+      {
+        question: "Ethers are prepared from alcohols by:",
+        options: ["Dehydration", "Oxidation", "Reduction", "Substitution"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃OCH₂CH₃ is:",
+        options: ["Methoxyethane", "Ethoxymethane", "Dimethyl ether", "Ethyl methyl ether"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with NaOH is:",
+        options: ["Sodium phenoxide", "Phenol", "Benzene", "Aniline"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is used in the manufacture of:",
+        options: ["Vinegar", "Bakelite", "Pesticides", "Refrigerants"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with Br₂ in water is:",
+        options: ["2,4,6-Tribromophenol", "o-Bromophenol", "p-Bromophenol", "Benzene"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂CH(OH)CH₃ is:",
+        options: ["Butan-2-ol", "Butan-1-ol", "Propan-2-ol", "Pentan-2-ol"],
+        correct: 0
+      },
+      {
+        question: "The product of ethanol with SOCl₂ is:",
+        options: ["Ethyl chloride", "Ethene", "Ethanal", "Ethyl bromide"],
+        correct: 0
+      },
+      {
+        question: "Phenol is prepared from cumene by:",
+        options: ["Cumene hydroperoxide process", "Dow’s process", "Wurtz reaction", "Finkelstein reaction"],
+        correct: 0
+      },
+      {
+        question: "Ethers are insoluble in water due to:",
+        options: ["Lack of hydrogen bonding", "Strong C-O bond", "High polarity", "Ionic bonding"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of (CH₃)₂CHOCH₃ is:",
+        options: ["2-Methoxypropane", "Methoxypropane", "Dimethyl ether", "Isopropyl methyl ether"],
+        correct: 0
+      },
+      {
+        question: "The product of methanol with CH₃COOH is:",
+        options: ["Methyl acetate", "Ethyl acetate", "Methyl formate", "Ethyl formate"],
+        correct: 0
+      },
+      {
+        question: "Phenol reacts with CH₂N₂ to form:",
+        options: ["Anisole", "Benzene", "Phenol", "Toluene"],
+        correct: 0
+      },
+      {
+        question: "Ethanol is used as a:",
+        options: ["Beverage", "Pesticide", "Refrigerant", "Fertilizer"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with H₂SO₄ is:",
+        options: ["Phenol sulfonic acid", "Benzoic acid", "Toluene", "Benzene"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂OH is:",
+        options: ["Ethanol", "Methanol", "Propanol", "Butanol"],
+        correct: 0
+      },
+      {
+        question: "The product of ethanol with Cu at 300°C is:",
+        options: ["Ethanal", "Ethanoic acid", "Ethene", "Ethyl acetate"],
+        correct: 0
+      },
+      {
+        question: "Phenol is used in the synthesis of:",
+        options: ["Aspirin", "Ethanol", "Ethers", "Alkenes"],
+        correct: 0
+      },
+      {
+        question: "The product of diethyl ether with HBr is:",
+        options: ["Ethyl bromide", "Ethanol", "Ethene", "Ethanal"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of C₆H₅OC₂H₅ is:",
+        options: ["Ethoxybenzene", "Phenyl ethyl ether", "Anisole", "Ethyl phenol"],
+        correct: 0
+      },
+      {
+        question: "The product of methanol with Na is:",
+        options: ["Sodium methoxide", "Methyl sodium", "Methane", "Methene"],
+        correct: 0
+      },
+      {
+        question: "The mechanism of dehydration of primary alcohols is catalyzed by:",
+        options: ["Acid", "Base", "Neutral", "Free radical"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂CH₂OCH₃ is:",
+        options: ["Methoxypropane", "Propoxymethane", "Dimethyl ether", "Ethyl methyl ether"],
+        correct: 0
+      },
+      {
+        question: "The product of phenol with CH₃I is:",
+        options: ["Anisole", "Benzene", "Toluene", "Phenol"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

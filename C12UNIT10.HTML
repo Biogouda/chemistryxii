@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haloalkanes and Haloarenes MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Haloalkanes and Haloarenes MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Haloalkanes are compounds containing a halogen atom bonded to:",
+        options: ["An aromatic ring", "An sp³ carbon", "An sp² carbon", "A nitrogen atom"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂Cl is:",
+        options: ["Chloroethane", "Ethyl chloride", "Methyl chloride", "Chloroethene"],
+        correct: 0
+      },
+      {
+        question: "The C-X bond in haloalkanes is:",
+        options: ["Non-polar", "Polar due to electronegativity difference", "Ionic", "Metallic"],
+        correct: 1
+      },
+      {
+        question: "The boiling point of haloalkanes compared to alkanes is:",
+        options: ["Lower", "Higher", "Same", "Unpredictable"],
+        correct: 1
+      },
+      {
+        question: "Haloalkanes are generally insoluble in:",
+        options: ["Water", "Ethanol", "Ether", "Benzene"],
+        correct: 0
+      },
+      {
+        question: "The mechanism of SN2 reaction involves:",
+        options: ["Carbocation formation", "Single step with backside attack", "Two steps", "Free radical formation"],
+        correct: 1
+      },
+      {
+        question: "SN1 reactions are favored in:",
+        options: ["Primary haloalkanes", "Secondary haloalkanes", "Tertiary haloalkanes", "Vinyl halides"],
+        correct: 2
+      },
+      {
+        question: "Optical rotation is exhibited by haloalkanes that are:",
+        options: ["Achiral", "Chiral", "Symmetrical", "Non-polar"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CH₃CH(Cl)CH₃ is:",
+        options: ["2-Chloropropane", "1-Chloropropane", "Chloroethane", "3-Chloropropane"],
+        correct: 0
+      },
+      {
+        question: "The reactivity of haloalkanes in SN2 reactions follows the order:",
+        options: ["I > Br > Cl > F", "F > Cl > Br > I", "Cl > Br > I > F", "Br > I > Cl > F"],
+        correct: 0
+      },
+      {
+        question: "Haloarenes have a halogen atom bonded to:",
+        options: ["An sp³ carbon", "An sp² carbon", "An sp carbon", "A nitrogen atom"],
+        correct: 1
+      },
+      {
+        question: "The C-X bond in haloarenes is stronger than in haloalkanes due to:",
+        options: ["sp³ hybridization", "Resonance with the aromatic ring", "Longer bond length", "Lower electronegativity"],
+        correct: 1
+      },
+      {
+        question: "Halogens in monosubstituted haloarenes are:",
+        options: ["Ortho-para directing", "Meta directing", "Non-directing", "Deactivating only"],
+        correct: 0
+      },
+      {
+        question: "Dichloromethane is used as a:",
+        options: ["Pesticide", "Solvent", "Refrigerant", "Anaesthetic"],
+        correct: 1
+      },
+      {
+        question: "Trichloromethane is commonly known as:",
+        options: ["Chloroform", "Carbon tetrachloride", "Iodoform", "Freon"],
+        correct: 0
+      },
+      {
+        question: "The environmental effect of DDT includes:",
+        options: ["Ozone depletion", "Bioaccumulation", "Acid rain", "Greenhouse effect"],
+        correct: 1
+      },
+      {
+        question: "Freons are primarily responsible for:",
+        options: ["Bioaccumulation", "Ozone layer depletion", "Soil pollution", "Water pollution"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of C₆H₅Cl is:",
+        options: ["Chlorobenzene", "Phenyl chloride", "Benzyl chloride", "Chloroarene"],
+        correct: 0
+      },
+      {
+        question: "The bond length of C-X in haloalkanes increases as:",
+        options: ["F > Cl > Br > I", "I > Br > Cl > F", "Cl > F > Br > I", "Br > I > Cl > F"],
+        correct: 1
+      },
+      {
+        question: "Haloalkanes undergo nucleophilic substitution with:",
+        options: ["OH⁻", "H⁺", "Cl₂", "O₂"],
+        correct: 0
+      },
+      {
+        question: "The product of CH₃CH₂Br with alcoholic KOH is:",
+        options: ["CH₃CH₂OH", "CH₂=CH₂", "CH₃CHO", "CH₃CH₃"],
+        correct: 1
+      },
+      {
+        question: "The SN2 reaction rate depends on:",
+        options: ["Nucleophile strength only", "Substrate and nucleophile", "Solvent only", "Temperature only"],
+        correct: 1
+      },
+      {
+        question: "The intermediate in an SN1 reaction is a:",
+        options: ["Carbanion", "Carbocation", "Free radical", "Transition state"],
+        correct: 1
+      },
+      {
+        question: "Chiral haloalkanes have a carbon atom with:",
+        options: ["Two identical groups", "Three identical groups", "Four different groups", "No substituents"],
+        correct: 2
+      },
+      {
+        question: "The dipole moment of haloalkanes is due to:",
+        options: ["C-C bond", "C-X bond polarity", "Symmetry", "Non-polar bonds"],
+        correct: 1
+      },
+      {
+        question: "Haloarenes do not undergo SN2 reactions due to:",
+        options: ["Weak C-X bond", "Resonance stabilization", "Steric hindrance", "Low electronegativity"],
+        correct: 1
+      },
+      {
+        question: "Tetrachloromethane is used as a:",
+        options: ["Solvent", "Pesticide", "Anaesthetic", "Refrigerant"],
+        correct: 0
+      },
+      {
+        question: "Iodoform is used as an:",
+        options: ["Antiseptic", "Pesticide", "Solvent", "Refrigerant"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CHCl₃ is:",
+        options: ["Trichloromethane", "Chloroform", "Carbon trichloride", "Methyl trichloride"],
+        correct: 0
+      },
+      {
+        question: "BHC is commonly known as:",
+        options: ["DDT", "Freon", "Gammexane", "Chloroform"],
+        correct: 2
+      },
+      {
+        question: "The reaction of haloalkanes with Na in ether is called:",
+        options: ["Wurtz reaction", "Sandmeyer reaction", "Finkelstein reaction", "Swarts reaction"],
+        correct: 0
+      },
+      {
+        question: "The product of CH₃Cl with AgCN is:",
+        options: ["CH₃CN", "CH₃NC", "CH₃OH", "CH₃NH₂"],
+        correct: 1
+      },
+      {
+        question: "The SN1 reaction is favored in:",
+        options: ["Non-polar solvents", "Polar protic solvents", "Aprotic solvents", "Gas phase"],
+        correct: 1
+      },
+      {
+        question: "The directive influence of chlorine in chlorobenzene is:",
+        options: ["Ortho-para directing, deactivating", "Meta directing", "Ortho-para directing, activating", "Non-directing"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₂Cl₂ is:",
+        options: ["Dichloromethane", "Methylene chloride", "Chloroform", "Carbon dichloride"],
+        correct: 0
+      },
+      {
+        question: "The density of haloalkanes compared to water is:",
+        options: ["Lower", "Higher", "Same", "Unpredictable"],
+        correct: 1
+      },
+      {
+        question: "The reaction of haloarenes with NaNH₂ forms:",
+        options: ["Aniline", "Phenol", "Benzene", "Benzyne intermediate"],
+        correct: 3
+      },
+      {
+        question: "The environmental effect of freons includes:",
+        options: ["Bioaccumulation", "Ozone depletion", "Acid rain", "Soil erosion"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CCl₄ is:",
+        options: ["Tetrachloromethane", "Carbon tetrachloride", "Chloroform", "Methyl tetrachloride"],
+        correct: 0
+      },
+      {
+        question: "The reaction of CH₃CH₂I with NaI in acetone is called:",
+        options: ["Wurtz reaction", "Finkelstein reaction", "Swarts reaction", "Sandmeyer reaction"],
+        correct: 1
+      },
+      {
+        question: "The product of chlorobenzene with Cl₂ in the presence of FeCl₃ is:",
+        options: ["1,2-Dichlorobenzene", "1,4-Dichlorobenzene", "Benzene", "Chlorotoluene"],
+        correct: 1
+      },
+      {
+        question: "The solubility of haloalkanes in water is low due to:",
+        options: ["Strong hydrogen bonding", "Weak van der Waals forces", "Inability to form hydrogen bonds", "High polarity"],
+        correct: 2
+      },
+      {
+        question: "The SN2 reaction is a:",
+        options: ["First-order reaction", "Second-order reaction", "Zero-order reaction", "Third-order reaction"],
+        correct: 1
+      },
+      {
+        question: "The product of CH₃CH₂Br with Ag₂O is:",
+        options: ["CH₃CH₂OH", "CH₃CHO", "C₂H₅OC₂H₅", "CH₂=CH₂"],
+        correct: 2
+      },
+      {
+        question: "The halogen in haloarenes is less reactive due to:",
+        options: ["Longer C-X bond", "Partial double bond character", "Lower electronegativity", "Steric hindrance"],
+        correct: 1
+      },
+      {
+        question: "DDT is used as a:",
+        options: ["Solvent", "Pesticide", "Refrigerant", "Anaesthetic"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CHI₃ is:",
+        options: ["Triiodomethane", "Iodoform", "Methyl triiodide", "Carbon triiodide"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with Mg in dry ether forms:",
+        options: ["Grignard reagent", "Alkene", "Alcohol", "Ether"],
+        correct: 0
+      },
+      {
+        question: "The SN1 reaction rate depends on:",
+        options: ["Nucleophile concentration", "Substrate concentration", "Solvent polarity", "Both substrate and nucleophile"],
+        correct: 1
+      },
+      {
+        question: "The product of chlorobenzene with HNO₃/H₂SO₄ is:",
+        options: ["1-Chloro-2-nitrobenzene", "1-Chloro-4-nitrobenzene", "Nitrobenzene", "Chlorotoluene"],
+        correct: 1
+      },
+      {
+        question: "The environmental effect of BHC includes:",
+        options: ["Ozone depletion", "Bioaccumulation", "Acid rain", "Greenhouse effect"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CH₃CH(Br)CH₂CH₃ is:",
+        options: ["2-Bromobutane", "1-Bromobutane", "3-Bromobutane", "4-Bromobutane"],
+        correct: 0
+      },
+      {
+        question: "The C-X bond strength in haloalkanes follows the order:",
+        options: ["C-F > C-Cl > C-Br > C-I", "C-I > C-Br > C-Cl > C-F", "C-Cl > C-F > C-Br > C-I", "C-Br > C-I > C-Cl > C-F"],
+        correct: 0
+      },
+      {
+        question: "Haloalkanes undergo elimination reactions to form:",
+        options: ["Alkanes", "Alkenes", "Alcohols", "Ethers"],
+        correct: 1
+      },
+      {
+        question: "The reaction of haloarenes with CuCN forms:",
+        options: ["Phenol", "Benzoic acid", "Benzonitrile", "Aniline"],
+        correct: 2
+      },
+      {
+        question: "The polarity of the C-X bond in haloalkanes makes the carbon:",
+        options: ["Nucleophilic", "Electrophilic", "Neutral", "Non-reactive"],
+        correct: 1
+      },
+      {
+        question: "The product of CH₃Br with KCN is:",
+        options: ["CH₃CN", "CH₃NC", "CH₃OH", "CH₃NH₂"],
+        correct: 0
+      },
+      {
+        question: "The SN2 reaction is favored in:",
+        options: ["Polar protic solvents", "Polar aprotic solvents", "Non-polar solvents", "Acidic solvents"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of C₆H₅CH₂Cl is:",
+        options: ["Benzyl chloride", "Chlorobenzene", "Phenylmethyl chloride", "Toluene chloride"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with NH₃ forms:",
+        options: ["Amines", "Alkenes", "Alcohols", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The product of chlorobenzene with CH₃Cl/AlCl₃ is:",
+        options: ["Toluene", "Chlorotoluene", "Benzene", "No reaction"],
+        correct: 3
+      },
+      {
+        question: "The environmental effect of chloroform includes:",
+        options: ["Ozone depletion", "Potential carcinogenicity", "Acid rain", "Greenhouse effect"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of (CH₃)₃CBr is:",
+        options: ["2-Bromo-2-methylpropane", "1-Bromobutane", "Tert-butyl bromide", "2-Bromobutane"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with AgNO₂ forms:",
+        options: ["Nitroalkane", "Alkyl nitrite", "Alcohol", "Alkene"],
+        correct: 1
+      },
+      {
+        question: "The SN1 reaction involves a:",
+        options: ["Planar carbocation", "Tetrahedral intermediate", "Linear transition state", "Free radical"],
+        correct: 0
+      },
+      {
+        question: "The product of CH₃CH₂Cl with aqueous KOH is:",
+        options: ["CH₃CH₂OH", "CH₂=CH₂", "CH₃CHO", "CH₃CH₃"],
+        correct: 0
+      },
+      {
+        question: "The halogen in haloarenes directs incoming electrophiles to:",
+        options: ["Ortho and meta positions", "Meta position only", "Ortho and para positions", "Para position only"],
+        correct: 2
+      },
+      {
+        question: "Dichloromethane is also known as:",
+        options: ["Methylene chloride", "Chloroform", "Carbon tetrachloride", "Iodoform"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with LiAlH₄ forms:",
+        options: ["Alkanes", "Alkenes", "Alcohols", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The product of chlorobenzene with NaOH at high temperature and pressure is:",
+        options: ["Phenol", "Benzene", "Aniline", "Chlorotoluene"],
+        correct: 0
+      },
+      {
+        question: "The environmental effect of tetrachloromethane includes:",
+        options: ["Ozone depletion", "Bioaccumulation", "Acid rain", "Greenhouse effect"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₃CH₂CH₂Br is:",
+        options: ["1-Bromopropane", "2-Bromopropane", "3-Bromopropane", "Propyl bromide"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with Zn/HCl forms:",
+        options: ["Alkanes", "Alkenes", "Alcohols", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The SN2 reaction is stereospecific, resulting in:",
+        options: ["Retention of configuration", "Inversion of configuration", "Racemization", "No change in stereochemistry"],
+        correct: 1
+      },
+      {
+        question: "The product of chlorobenzene with H₂SO₄/SO₃ is:",
+        options: ["Chlorobenzenesulfonic acid", "Phenol", "Benzene", "Chlorotoluene"],
+        correct: 0
+      },
+      {
+        question: "The use of iodoform includes:",
+        options: ["Solvent", "Pesticide", "Antiseptic", "Refrigerant"],
+        correct: 2
+      },
+      {
+        question: "The IUPAC name of CH₂=CHCH₂Cl is:",
+        options: ["3-Chloropropene", "1-Chloropropene", "Allyl chloride", "Vinyl chloride"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with NaSH forms:",
+        options: ["Thiols", "Alkenes", "Alcohols", "Ethers"],
+        correct: 0
+      },
+      {
+        question: "The product of chlorobenzene with NH₃/Cu₂O is:",
+        options: ["Aniline", "Phenol", "Benzene", "No reaction"],
+        correct: 0
+      },
+      {
+        question: "The environmental effect of DDT includes:",
+        options: ["Ozone depletion", "Harm to wildlife", "Acid rain", "Greenhouse effect"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of CH₃CHCl₂ is:",
+        options: ["1,1-Dichloroethane", "1,2-Dichloroethane", "Chloroethane", "Dichloromethane"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with KOH in ethanol forms:",
+        options: ["Alcohols", "Alkenes", "Ethers", "Amines"],
+        correct: 1
+      },
+      {
+        question: "The C-X bond in haloarenes is shorter than in haloalkanes due to:",
+        options: ["sp³ hybridization", "sp² hybridization", "Longer bond length", "Lower electronegativity"],
+        correct: 1
+      },
+      {
+        question: "The use of BHC includes:",
+        options: ["Solvent", "Pesticide", "Refrigerant", "Anaesthetic"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of (CH₃)₂CHCl is:",
+        options: ["2-Chloropropane", "1-Chloropropane", "Isopropyl chloride", "3-Chloropropane"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with NaOR forms:",
+        options: ["Alcohols", "Ethers", "Alkenes", "Amines"],
+        correct: 1
+      },
+      {
+        question: "The product of chlorobenzene with CH₃COCl/AlCl₃ is:",
+        options: ["Acetophenone", "Toluene", "Benzene", "Chlorotoluene"],
+        correct: 0
+      },
+      {
+        question: "The environmental effect of freons includes:",
+        options: ["Global warming", "Bioaccumulation", "Soil pollution", "Water pollution"],
+        correct: 0
+      },
+      {
+        question: "The IUPAC name of CH₂ClCH₂Cl is:",
+        options: ["1,2-Dichloroethane", "1,1-Dichloroethane", "Dichloromethane", "Chloroethane"],
+        correct: 0
+      },
+      {
+        question: "The reaction of haloalkanes with Na₂S forms:",
+        options: ["Thiols", "Sulfides", "Alcohols", "Ethers"],
+        correct: 1
+      },
+      {
+        question: "The SN1 reaction is favored for haloalkanes with:",
+        options: ["Primary carbon", "Secondary carbon", "Tertiary carbon", "Vinyl carbon"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

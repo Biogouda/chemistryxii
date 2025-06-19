@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutions MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Solutions MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "A solution is defined as a:",
+        options: ["Heterogeneous mixture", "Homogeneous mixture", "Pure substance", "Colloid"],
+        correct: 1
+      },
+      {
+        question: "Which of the following is a type of solution?",
+        options: ["Solid in gas", "Liquid in solid", "Gas in gas", "Solid in liquid"],
+        correct: 2
+      },
+      {
+        question: "The concentration of a solution is expressed as molarity when it is:",
+        options: ["Mass of solute per liter", "Moles of solute per liter", "Mass of solute per kg", "Moles of solute per kg"],
+        correct: 1
+      },
+      {
+        question: "Molality is defined as:",
+        options: ["Moles of solute per liter of solution", "Moles of solute per kg of solvent", "Mass of solute per liter", "Mass of solute per kg of solution"],
+        correct: 1
+      },
+      {
+        question: "Henry’s law is related to the solubility of:",
+        options: ["Solids in liquids", "Gases in liquids", "Liquids in liquids", "Gases in solids"],
+        correct: 1
+      },
+      {
+        question: "According to Henry’s law, the solubility of a gas is proportional to:",
+        options: ["Temperature", "Pressure", "Volume", "Mole fraction"],
+        correct: 1
+      },
+      {
+        question: "A solid solution of two metals is called:",
+        options: ["Alloy", "Amalgam", "Colloid", "Emulsion"],
+        correct: 0
+      },
+      {
+        question: "Raoult’s law applies to:",
+        options: ["Ideal solutions", "Non-ideal solutions", "Colloidal solutions", "Saturated solutions"],
+        correct: 0
+      },
+      {
+        question: "Raoult’s law states that the vapor pressure of a solution is proportional to:",
+        options: ["Mole fraction of solvent", "Mole fraction of solute", "Mass of solute", "Volume of solution"],
+        correct: 0
+      },
+      {
+        question: "Relative lowering of vapor pressure is a:",
+        options: ["Colligative property", "Physical property", "Chemical property", "Thermal property"],
+        correct: 0
+      },
+      {
+        question: "The elevation of boiling point is directly proportional to:",
+        options: ["Molarity", "Molality", "Mole fraction", "Mass fraction"],
+        correct: 1
+      },
+      {
+        question: "The depression of freezing point depends on:",
+        options: ["Nature of solvent", "Molality of solute", "Volume of solution", "Pressure"],
+        correct: 1
+      },
+      {
+        question: "Osmotic pressure of a solution is given by the formula:",
+        options: ["π = CRT", "π = MRT", "π = nRT/V", "π = P/RT"],
+        correct: 0
+      },
+      {
+        question: "Colligative properties depend on:",
+        options: ["Nature of solute", "Number of solute particles", "Nature of solvent", "Volume of solution"],
+        correct: 1
+      },
+      {
+        question: "The van’t Hoff factor (i) accounts for:",
+        options: ["Solute dissociation", "Solvent density", "Solution volume", "Temperature change"],
+        correct: 0
+      },
+      {
+        question: "For a non-electrolyte, the van’t Hoff factor is:",
+        options: ["0", "1", "2", "Greater than 2"],
+        correct: 1
+      },
+      {
+        question: "Abnormal molecular mass is observed when:",
+        options: ["Solute dissociates or associates", "Solvent evaporates", "Solution is saturated", "Temperature decreases"],
+        correct: 0
+      },
+      {
+        question: "The molecular mass of a solute can be determined using:",
+        options: ["Boiling point elevation", "Density measurement", "Viscosity", "Surface tension"],
+        correct: 0
+      },
+      {
+        question: "Which solution has the highest osmotic pressure?",
+        options: ["0.1 M NaCl", "0.1 M Glucose", "0.1 M Urea", "0.1 M Sucrose"],
+        correct: 0
+      },
+      {
+        question: "The relative lowering of vapor pressure is equal to:",
+        options: ["Mole fraction of solute", "Mole fraction of solvent", "Molality", "Molarity"],
+        correct: 0
+      },
+      {
+        question: "Which is an example of a solid solution?",
+        options: ["Sugar in water", "Brass", "Air", "Salt in water"],
+        correct: 1
+      },
+      {
+        question: "The boiling point of a solution is always:",
+        options: ["Lower than the solvent", "Equal to the solvent", "Higher than the solvent", "Unchanged"],
+        correct: 2
+      },
+      {
+        question: "The freezing point of a solution is always:",
+        options: ["Higher than the solvent", "Lower than the solvent", "Equal to the solvent", "Unchanged"],
+        correct: 1
+      },
+      {
+        question: "Which property is used to determine molecular mass in dilute solutions?",
+        options: ["Viscosity", "Osmotic pressure", "Density", "Refractive index"],
+        correct: 1
+      },
+      {
+        question: "The van’t Hoff factor for NaCl in water is approximately:",
+        options: ["1", "2", "3", "4"],
+        correct: 1
+      },
+      {
+        question: "A solution with a van’t Hoff factor greater than 1 indicates:",
+        options: ["Association", "Dissociation", "No change", "Precipitation"],
+        correct: 1
+      },
+      {
+        question: "The solubility of gases in liquids generally decreases with:",
+        options: ["Increasing temperature", "Increasing pressure", "Decreasing volume", "Adding solute"],
+        correct: 0
+      },
+      {
+        question: "Which concentration unit is temperature-independent?",
+        options: ["Molarity", "Molality", "Mole fraction", "Mass percentage"],
+        correct: 1
+      },
+      {
+        question: "The elevation of boiling point constant (Kb) depends on:",
+        options: ["Solute", "Solvent", "Solution volume", "Pressure"],
+        correct: 1
+      },
+      {
+        question: "The depression of freezing point constant (Kf) is characteristic of:",
+        options: ["Solute", "Solvent", "Solution", "Temperature"],
+        correct: 1
+      },
+      {
+        question: "Osmotic pressure is directly proportional to:",
+        options: ["Volume", "Temperature", "Pressure", "Mass of solute"],
+        correct: 1
+      },
+      {
+        question: "Which solution is isotonic with 0.1 M NaCl?",
+        options: ["0.1 M Glucose", "0.05 M CaCl2", "0.2 M Urea", "0.1 M KCl"],
+        correct: 0
+      },
+      {
+        question: "Raoult’s law is not obeyed by:",
+        options: ["Ideal solutions", "Dilute solutions", "Non-ideal solutions", "Azeotropic mixtures"],
+        correct: 2
+      },
+      {
+        question: "The molecular mass determined by colligative properties is:",
+        options: ["Apparent molecular mass", "True molecular mass", "Atomic mass", "Formula mass"],
+        correct: 0
+      },
+      {
+        question: "The van’t Hoff factor for CaCl2 in water is approximately:",
+        options: ["1", "2", "3", "4"],
+        correct: 2
+      },
+      {
+        question: "Which colligative property is most sensitive for molecular mass determination?",
+        options: ["Boiling point elevation", "Freezing point depression", "Osmotic pressure", "Vapor pressure lowering"],
+        correct: 2
+      },
+      {
+        question: "A solution of glucose in water is an example of:",
+        options: ["Solid in liquid", "Liquid in liquid", "Gas in liquid", "Solid in solid"],
+        correct: 0
+      },
+      {
+        question: "The solubility of a gas in a liquid is affected by:",
+        options: ["Nature of solvent only", "Nature of gas only", "Both gas and solvent", "Temperature only"],
+        correct: 2
+      },
+      {
+        question: "Which is a colligative property?",
+        options: ["Viscosity", "Surface tension", "Boiling point elevation", "Density"],
+        correct: 2
+      },
+      {
+        question: "Abnormal molecular mass is caused by:",
+        options: ["High temperature", "Solute dissociation or association", "Solvent evaporation", "Low pressure"],
+        correct: 1
+      },
+      {
+        question: "The van’t Hoff factor for a weak electrolyte is:",
+        options: ["Equal to 1", "Less than 1", "Between 1 and its maximum value", "Greater than 2"],
+        correct: 2
+      },
+      {
+        question: "The relative lowering of vapor pressure知らせindependent of:",
+        options: ["Temperature", "Nature of solute", "Mole fraction", "Nature of solvent"],
+        correct: 1
+      },
+      {
+        question: "Which solution has the lowest freezing point?",
+        options: ["0.1 M Glucose", "0.1 M NaCl 0.1 M NaCl", "0.1 M Urea", "0.1 M Sucrose"],
+        correct: 1
+      },
+      {
+        question: "The boiling point elevation is measured using:",
+        options: ["Osmometer", "Ebullioscope", "Cryoscope", "Manometer"],
+        correct: 1
+      },
+      {
+        question: "The freezing point depression is measured using:",
+        options: ["Osmometer", "Ebullioscope", "Cryoscope", "Manometer"],
+        correct: 2
+      },
+      {
+        question: "A solution with a van’t Hoff factor less than 1 indicates:",
+        options: ["Dissociation", "Association", "No change", "Ionization"],
+        correct: 1
+      },
+      {
+        question: "The osmotic pressure of a solution depends on:",
+        options: ["Nature of solvent", "Number of solute particles", "Volume of solvent", "Mass of solvent"],
+        correct: 1
+      },
+      {
+        question: "Which is an example of a liquid in liquid solution?",
+        options: ["Sugar in water", "Ethanol in water", "Brass", "Air"],
+        correct: 1
+      },
+      {
+        question: "The molecular mass of a polymer is best determined by:",
+        options: ["Boiling point elevation", "Freezing point depression", "Osmotic pressure", "Vapor pressure lowering"],
+        correct: 2
+      },
+      {
+        question: "The van’t Hoff factor corrects for deviations in:",
+        options: ["Ideal gas behavior", "Colligative properties", "Solution density", "Vapor pressure"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

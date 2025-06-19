@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p-Block Elements (Group 18) MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">p-Block Elements (Group 18) MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Group 18 elements are also known as:",
+        options: ["Halogens", "Noble gases", "Chalcogens", "Alkali metals"],
+        correct: 1
+      },
+      {
+        question: "The general electronic configuration of Group 18 elements is:",
+        options: ["ns²np⁴", "ns²np⁵", "ns²np⁶", "ns²np³"],
+        correct: 2
+      },
+      {
+        question: "The most abundant noble gas in the Earth's atmosphere is:",
+        options: ["Helium", "Neon", "Argon", "Krypton"],
+        correct: 2
+      },
+      {
+        question: "The primary source of helium is:",
+        options: ["Air", "Natural gas", "Sea water", "Rocks"],
+        correct: 1
+      },
+      {
+        question: "The atomic radius of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Increases across a period"],
+        correct: 0
+      },
+      {
+        question: "The ionization energy of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is lowest for helium"],
+        correct: 1
+      },
+      {
+        question: "Noble gases are chemically inert due to their:",
+        options: ["Incomplete valence shell", "High ionization energy", "Low electronegativity", "Small atomic size"],
+        correct: 1
+      },
+      {
+        question: "The boiling point of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas used in lighting is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 1
+      },
+      {
+        question: "Helium is used in:",
+        options: ["Water purification", "Balloon filling", "Fertilizer production", "Dye synthesis"],
+        correct: 1
+      },
+      {
+        question: "The noble gas discovered on the sun before Earth is:",
+        options: ["Argon", "Helium", "Neon", "Krypton"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in medical imaging (MRI) is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 0
+      },
+      {
+        question: "The van der Waals forces in noble gases:",
+        options: ["Increase down the group", "Decrease down the group", "Remain constant", "Are absent"],
+        correct: 0
+      },
+      {
+        question: "The noble gas with the highest ionization energy is:",
+        options: ["Helium", "Neon", "Argon", "Radon"],
+        correct: 0
+      },
+      {
+        question: "Noble gases are monatomic because of their:",
+        options: ["High reactivity", "Stable electronic configuration", "Low boiling points", "High electronegativity"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in headlights of cars is:",
+        options: ["Helium", "Neon", "Xenon", "Krypton"],
+        correct: 2
+      },
+      {
+        question: "The density of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas that forms the most compounds is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 3
+      },
+      {
+        question: "The first noble gas compound synthesized was:",
+        options: ["XeF₂", "XePtF₆", "KrF₂", "NeF₂"],
+        correct: 1
+      },
+      {
+        question: "Xenon forms compounds due to its:",
+        options: ["High ionization energy", "Low ionization energy", "Small atomic size", "High electronegativity"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in diving tanks is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 0
+      },
+      {
+        question: "Radon is:",
+        options: ["Non-radioactive", "Radioactive", "A liquid at room temperature", "Highly reactive"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in advertising signs is:",
+        options: ["Helium", "Neon", "Krypton", "Radon"],
+        correct: 1
+      },
+      {
+        question: "The melting point of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas with the lowest boiling point is:",
+        options: ["Helium", "Neon", "Argon", "Krypton"],
+        correct: 0
+      },
+      {
+        question: "Argon is used in:",
+        options: ["Welding", "Fertilizer production", "Water purification", "Dye synthesis"],
+        correct: 0
+      },
+      {
+        question: "The noble gas that is a potential health hazard due to radioactivity is:",
+        options: ["Helium", "Neon", "Argon", "Radon"],
+        correct: 3
+      },
+      {
+        question: "The solubility of noble gases in water generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas used in lasers is:",
+        options: ["Helium", "Neon", "Krypton", "Xenon"],
+        correct: 1
+      },
+      {
+        question: "The chemical inertness of noble gases is due to their:",
+        options: ["Open valence shell", "Complete valence shell", "High reactivity", "Low atomic mass"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in cryogenics is:",
+        options: ["Helium", "Neon", "Argon", "Krypton"],
+        correct: 0
+      },
+      {
+        question: "The atomic number of xenon is:",
+        options: ["36", "54", "86", "18"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in ion thrusters for spacecraft is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 3
+      },
+      {
+        question: "The polarizability of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas that forms XeF₄ is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 3
+      },
+      {
+        question: "The shape of XeF₂ is:",
+        options: ["Linear", "Bent", "Trigonal planar", "Tetrahedral"],
+        correct: 0
+      },
+      {
+        question: "The hybridization of xenon in XeF₂ is:",
+        options: ["sp³", "sp³d", "sp³d²", "sp²"],
+        correct: 1
+      },
+      {
+        question: "The shape of XeF₄ is:",
+        options: ["Tetrahedral", "Square planar", "Trigonal bipyramidal", "Octahedral"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in incandescent bulbs is:",
+        options: ["Helium", "Neon", "Argon", "Krypton"],
+        correct: 2
+      },
+      {
+        question: "The noble gas with the highest atomic mass is:",
+        options: ["Helium", "Neon", "Argon", "Radon"],
+        correct: 3
+      },
+      {
+        question: "The noble gas used in anaesthesia is:",
+        options: ["Helium", "Neon", "Xenon", "Krypton"],
+        correct: 2
+      },
+      {
+        question: "The occurrence of noble gases is primarily in:",
+        options: ["Earth’s crust", "Atmosphere", "Oceans", "Minerals"],
+        correct: 1
+      },
+      {
+        question: "The noble gas that does not form any compounds is:",
+        options: ["Helium", "Xenon", "Krypton", "Radon"],
+        correct: 0
+      },
+      {
+        question: "The critical temperature of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas used in dating rocks is:",
+        options: ["Helium", "Neon", "Argon", "Radon"],
+        correct: 2
+      },
+      {
+        question: "The reactivity of Group 18 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for helium"],
+        correct: 0
+      },
+      {
+        question: "The noble gas used in fluorescent tubes is:",
+        options: ["Helium", "Neon", "Argon", "Krypton"],
+        correct: 2
+      },
+      {
+        question: "The liquefaction of noble gases becomes easier down the group due to:",
+        options: ["Decreasing van der Waals forces", "Increasing van der Waals forces", "Increasing ionization energy", "Decreasing atomic size"],
+        correct: 1
+      },
+      {
+        question: "The noble gas used in deep-sea diving is:",
+        options: ["Helium", "Neon", "Argon", "Xenon"],
+        correct: 0
+      },
+      {
+        question: "The noble gas with the lowest ionization energy is:",
+        options: ["Helium", "Neon", "Argon", "Radon"],
+        correct: 3
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

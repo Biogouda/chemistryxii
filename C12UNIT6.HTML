@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isolation of Elements MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">General Principles and Processes of Isolation of Elements MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "The process of extracting a metal from its ore is called:",
+        options: ["Refining", "Metallurgy", "Concentration", "Calcination"],
+        correct: 1
+      },
+      {
+        question: "Concentration of ore involves:",
+        options: ["Removing impurities", "Reducing the ore", "Oxidizing the ore", "Refining the metal"],
+        correct: 0
+      },
+      {
+        question: "Froth flotation is used to concentrate:",
+        options: ["Oxide ores", "Sulphide ores", "Carbonate ores", "Chloride ores"],
+        correct: 1
+      },
+      {
+        question: "Magnetic separation is used for ores that are:",
+        options: ["Magnetic", "Non-magnetic", "Sulphides", "Oxides"],
+        correct: 0
+      },
+      {
+        question: "Calcination involves heating the ore:",
+        options: ["In presence of oxygen", "In absence of air", "With carbon", "In water"],
+        correct: 1
+      },
+      {
+        question: "Roasting is primarily used for:",
+        options: ["Oxide ores", "Sulphide ores", "Carbonate ores", "Silicate ores"],
+        correct: 1
+      },
+      {
+        question: "The reduction of metal oxides to metals is done using:",
+        options: ["Water", "Carbon or aluminium", "Oxygen", "Nitrogen"],
+        correct: 1
+      },
+      {
+        question: "Electrolytic reduction is used for extracting:",
+        options: ["Iron", "Copper", "Aluminium", "Zinc"],
+        correct: 2
+      },
+      {
+        question: "Refining of metals is done to:",
+        options: ["Remove impurities", "Reduce the ore", "Concentrate the ore", "Oxidize the metal"],
+        correct: 0
+      },
+      {
+        question: "The main ore of aluminium is:",
+        options: ["Bauxite", "Haematite", "Chalcopyrite", "Galena"],
+        correct: 0
+      },
+      {
+        question: "The process used to extract aluminium from bauxite is:",
+        options: ["Bessemer process", "Hall-Heroult process", "Blast furnace", "Mond process"],
+        correct: 1
+      },
+      {
+        question: "The electrolyte in the extraction of aluminium is:",
+        options: ["NaCl", "Cryolite with Al₂O₃", "H₂SO₄", "KCl"],
+        correct: 1
+      },
+      {
+        question: "The main ore of copper is:",
+        options: ["Malachite", "Haematite", "Bauxite", "Sphalerite"],
+        correct: 0
+      },
+      {
+        question: "Copper is extracted from its sulphide ore by:",
+        options: ["Electrolytic reduction", "Self-reduction", "Carbon reduction", "Aluminium reduction"],
+        correct: 1
+      },
+      {
+        question: "The process of purifying copper is called:",
+        options: ["Electrorefining", "Roasting", "Calcination", "Smelting"],
+        correct: 0
+      },
+      {
+        question: "The main ore of zinc is:",
+        options: ["Zinc blende", "Chalcopyrite", "Bauxite", "Magnetite"],
+        correct: 0
+      },
+      {
+        question: "Zinc is extracted from its ore by:",
+        options: ["Electrolytic reduction", "Carbon reduction", "Self-reduction", "Aluminium reduction"],
+        correct: 1
+      },
+      {
+        question: "The main ore of iron is:",
+        options: ["Haematite", "Bauxite", "Chalcopyrite", "Galena"],
+        correct: 0
+      },
+      {
+        question: "Iron is extracted using a:",
+        options: ["Blast furnace", "Electric arc furnace", "Reverberatory furnace", "Electrolytic cell"],
+        correct: 0
+      },
+      {
+        question: "The reducing agent in the blast furnace is:",
+        options: ["Carbon monoxide", "Oxygen", "Hydrogen", "Nitrogen"],
+        correct: 0
+      },
+      {
+        question: "The flux used in the extraction of iron is:",
+        options: ["Silica", "Limestone", "Cryolite", "Carbon"],
+        correct: 1
+      },
+      {
+        question: "The purpose of flux in metallurgy is to:",
+        options: ["Reduce the ore", "Form slag with impurities", "Oxidize the ore", "Increase temperature"],
+        correct: 1
+      },
+      {
+        question: "Bayer’s process is used to concentrate:",
+        options: ["Copper ore", "Aluminium ore", "Zinc ore", "Iron ore"],
+        correct: 1
+      },
+      {
+        question: "The anode in the electrorefining of copper is:",
+        options: ["Pure copper", "Impure copper", "Graphite", "Zinc"],
+        correct: 1
+      },
+      {
+        question: "The cathode in the electrorefining of copper is:",
+        options: ["Pure copper", "Impure copper", "Graphite", "Zinc"],
+        correct: 0
+      },
+      {
+        question: "The froth flotation process uses a collector like:",
+        options: ["Pine oil", "Limestone", "Cryolite", "Carbon"],
+        correct: 0
+      },
+      {
+        question: "Smelting involves:",
+        options: ["Heating with a reducing agent", "Heating without air", "Electrolytic reduction", "Dissolving in acid"],
+        correct: 0
+      },
+      {
+        question: "The impurity removed as slag in iron extraction is:",
+        options: ["Silica", "Carbon", "Sulphur", "Phosphorus"],
+        correct: 0
+      },
+      {
+        question: "The Hall-Heroult process produces:",
+        options: ["Pure iron", "Pure aluminium", "Pure copper", "Pure zinc"],
+        correct: 1
+      },
+      {
+        question: "The carbon reduction method is NOT suitable for:",
+        options: ["Iron", "Zinc", "Aluminium", "Copper"],
+        correct: 2
+      },
+      {
+        question: "The process of converting sulphide ore to oxide by heating is:",
+        options: ["Calcination", "Roasting", "Smelting", "Refining"],
+        correct: 1
+      },
+      {
+        question: "The electrolyte used in zinc extraction is:",
+        options: ["ZnSO₄", "NaCl", "H₂SO₄", "Cryolite"],
+        correct: 0
+      },
+      {
+        question: "The Bessemer process is associated with:",
+        options: ["Aluminium extraction", "Copper refining", "Steel production", "Zinc extraction"],
+        correct: 2
+      },
+      {
+        question: "The gangue in an ore is:",
+        options: ["The metal compound", "The impurity", "The reducing agent", "The flux"],
+        correct: 1
+      },
+      {
+        question: "The purpose of roasting is to:",
+        options: ["Remove moisture", "Convert sulphide to oxide", "Reduce the ore", "Form slag"],
+        correct: 1
+      },
+      {
+        question: "The metal extracted by leaching with cyanide is:",
+        options: ["Iron", "Copper", "Gold", "Aluminium"],
+        correct: 2
+      },
+      {
+        question: "The Mond process is used for refining:",
+        options: ["Nickel", "Copper", "Iron", "Aluminium"],
+        correct: 0
+      },
+      {
+        question: "The electrolyte in aluminium extraction lowers the:",
+        options: ["Melting point of Al₂O₃", "Boiling point of Al₂O₃", "Density of aluminium", "Conductivity"],
+        correct: 0
+      },
+      {
+        question: "The slag in iron extraction is primarily:",
+        options: ["CaSiO₃", "Fe₂O₃", "Al₂O₃", "ZnS"],
+        correct: 0
+      },
+      {
+        question: "The self-reduction process is used in the extraction of:",
+        options: ["Aluminium", "Copper", "Iron", "Zinc"],
+        correct: 1
+      },
+      {
+        question: "The primary step in bauxite purification is:",
+        options: ["Roasting", "Leaching with NaOH", "Calcination", "Smelting"],
+        correct: 1
+      },
+      {
+        question: "The anode in aluminium extraction is made of:",
+        options: ["Copper", "Graphite", "Zinc", "Iron"],
+        correct: 1
+      },
+      {
+        question: "The process of zone refining is used for:",
+        options: ["Iron", "Copper", "Silicon", "Aluminium"],
+        correct: 2
+      },
+      {
+        question: "The ore of copper, chalcopyrite, has the formula:",
+        options: ["CuFeS₂", "Cu₂O", "CuCO₃", "CuS"],
+        correct: 0
+      },
+      {
+        question: "The reducing agent in zinc extraction is:",
+        options: ["Carbon", "Aluminium", "Hydrogen", "Oxygen"],
+        correct: 0
+      },
+      {
+        question: "The impurity in bauxite is primarily:",
+        options: ["Silica", "Iron oxide", "Both silica and iron oxide", "Sulphur"],
+        correct: 2
+      },
+      {
+        question: "The liquation process is used for refining metals with:",
+        options: ["High melting points", "Low melting points", "High density", "Low density"],
+        correct: 1
+      },
+      {
+        question: "The extraction of iron involves the reduction of:",
+        options: ["Fe₂O₃", "FeS", "FeCO₃", "FeCl₃"],
+        correct: 0
+      },
+      {
+        question: "The vanadium pentoxide catalyst is used in the extraction of:",
+        options: ["Iron", "Copper", "Sulphuric acid", "Aluminium"],
+        correct: 2
+      },
+      {
+        question: "The process of poling is used in the refining of:",
+        options: ["Copper", "Iron", "Aluminium", "Zinc"],
+        correct: 0
+      },
+      {
+        question: "The occurrence of zinc is mainly as:",
+        options: ["Oxide", "Sulphide", "Carbonate", "Silicate"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

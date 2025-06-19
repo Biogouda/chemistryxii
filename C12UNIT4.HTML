@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemical Kinetics MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Chemical Kinetics MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "The rate of a chemical reaction is defined as:",
+        options: ["Change in concentration per unit time", "Total concentration of reactants", "Amount of product formed", "Time taken for reaction completion"],
+        correct: 0
+      },
+      {
+        question: "Instantaneous rate of reaction is measured as:",
+        options: ["Average rate over time", "Rate at a specific moment", "Total product formed", "Rate at equilibrium"],
+        correct: 1
+      },
+      {
+        question: "Which factor does NOT affect the rate of a reaction?",
+        options: ["Concentration", "Temperature", "Catalyst", "Color of reactants"],
+        correct: 3
+      },
+      {
+        question: "Increasing the concentration of reactants generally:",
+        options: ["Decreases reaction rate", "Increases reaction rate", "Has no effect", "Stops the reaction"],
+        correct: 1
+      },
+      {
+        question: "A catalyst affects the rate of reaction by:",
+        options: ["Increasing activation energy", "Decreasing activation energy", "Changing reaction products", "Increasing temperature"],
+        correct: 1
+      },
+      {
+        question: "The order of a reaction is:",
+        options: ["Sum of stoichiometric coefficients", "Sum of powers of concentration terms in rate law", "Number of reactants", "Number of products"],
+        correct: 1
+      },
+      {
+        question: "Molecularity of a reaction is:",
+        options: ["Number of molecules in the rate law", "Number of molecules in the reaction step", "Order of the reaction", "Sum of concentrations"],
+        correct: 1
+      },
+      {
+        question: "The rate law for a reaction is expressed as:",
+        options: ["Rate = k[A][B]", "Rate = k[A] + [B]", "Rate = k/[A][B]", "Rate = k[A]/[B]"],
+        correct: 0
+      },
+      {
+        question: "The specific rate constant (k) has units of:",
+        options: ["mol L⁻¹ s⁻¹", "L mol⁻¹ s⁻¹ for first order", "s⁻¹ for first order", "L² mol⁻² s⁻¹ for third order"],
+        correct: 2
+      },
+      {
+        question: "For a zero-order reaction, the integrated rate equation is:",
+        options: ["[A] = [A]₀ - kt", "ln[A] = -kt + ln[A]₀", "1/[A] = kt + 1/[A]₀", "[A] = kt + [A]₀"],
+        correct: 0
+      },
+      {
+        question: "The half-life of a first-order reaction is:",
+        options: ["0.693/k", "k/0.693", "1/k[A]₀", "k[A]₀/2"],
+        correct: 0
+      },
+      {
+        question: "The half-life of a zero-order reaction depends on:",
+        options: ["Rate constant only", "Initial concentration", "Temperature only", "Catalyst"],
+        correct: 1
+      },
+      {
+        question: "Collision theory states that a reaction occurs when molecules:",
+        options: ["Collide with any energy", "Collide with sufficient energy and proper orientation", "Are in the same phase", "Have high concentration"],
+        correct: 1
+      },
+      {
+        question: "Activation energy is the:",
+        options: ["Energy released in a reaction", "Minimum energy required for a reaction", "Energy of products", "Energy of reactants"],
+        correct: 1
+      },
+      {
+        question: "The Arrhenius equation relates rate constant to:",
+        options: ["Concentration", "Temperature and activation energy", "Pressure", "Volume"],
+        correct: 1
+      },
+      {
+        question: "The Arrhenius equation is given by:",
+        options: ["k = Ae^(-Ea/RT)", "k = Ae^(Ea/RT)", "k = A + e^(-Ea/RT)", "k = A - e^(Ea/RT)"],
+        correct: 0
+      },
+      {
+        question: "The pre-exponential factor (A) in the Arrhenius equation represents:",
+        options: ["Activation energy", "Collision frequency", "Temperature", "Rate constant"],
+        correct: 1
+      },
+      {
+        question: "For a first-order reaction, the integrated rate equation is:",
+        options: ["[A] = [A]₀ - kt", "ln[A] = -kt + ln[A]₀", "1/[A] = kt + 1/[A]₀", "[A] = kt + [A]₀"],
+        correct: 1
+      },
+      {
+        question: "The unit of rate constant for a zero-order reaction is:",
+        options: ["s⁻¹", "mol L⁻¹ s⁻¹", "L mol⁻¹ s⁻¹", "L² mol⁻² s⁻¹"],
+        correct: 1
+      },
+      {
+        question: "Increasing temperature generally increases reaction rate because:",
+        options: ["Activation energy decreases", "More molecules have sufficient energy", "Concentration decreases", "Catalyst is activated"],
+        correct: 1
+      },
+      {
+        question: "The order of a reaction can be:",
+        options: ["Only an integer", "Fractional or negative", "Always positive", "Zero or negative only"],
+        correct: 1
+      },
+      {
+        question: "Molecularity is always:",
+        options: ["Fractional", "Negative", "A positive integer", "Zero"],
+        correct: 2
+      },
+      {
+        question: "The rate of a reaction is doubled when the concentration of a reactant is doubled. The order with respect to that reactant is:",
+        options: ["0", "1", "2", "3"],
+        correct: 1
+      },
+      {
+        question: "The half-life of a first-order reaction is independent of:",
+        options: ["Rate constant", "Initial concentration", "Temperature", "Activation energy"],
+        correct: 1
+      },
+      {
+        question: "A catalyst participates in a reaction by:",
+        options: ["Providing an alternative pathway", "Increasing reactant concentration", "Changing the reaction order", "Reducing temperature"],
+        correct: 0
+      },
+      {
+        question: "The rate constant of a reaction increases with:",
+        options: ["Decreasing temperature", "Increasing temperature", "Increasing concentration", "Decreasing activation energy"],
+        correct: 1
+      },
+      {
+        question: "The slope of the plot of ln[A] vs. time for a first-order reaction is:",
+        options: ["k", "-k", "k/[A]₀", "-k/[A]₀"],
+        correct: 1
+      },
+      {
+        question: "For a zero-order reaction, the plot of [A] vs. time is:",
+        options: ["A straight line with negative slope", "A straight line with positive slope", "A curve", "A horizontal line"],
+        correct: 0
+      },
+      {
+        question: "The energy barrier that reactants must overcome is called:",
+        options: ["Kinetic energy", "Potential energy", "Activation energy", "Thermal energy"],
+        correct: 2
+      },
+      {
+        question: "The Arrhenius equation shows that the rate constant increases when:",
+        options: ["Ea increases", "T decreases", "T increases", "A decreases"],
+        correct: 2
+      },
+      {
+        question: "The rate of a reaction is independent of concentration in a:",
+        options: ["First-order reaction", "Second-order reaction", "Zero-order reaction", "Third-order reaction"],
+        correct: 2
+      },
+      {
+        question: "The time taken for 50% of a first-order reaction to complete is called:",
+        options: ["Rate constant", "Half-life", "Activation time", "Reaction time"],
+        correct: 1
+      },
+      {
+        question: "Collision theory assumes that reactions occur only if:",
+        options: ["Molecules are in the gas phase", "Molecules collide with proper orientation", "Temperature is low", "Concentration is high"],
+        correct: 1
+      },
+      {
+        question: "The rate law is determined by:",
+        options: ["Stoichiometry of the reaction", "Experimental data", "Molecularity", "Equilibrium constant"],
+        correct: 1
+      },
+      {
+        question: "The half-life of a zero-order reaction is given by:",
+        options: ["0.693/k", "[A]₀/2k", "1/k[A]₀", "k/[A]₀"],
+        correct: 1
+      },
+      {
+        question: "A reaction with molecularity of 3 is called:",
+        options: ["Unimolecular", "Bimolecular", "Termolecular", "Tetramolecular"],
+        correct: 2
+      },
+      {
+        question: "The rate constant is specific to a reaction and depends on:",
+        options: ["Concentration", "Temperature", "Pressure", "Volume"],
+        correct: 1
+      },
+      {
+        question: "The plot of 1/[A] vs. time is linear for a:",
+        options: ["Zero-order reaction", "First-order reaction", "Second-order reaction", "Third-order reaction"],
+        correct: 2
+      },
+      {
+        question: "A catalyst does NOT change the:",
+        options: ["Activation energy", "Reaction pathway", "Equilibrium constant", "Rate of reaction"],
+        correct: 2
+      },
+      {
+        question: "The rate of a reaction is quadrupled when the concentration of a reactant is doubled. The order is:",
+        options: ["0", "1", "2", "3"],
+        correct: 2
+      },
+      {
+        question: "The Arrhenius equation can be used to calculate:",
+        options: ["Concentration", "Activation energy", "Molecularity", "Equilibrium constant"],
+        correct: 1
+      },
+      {
+        question: "The rate of a zero-order reaction is:",
+        options: ["Proportional to [A]", "Proportional to [A]²", "Constant", "Proportional to 1/[A]"],
+        correct: 2
+      },
+      {
+        question: "The frequency factor (A) in the Arrhenius equation is related to:",
+        options: ["Activation energy", "Collision frequency and orientation", "Temperature", "Rate constant"],
+        correct: 1
+      },
+      {
+        question: "The slope of [A] vs. time for a zero-order reaction is:",
+        options: ["k", "-k", "k/[A]₀", "-k/[A]₀"],
+        correct: 1
+      },
+      {
+        question: "The activation energy of a reaction can be determined from:",
+        options: ["Rate law", "Arrhenius plot", "Half-life", "Molecularity"],
+        correct: 1
+      },
+      {
+        question: "The rate constant for a first-order reaction has units of:",
+        options: ["mol L⁻¹ s⁻¹", "L mol⁻¹ s⁻¹", "s⁻¹", "L² mol⁻² s⁻¹"],
+        correct: 2
+      },
+      {
+        question: "A reaction with high activation energy proceeds:",
+        options: ["Rapidly", "Slowly", "Instantaneously", "At equilibrium"],
+        correct: 1
+      },
+      {
+        question: "The rate of a reaction is measured by monitoring:",
+        options: ["Change in temperature", "Change in concentration", "Change in volume", "Change in color only"],
+        correct: 1
+      },
+      {
+        question: "The molecularity of a reaction is determined by:",
+        options: ["Rate law", "Elementary reaction step", "Overall reaction", "Rate constant"],
+        correct: 1
+      },
+      {
+        question: "The Arrhenius equation predicts that a lower Ea results in:",
+        options: ["Lower rate constant", "Higher rate constant", "No change in rate", "Lower temperature"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

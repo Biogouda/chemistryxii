@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electrochemistry MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Electrochemistry MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "A redox reaction involves:",
+        options: ["Only oxidation", "Only reduction", "Both oxidation and reduction", "Neither oxidation nor reduction"],
+        correct: 2
+      },
+      {
+        question: "An electrolyte is a substance that:",
+        options: ["Does not conduct electricity", "Conducts electricity in solution", "Is always a non-metal", "Forms covalent bonds"],
+        correct: 1
+      },
+      {
+        question: "Which of the following is a non-electrolyte?",
+        options: ["NaCl", "Sugar", "HCl", "KOH"],
+        correct: 1
+      },
+      {
+        question: "Specific conductivity is defined as:",
+        options: ["Conductivity per unit volume", "Conductivity of 1 mol of solution", "Reciprocal of resistivity", "Conductivity per unit concentration"],
+        correct: 0
+      },
+      {
+        question: "Molar conductivity is given by:",
+        options: ["κ/c", "κ × c", "κ × V", "κ/V"],
+        correct: 0
+      },
+      {
+        question: "As the concentration of an electrolytic solution decreases, its conductivity:",
+        options: ["Increases", "Decreases", "Remains constant", "Becomes zero"],
+        correct: 1
+      },
+      {
+        question: "Kohlrausch’s law is used to calculate:",
+        options: ["EMF of a cell", "Molar conductivity at infinite dilution", "Specific conductivity", "Electrode potential"],
+        correct: 1
+      },
+      {
+        question: "Electrolysis involves:",
+        options: ["Spontaneous redox reactions", "Non-spontaneous redox reactions", "Only oxidation reactions", "Only reduction reactions"],
+        correct: 1
+      },
+      {
+        question: "Faraday’s first law of electrolysis states that the amount of substance deposited is proportional to:",
+        options: ["Current strength", "Time", "Quantity of electricity", "Voltage"],
+        correct: 2
+      },
+      {
+        question: "A dry cell is an example of a:",
+        options: ["Galvanic cell", "Electrolytic cell", "Fuel cell", "Lead accumulator"],
+        correct: 0
+      },
+      {
+        question: "The anode in a Galvanic cell is:",
+        options: ["Positive electrode", "Negative electrode", "Neutral electrode", "Inert electrode"],
+        correct: 1
+      },
+      {
+        question: "The EMF of a cell is the potential difference when:",
+        options: ["No current flows", "Maximum current flows", "Cell is fully discharged", "Cell is charging"],
+        correct: 0
+      },
+      {
+        question: "Standard electrode potential is measured at:",
+        options: ["0 K", "273 K", "298 K", "373 K"],
+        correct: 2
+      },
+      {
+        question: "The Nernst equation relates EMF to:",
+        options: ["Temperature only", "Concentration and temperature", "Pressure only", "Volume and pressure"],
+        correct: 1
+      },
+      {
+        question: "The Gibbs free energy change (ΔG) is related to EMF by:",
+        options: ["ΔG = nFE", "ΔG = -nFE", "ΔG = nF/E", "ΔG = -nF/E"],
+        correct: 1
+      },
+      {
+        question: "A fuel cell generates electricity using:",
+        options: ["Chemical energy of fuels", "Nuclear energy", "Thermal energy", "Mechanical energy"],
+        correct: 0
+      },
+      {
+        question: "Corrosion is an example of:",
+        options: ["Electrolytic process", "Galvanic process", "Thermal process", "Mechanical process"],
+        correct: 1
+      },
+      {
+        question: "The cathode in an electrolytic cell is:",
+        options: ["Positive electrode", "Negative electrode", "Neutral electrode", "Inert electrode"],
+        correct: 1
+      },
+      {
+        question: "The unit of specific conductivity is:",
+        options: ["S cm⁻¹", "S cm² mol⁻¹", "Ω cm", "S mol⁻¹"],
+        correct: 0
+      },
+      {
+        question: "Molar conductivity increases with dilution for:",
+        options: ["Strong electrolytes", "Weak electrolytes", "Both strong and weak electrolytes", "Non-electrolytes"],
+        correct: 2
+      },
+      {
+        question: "The lead accumulator is a type of:",
+        options: ["Primary cell", "Secondary cell", "Fuel cell", "Dry cell"],
+        correct: 1
+      },
+      {
+        question: "The electrolyte in a lead accumulator is:",
+        options: ["HCl", "H₂SO₄", "NaOH", "KCl"],
+        correct: 1
+      },
+      {
+        question: "The standard hydrogen electrode has a potential of:",
+        options: ["0 V", "1 V", "-1 V", "0.059 V"],
+        correct: 0
+      },
+      {
+        question: "The Nernst equation at 298 K includes the term:",
+        options: ["0.059/n", "2.303 RT/F", "0.059 log Q", "RT/nF"],
+        correct: 0
+      },
+      {
+        question: "A negative EMF indicates that the cell reaction is:",
+        options: ["Spontaneous", "Non-spontaneous", "Equilibrium", "Reversible"],
+        correct: 1
+      },
+      {
+        question: "Faraday’s second law of electrolysis relates to:",
+        options: ["Current and time", "Equivalent weights", "Voltage", "Concentration"],
+        correct: 1
+      },
+      {
+        question: "The primary reaction at the anode of a dry cell is:",
+        options: ["Reduction of Zn", "Oxidation of Zn", "Reduction of MnO₂", "Oxidation of NH₄⁺"],
+        correct: 1
+      },
+      {
+        question: "Corrosion of iron is prevented by:",
+        options: ["Anodizing", "Galvanizing", "Electroplating with copper", "Painting with oil"],
+        correct: 1
+      },
+      {
+        question: "The cell constant is defined as:",
+        options: ["l/A", "A/l", "κ × l", "κ/A"],
+        correct: 0
+      },
+      {
+        question: "Kohlrausch’s law is expressed as:",
+        options: ["Λ_m = Λ_m⁰ - k√c", "Λ_m = Λ_m⁰ + k√c", "κ = Λ_m × c", "Λ_m = κ/c"],
+        correct: 0
+      },
+      {
+        question: "The electrolyte in a fuel cell is often:",
+        options: ["H₂SO₄", "KOH", "NaCl", "HCl"],
+        correct: 1
+      },
+      {
+        question: "The standard reduction potential of Cu²⁺/Cu is:",
+        options: ["+0.34 V", "-0.34 V", "+0.76 V", "-0.76 V"],
+        correct: 0
+      },
+      {
+        question: "A Galvanic cell converts:",
+        options: ["Electrical energy to chemical energy", "Chemical energy to electrical energy", "Thermal energy to electrical energy", "Mechanical energy to chemical energy"],
+        correct: 1
+      },
+      {
+        question: "The resistance of an electrolytic solution is measured using:",
+        options: ["Voltmeter", "Ammeter", "Conductivity cell", "Galvanometer"],
+        correct: 2
+      },
+      {
+        question: "The EMF of a cell depends on:",
+        options: ["Nature of electrodes", "Size of electrodes", "Shape of cell", "Volume of electrolyte"],
+        correct: 0
+      },
+      {
+        question: "The Nernst equation is used to calculate:",
+        options: ["Standard EMF", "Cell potential under non-standard conditions", "Specific conductivity", "Molar conductivity"],
+        correct: 1
+      },
+      {
+        question: "A positive ΔG for a cell reaction indicates:",
+        options: ["Spontaneous reaction", "Non-spontaneous reaction", "Equilibrium", "High conductivity"],
+        correct: 1
+      },
+      {
+        question: "The cathode in a lead accumulator during discharge is:",
+        options: ["Pb", "PbO₂", "PbSO₄", "H₂SO₄"],
+        correct: 1
+      },
+      {
+        question: "The primary fuel in a hydrogen-oxygen fuel cell is:",
+        options: ["Methane", "Hydrogen", "Oxygen", "Carbon monoxide"],
+        correct: 1
+      },
+      {
+        question: "Conductivity of a solution is measured in:",
+        options: ["S cm⁻¹", "S cm² mol⁻¹", "Ω⁻¹ cm⁻¹", "Ω cm"],
+        correct: 0
+      },
+      {
+        question: "The process of electrolysis is used in:",
+        options: ["Electroplating", "Battery charging", "Fuel cells", "Corrosion"],
+        correct: 0
+      },
+      {
+        question: "The standard reduction potential of Zn²⁺/Zn is:",
+        options: ["+0.76 V", "-0.76 V", "+0.34 V", "-0.34 V"],
+        correct: 1
+      },
+      {
+        question: "The cell reaction is spontaneous if:",
+        options: ["ΔG > 0", "ΔG < 0", "EMF = 0", "ΔG = 0"],
+        correct: 1
+      },
+      {
+        question: "The electrolyte in a mercury cell is:",
+        options: ["KOH", "H₂SO₄", "ZnCl₂", "HgO"],
+        correct: 0
+      },
+      {
+        question: "The unit of molar conductivity is:",
+        options: ["S cm⁻¹", "S cm² mol⁻¹", "Ω cm", "S mol⁻¹"],
+        correct: 1
+      },
+      {
+        question: "The sacrificial anode in corrosion prevention is made of:",
+        options: ["Copper", "Zinc", "Iron", "Silver"],
+        correct: 1
+      },
+      {
+        question: "The Nernst equation includes the term ‘Q’, which is:",
+        options: ["Reaction quotient", "Equilibrium constant", "Rate constant", "Cell constant"],
+        correct: 0
+      },
+      {
+        question: "A secondary cell can be:",
+        options: ["Used only once", "Recharged", "Non-rechargeable", "Used without electrolyte"],
+        correct: 1
+      },
+      {
+        question: "The primary cause of corrosion is:",
+        options: ["High temperature", "Electrochemical reaction", "Mechanical stress", "UV radiation"],
+        correct: 1
+      },
+      {
+        question: "The relationship between conductance (G) and resistance (R) is:",
+        options: ["G = R", "G = 1/R", "G = R²", "G = 1/R²"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

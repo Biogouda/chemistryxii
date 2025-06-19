@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p-Block Elements (Group 17) MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">p-Block Elements (Group 17) MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Group 17 elements are also known as:",
+        options: ["Chalcogens", "Halogens", "Noble gases", "Alkali metals"],
+        correct: 1
+      },
+      {
+        question: "The general electronic configuration of Group 17 elements is:",
+        options: ["ns²np³", "ns²np⁴", "ns²np⁵", "ns²np⁶"],
+        correct: 2
+      },
+      {
+        question: "The most electronegative element in Group 17 is:",
+        options: ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        correct: 0
+      },
+      {
+        question: "Common oxidation states of Group 17 elements include:",
+        options: ["-1, +1, +3, +5, +7", "-2, +2, +4", "+1, +3", "-1 only"],
+        correct: 0
+      },
+      {
+        question: "The atomic radius of Group 17 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Increases across a period"],
+        correct: 0
+      },
+      {
+        question: "The electronegativity of Group 17 elements:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Increases across a period"],
+        correct: 1
+      },
+      {
+        question: "Chlorine is prepared in the laboratory by:",
+        options: ["Heating NaCl", "Oxidizing HCl with MnO₂", "Electrolysis of water", "Burning Cl₂ in air"],
+        correct: 1
+      },
+      {
+        question: "Chlorine is a:",
+        options: ["Monatomic gas", "Diatomic gas", "Triatomic gas", "Polyatomic gas"],
+        correct: 1
+      },
+      {
+        question: "The main use of chlorine is in:",
+        options: ["Fertilizer production", "Water purification", "Refrigeration", "Dye synthesis"],
+        correct: 1
+      },
+      {
+        question: "Hydrochloric acid is prepared by dissolving HCl gas in:",
+        options: ["Alcohol", "Water", "Ether", "Kerosene"],
+        correct: 1
+      },
+      {
+        question: "Hydrochloric acid is a:",
+        options: ["Weak acid", "Strong acid", "Neutral compound", "Base"],
+        correct: 1
+      },
+      {
+        question: "Chlorine acts as a:",
+        options: ["Reducing agent", "Oxidizing agent", "Neutral compound", "Catalyst"],
+        correct: 1
+      },
+      {
+        question: "Interhalogen compounds are formed between:",
+        options: ["Two different halogens", "Halogens and metals", "Halogens and noble gases", "Halogens and chalcogens"],
+        correct: 0
+      },
+      {
+        question: "An example of an interhalogen compound is:",
+        options: ["ClF", "NaCl", "HCl", "CaF₂"],
+        correct: 0
+      },
+      {
+        question: "The structure of ClF₃ is:",
+        options: ["Linear", "T-shaped", "Trigonal planar", "Tetrahedral"],
+        correct: 1
+      },
+      {
+        question: "An oxoacid of chlorine is:",
+        options: ["HClO₄", "H₂SO₄", "HNO₃", "H₃PO₄"],
+        correct: 0
+      },
+      {
+        question: "The oxidation state of chlorine in HClO₄ is:",
+        options: ["+1", "+3", "+5", "+7"],
+        correct: 3
+      },
+      {
+        question: "The structure of HClO₄ involves chlorine in a:",
+        options: ["Linear arrangement", "Trigonal planar arrangement", "Tetrahedral arrangement", "Octahedral arrangement"],
+        correct: 2
+      },
+      {
+        question: "The boiling point of Group 17 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for fluorine"],
+        correct: 0
+      },
+      {
+        question: "The reactivity of Group 17 elements:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is lowest for fluorine"],
+        correct: 1
+      },
+      {
+        question: "Fluorine is the most reactive halogen due to its:",
+        options: ["Large atomic size", "Low bond dissociation energy", "High electronegativity", "Low ionization energy"],
+        correct: 2
+      },
+      {
+        question: "The bond dissociation energy of X₂ (X = halogen) generally:",
+        options: ["Increases down the group", "Decreases down the group", "Is highest for Cl₂", "Is lowest for F₂"],
+        correct: 3
+      },
+      {
+        question: "Chlorine is used as a:",
+        options: ["Bleaching agent", "Reducing agent", "Fertilizer", "Refrigerant"],
+        correct: 0
+      },
+      {
+        question: "Hydrochloric acid reacts with metals to produce:",
+        options: ["H₂ gas", "Cl₂ gas", "O₂ gas", "N₂ gas"],
+        correct: 0
+      },
+      {
+        question: "The hybridization of chlorine in ClF₃ is:",
+        options: ["sp³", "sp³d", "sp³d²", "sp²"],
+        correct: 1
+      },
+      {
+        question: "The oxoacid HClO is known as:",
+        options: ["Hypochlorous acid", "Chlorous acid", "Chloric acid", "Perchloric acid"],
+        correct: 0
+      },
+      {
+        question: "The oxidation state of chlorine in HClO is:",
+        options: ["+1", "+3", "+5", "+7"],
+        correct: 0
+      },
+      {
+        question: "The structure of ICl is:",
+        options: ["Linear", "Bent", "Trigonal planar", "Tetrahedral"],
+        correct: 0
+      },
+      {
+        question: "The thermal stability of hydrogen halides (HX) generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for HF"],
+        correct: 0
+      },
+      {
+        question: "The high boiling point of HF compared to HCl is due to:",
+        options: ["Covalent bonding", "Hydrogen bonding", "Ionic bonding", "Metallic bonding"],
+        correct: 1
+      },
+      {
+        question: "The reducing character of hydrogen halides:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for HF"],
+        correct: 0
+      },
+      {
+        question: "Iodine is used in the treatment of:",
+        options: ["Goitre", "Cancer", "Diabetes", "Hypertension"],
+        correct: 0
+      },
+      {
+        question: "The oxoacid HClO₃ is known as:",
+        options: ["Hypochlorous acid", "Chlorous acid", "Chloric acid", "Perchloric acid"],
+        correct: 2
+      },
+      {
+        question: "The oxidation state of chlorine in HClO₃ is:",
+        options: ["+1", "+3", "+5", "+7"],
+        correct: 2
+      },
+      {
+        question: "The interhalogen compound BrF₅ has the shape:",
+        options: ["Tetrahedral", "Trigonal bipyramidal", "Square pyramidal", "Octahedral"],
+        correct: 2
+      },
+      {
+        question: "The hybridization of bromine in BrF₅ is:",
+        options: ["sp³", "sp³d", "sp³d²", "sp²"],
+        correct: 2
+      },
+      {
+        question: "Chlorine reacts with cold dilute NaOH to form:",
+        options: ["NaCl", "NaClO", "NaClO₃", "NaClO₄"],
+        correct: 1
+      },
+      {
+        question: "Chlorine reacts with hot concentrated NaOH to form:",
+        options: ["NaCl", "NaClO", "NaClO₃", "NaClO₄"],
+        correct: 2
+      },
+      {
+        question: "The bond angle in HF is approximately:",
+        options: ["90°", "104.5°", "180°", "120°"],
+        correct: 2
+      },
+      {
+        question: "The Group 17 element used in toothpaste is:",
+        options: ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        correct: 0
+      },
+      {
+        question: "The oxoacid HIO₄ is known as:",
+        options: ["Hypoiodous acid", "Iodous acid", "Iodic acid", "Periodic acid"],
+        correct: 3
+      },
+      {
+        question: "The oxidation state of iodine in HIO₄ is:",
+        options: ["+1", "+3", "+5", "+7"],
+        correct: 3
+      },
+      {
+        question: "The interhalogen compound IF₇ has the shape:",
+        options: ["Tetrahedral", "Trigonal bipyramidal", "Pentagonal bipyramidal", "Octahedral"],
+        correct: 2
+      },
+      {
+        question: "The colour of chlorine gas is:",
+        options: ["Colourless", "Yellow-green", "Red", "Blue"],
+        correct: 1
+      },
+      {
+        question: "The Group 17 element that is a liquid at room temperature is:",
+        options: ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        correct: 2
+      },
+      {
+        question: "The metallic character of Group 17 elements down the group:",
+        options: ["Increases", "Decreases", "Remains constant", "Fluctuates"],
+        correct: 0
+      },
+      {
+        question: "The interhalogen compound ClF is prepared by:",
+        options: ["Direct combination of Cl₂ and F₂", "Electrolysis of Cl₂", "Heating NaCl with F₂", "Dissolving Cl₂ in water"],
+        correct: 0
+      },
+      {
+        question: "The oxoacid HClO₂ is known as:",
+        options: ["Hypochlorous acid", "Chlorous acid", "Chloric acid", "Perchloric acid"],
+        correct: 1
+      },
+      {
+        question: "The oxidation state of chlorine in HClO₂ is:",
+        options: ["+1", "+3", "+5", "+7"],
+        correct: 1
+      },
+      {
+        question: "The Group 17 element used in photography is:",
+        options: ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        correct: 2
+      },
+      {
+        question: "The strength of oxoacids of halogens generally increases with:",
+        options: ["Decreasing oxidation state", "Increasing oxidation state", "Decreasing electronegativity", "Increasing atomic size"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surface Chemistry MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Surface Chemistry MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Adsorption is the process of:",
+        options: ["Absorption of molecules into a bulk phase", "Accumulation of molecules on a surface", "Diffusion of molecules", "Evaporation of molecules"],
+        correct: 1
+      },
+      {
+        question: "Physisorption involves:",
+        options: ["Chemical bonds", "Weak van der Waals forces", "Ionic interactions", "Covalent bonds"],
+        correct: 1
+      },
+      {
+        question: "Chemisorption is characterized by:",
+        options: ["Low heat of adsorption", "Formation of chemical bonds", "Multilayer adsorption", "Reversible process"],
+        correct: 1
+      },
+      {
+        question: "The extent of adsorption of a gas on a solid increases with:",
+        options: ["Decrease in temperature", "Increase in temperature", "Decrease in pressure", "Decrease in surface area"],
+        correct: 0
+      },
+      {
+        question: "Which factor does NOT affect adsorption of gases on solids?",
+        options: ["Temperature", "Pressure", "Nature of gas", "Color of solid"],
+        correct: 3
+      },
+      {
+        question: "A catalyst increases the rate of a reaction by:",
+        options: ["Increasing activation energy", "Decreasing activation energy", "Changing the reaction products", "Increasing temperature"],
+        correct: 1
+      },
+      {
+        question: "Homogeneous catalysis occurs when:",
+        options: ["Catalyst and reactants are in different phases", "Catalyst and reactants are in the same phase", "Catalyst is a solid", "Catalyst is an enzyme"],
+        correct: 1
+      },
+      {
+        question: "Heterogeneous catalysis involves:",
+        options: ["Catalyst and reactants in the same phase", "Catalyst and reactants in different phases", "Liquid catalysts only", "Gas catalysts only"],
+        correct: 1
+      },
+      {
+        question: "The selectivity of a catalyst refers to its ability to:",
+        options: ["Increase reaction rate", "Favor a specific product", "Reduce activation energy", "Work at high temperatures"],
+        correct: 1
+      },
+      {
+        question: "Enzyme catalysts are primarily:",
+        options: ["Inorganic compounds", "Proteins", "Metals", "Synthetic polymers"],
+        correct: 1
+      },
+      {
+        question: "A colloidal state is distinguished from a true solution by:",
+        options: ["Particle size", "Homogeneity", "Transparency", "Density"],
+        correct: 0
+      },
+      {
+        question: "The particle size in a colloid ranges from:",
+        options: ["1-10 nm", "1-1000 nm", "1000-10000 nm", "Less than 1 nm"],
+        correct: 1
+      },
+      {
+        question: "A suspension differs from a colloid because it:",
+        options: ["Is homogeneous", "Settles on standing", "Shows Tyndall effect", "Is transparent"],
+        correct: 1
+      },
+      {
+        question: "Lyophilic colloids are stabilized by:",
+        options: ["Electrostatic repulsion", "Solvent attraction", "High surface tension", "Low viscosity"],
+        correct: 1
+      },
+      {
+        question: "Lyophobic colloids are:",
+        options: ["Solvent-loving", "Solvent-repelling", "Easily coagulated", "Both solvent-repelling and easily coagulated"],
+        correct: 3
+      },
+      {
+        question: "Multimolecular colloids are formed by:",
+        options: ["Aggregation of small molecules", "Large single molecules", "Polymer chains", "Ionic compounds"],
+        correct: 0
+      },
+      {
+        question: "Macromolecular colloids consist of:",
+        options: ["Small molecules", "Large molecules like proteins", "Aggregated particles", "Inorganic salts"],
+        correct: 1
+      },
+      {
+        question: "The Tyndall effect is observed in:",
+        options: ["True solutions", "Colloids", "Suspensions", "Both colloids and suspensions"],
+        correct: 3
+      },
+      {
+        question: "Brownian movement in colloids is due to:",
+        options: ["Electrostatic repulsion", "Collision with solvent molecules", "High viscosity", "Light scattering"],
+        correct: 1
+      },
+      {
+        question: "Electrophoresis is the movement of colloidal particles under:",
+        options: ["Gravity", "Electric field", "Magnetic field", "Thermal gradient"],
+        correct: 1
+      },
+      {
+        question: "Coagulation of a colloid is caused by:",
+        options: ["Adding a solvent", "Neutralizing charge", "Decreasing temperature", "Increasing particle size"],
+        correct: 1
+      },
+      {
+        question: "An emulsion is a colloidal system of:",
+        options: ["Solid in liquid", "Liquid in liquid", "Gas in liquid", "Solid in gas"],
+        correct: 1
+      },
+      {
+        question: "The two main types of emulsions are:",
+        options: ["Oil-in-water and water-in-oil", "Solid-in-liquid and liquid-in-solid", "Gas-in-liquid and liquid-in-gas", "Oil-in-gas and gas-in-oil"],
+        correct: 0
+      },
+      {
+        question: "Physisorption is generally:",
+        options: ["Irreversible", "Specific to certain gases", "Reversible", "High-energy process"],
+        correct: 2
+      },
+      {
+        question: "Chemisorption is usually:",
+        options: ["Multilayer", "Reversible", "Specific and irreversible", "Low-energy process"],
+        correct: 2
+      },
+      {
+        question: "Adsorption of gases on solids is exothermic because:",
+        options: ["Energy is absorbed", "Molecules gain energy", "Molecules lose energy", "Surface area increases"],
+        correct: 2
+      },
+      {
+        question: "A homogeneous catalyst is typically found in:",
+        options: ["Gas or liquid phase", "Solid phase", "Different phase from reactants", "Inert phase"],
+        correct: 0
+      },
+      {
+        question: "An example of a heterogeneous catalyst is:",
+        options: ["H₂SO₄ in esterification", "Pt in hydrogenation", "Enzyme in fermentation", "HCl in hydrolysis"],
+        correct: 1
+      },
+      {
+        question: "Enzyme catalysis is highly specific due to:",
+        options: ["High activation energy", "Active sites", "Low temperature", "Non-polar nature"],
+        correct: 1
+      },
+      {
+        question: "A true solution differs from a colloid by:",
+        options: ["Showing Tyndall effect", "Having smaller particles", "Being heterogeneous", "Settling on standing"],
+        correct: 1
+      },
+      {
+        question: "Lyophilic colloids are more stable than lyophobic colloids because of:",
+        options: ["Strong solvent interaction", "Electrostatic repulsion", "Small particle size", "High viscosity"],
+        correct: 0
+      },
+      {
+        question: "An example of a multimolecular colloid is:",
+        options: ["Starch", "Gold sol", "Protein", "Cellulose"],
+        correct: 1
+      },
+      {
+        question: "An example of a macromolecular colloid is:",
+        options: ["Sulphur sol", "Starch", "Gold sol", "Silver sol"],
+        correct: 1
+      },
+      {
+        question: "The Tyndall effect is caused by:",
+        options: ["Absorption of light", "Scattering of light", "Reflection of light", "Refraction of light"],
+        correct: 1
+      },
+      {
+        question: "Brownian movement is more pronounced in:",
+        options: ["Larger particles", "Smaller colloidal particles", "True solutions", "Suspensions"],
+        correct: 1
+      },
+      {
+        question: "Electrophoresis confirms that colloidal particles are:",
+        options: ["Neutral", "Charged", "Non-polar", "Insoluble"],
+        correct: 1
+      },
+      {
+        question: "Coagulation can be induced by adding:",
+        options: ["A solvent", "An electrolyte", "A non-polar liquid", "A lyophilic colloid"],
+        correct: 1
+      },
+      {
+        question: "An oil-in-water emulsion is stabilized by:",
+        options: ["Non-polar solvents", "Emulsifying agents", "High temperature", "Increasing pressure"],
+        correct: 1
+      },
+      {
+        question: "A water-in-oil emulsion has:",
+        options: ["Water dispersed in oil", "Oil dispersed in water", "Gas dispersed in liquid", "Solid dispersed in liquid"],
+        correct: 0
+      },
+      {
+        question: "The adsorption isotherm relates:",
+        options: ["Pressure to temperature", "Amount adsorbed to pressure", "Temperature to volume", "Concentration to surface area"],
+        correct: 1
+      },
+      {
+        question: "Freundlich isotherm is used to describe:",
+        options: ["Chemisorption", "Physisorption", "Absorption", "Desorption"],
+        correct: 1
+      },
+      {
+        question: "The activity of a catalyst refers to its ability to:",
+        options: ["Increase reaction rate", "Select specific products", "Reduce temperature", "Change equilibrium"],
+        correct: 0
+      },
+      {
+        question: "Enzymes are denatured by:",
+        options: ["Low pH only", "High temperature or extreme pH", "Low temperature", "Neutral pH"],
+        correct: 1
+      },
+      {
+        question: "A colloid is prepared by:",
+        options: ["Dissolving a solute", "Dispersing particles in a medium", "Mixing two liquids", "Heating a solution"],
+        correct: 1
+      },
+      {
+        question: "Lyophobic colloids are prepared by:",
+        options: ["Dissolving in solvent", "Chemical methods like reduction", "Simple mixing", "Heating"],
+        correct: 1
+      },
+      {
+        question: "The charge on colloidal particles is due to:",
+        options: ["Adsorption of ions", "High temperature", "Solvent molecules", "Light scattering"],
+        correct: 0
+      },
+      {
+        question: "Hardy-Schulze rule states that coagulation is caused by:",
+        options: ["Low charge ions", "High charge ions", "Neutral molecules", "Non-polar solvents"],
+        correct: 1
+      },
+      {
+        question: "An emulsifying agent stabilizes an emulsion by:",
+        options: ["Increasing viscosity", "Reducing surface tension", "Increasing particle size", "Neutralizing charge"],
+        correct: 1
+      },
+      {
+        question: "Soap acts as an emulsifying agent by:",
+        options: ["Forming micelles", "Increasing polarity", "Reducing viscosity", "Neutralizing pH"],
+        correct: 0
+      },
+      {
+        question: "The zeta potential is related to:",
+        options: ["Colloidal stability", "Adsorption capacity", "Catalyst activity", "Emulsion type"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

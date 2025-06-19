@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solid State MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Solid State MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Which type of solid is characterized by strong electrostatic forces between ions?",
+        options: ["Molecular solid", "Ionic solid", "Covalent solid", "Metallic solid"],
+        correct: 1
+      },
+      {
+        question: "Amorphous solids differ from crystalline solids in that they:",
+        options: ["Have a regular lattice structure", "Lack a definite melting point", "Exhibit long-range order", "Form unit cells"],
+        correct: 1
+      },
+      {
+        question: "What is the number of atoms per unit cell in a face-centered cubic (FCC) lattice?",
+        options: ["1", "2", "4", "8"],
+        correct: 2
+      },
+      {
+        question: "The density of a unit cell is calculated using which formula?",
+        options: ["ρ = (Z × M) / (a³ × Nₐ)", "ρ = (M × Nₐ) / (Z × a³)", "ρ = (Z × a³) / (M × Nₐ)", "ρ = (M × a³) / (Z × Nₐ)"],
+        correct: 0
+      },
+      {
+        question: "Which type of void is smaller in a close-packed structure?",
+        options: ["Tetrahedral void", "Octahedral void", "Cubic void", "Hexagonal void"],
+        correct: 0
+      },
+      {
+        question: "Packing efficiency is highest in which crystal lattice?",
+        options: ["Simple cubic", "Body-centered cubic", "Face-centered cubic", "Hexagonal close-packed"],
+        correct: 2
+      },
+      {
+        question: "Frenkel defect is associated with which type of point defect?",
+        options: ["Vacancy defect", "Interstitial defect", "Substitutional defect", "Schottky defect"],
+        correct: 1
+      },
+      {
+        question: "According to band theory, insulators have:",
+        options: ["A small band gap", "No band gap", "A large band gap", "Overlapping bands"],
+        correct: 2
+      },
+      {
+        question: "n-type semiconductors are formed by doping with:",
+        options: ["Group 13 elements", "Group 14 elements", "Group 15 elements", "Group 16 elements"],
+        correct: 2
+      },
+      {
+        question: "Which solid exhibits both electrical and magnetic properties due to delocalized electrons?",
+        options: ["Ionic solid", "Covalent solid", "Metallic solid", "Molecular solid"],
+        correct: 2
+      },
+      {
+        question: "Which solid is held together by weak van der Waals forces?",
+        options: ["Ionic solid", "Molecular solid", "Covalent solid", "Metallic solid"],
+        correct: 1
+      },
+      {
+        question: "Crystalline solids are characterized by:",
+        options: ["Short-range order", "Long-range order", "No order", "Random arrangement"],
+        correct: 1
+      },
+      {
+        question: "What is the coordination number of a body-centered cubic (BCC) lattice?",
+        options: ["4", "6", "8", "12"],
+        correct: 2
+      },
+      {
+        question: "The packing efficiency of a simple cubic lattice is:",
+        options: ["52.4%", "68%", "74%", "80%"],
+        correct: 0
+      },
+      {
+        question: "Schottky defect involves:",
+        options: ["Interstitial atoms", "Vacancy of ion pairs", "Substitution of atoms", "Dislocation of atoms"],
+        correct: 1
+      },
+      {
+        question: "Which type of solid has a network of covalent bonds?",
+        options: ["Molecular solid", "Ionic solid", "Covalent solid", "Metallic solid"],
+        correct: 2
+      },
+      {
+        question: "The number of tetrahedral voids in a close-packed structure is how many times the number of atoms?",
+        options: ["1", "2", "3", "4"],
+        correct: 1
+      },
+      {
+        question: "Band theory explains the conductivity of:",
+        options: ["Ionic solids", "Molecular solids", "Metals and semiconductors", "Amorphous solids"],
+        correct: 2
+      },
+      {
+        question: "p-type semiconductors are formed by doping with:",
+        options: ["Group 13 elements", "Group 14 elements", "Group 15 elements", "Group 16 elements"],
+        correct: 0
+      },
+      {
+        question: "Which lattice has the same packing efficiency as FCC?",
+        options: ["Simple cubic", "Body-centered cubic", "Hexagonal close-packed", "Tetragonal"],
+        correct: 2
+      },
+      {
+        question: "The number of atoms per unit cell in a simple cubic lattice is:",
+        options: ["1", "2", "4", "8"],
+        correct: 0
+      },
+      {
+        question: "Which defect increases the density of a crystal?",
+        options: ["Schottky defect", "Frenkel defect", "Vacancy defect", "Interstitial defect"],
+        correct: 3
+      },
+      {
+        question: "Metallic solids conduct electricity due to:",
+        options: ["Localized electrons", "Delocalized electrons", "Ionic movement", "Covalent bonds"],
+        correct: 1
+      },
+      {
+        question: "The coordination number of a hexagonal close-packed (HCP) lattice is:",
+        options: ["6", "8", "12", "14"],
+        correct: 2
+      },
+      {
+        question: "Which solid is typically soft and has a low melting point?",
+        options: ["Ionic solid", "Covalent solid", "Molecular solid", "Metallic solid"],
+        correct: 2
+      },
+      {
+        question: "The band gap in conductors is:",
+        options: ["Large", "Small", "Zero or overlapping", "Moderate"],
+        correct: 2
+      },
+      {
+        question: "The number of octahedral voids per atom in a close-packed structure is:",
+        options: ["1", "2", "3", "4"],
+        correct: 0
+      },
+      {
+        question: "Which type of solid is diamond an example of?",
+        options: ["Ionic solid", "Covalent solid", "Metallic solid", "Molecular solid"],
+        correct: 1
+      },
+      {
+        question: "The packing efficiency of a body-centered cubic lattice is:",
+        options: ["52.4%", "68%", "74%", "80%"],
+        correct: 1
+      },
+      {
+        question: "Which defect is caused by missing cation-anion pairs in ionic solids?",
+        options: ["Frenkel defect", "Schottky defect", "Interstitial defect", "Substitutional defect"],
+        correct: 1
+      },
+      {
+        question: "Semiconductors have a band gap that is:",
+        options: ["Zero", "Large", "Small to moderate", "Infinite"],
+        correct: 2
+      },
+      {
+        question: "Which solid type is characterized by high melting points and brittleness?",
+        options: ["Molecular solid", "Ionic solid", "Metallic solid", "Covalent solid"],
+        correct: 1
+      },
+      {
+        question: "The number of atoms in a body-centered cubic (BCC) unit cell is:",
+        options: ["1", "2", "4", "8"],
+        correct: 1
+      },
+      {
+        question: "Which type of void is surrounded by six atoms in a close-packed structure?",
+        options: ["Tetrahedral void", "Octahedral void", "Cubic void", "Hexagonal void"],
+        correct: 1
+      },
+      {
+        question: "Magnetic properties in solids are primarily due to:",
+        options: ["Paired electrons", "Unpaired electrons", "Ionic bonds", "Covalent bonds"],
+        correct: 1
+      },
+      {
+        question: "Which solid is a good conductor of electricity due to its structure?",
+        options: ["Ionic solid", "Covalent solid", "Metallic solid", "Molecular solid"],
+        correct: 2
+      },
+      {
+        question: "The formula for packing efficiency is:",
+        options: ["(Volume of atoms / Volume of unit cell) × 100", "(Volume of unit cell / Volume of atoms) × 100", "(Z × M) / (a³ × Nₐ)", "(a³ × Nₐ) / (Z × M)"],
+        correct: 0
+      },
+      {
+        question: "Which type of semiconductor is formed by doping silicon with boron?",
+        options: ["n-type", "p-type", "Intrinsic", "Extrinsic"],
+        correct: 1
+      },
+      {
+        question: "The coordination number of a simple cubic lattice is:",
+        options: ["4", "6", "8", "12"],
+        correct: 1
+      },
+      {
+        question: "Which solid has a layered structure with strong covalent bonds within layers?",
+        options: ["Graphite", "Sodium chloride", "Iron", "Dry ice"],
+        correct: 0
+      },
+      {
+        question: "Frenkel defect is more common in solids with:",
+        options: ["High coordination number", "Large size difference between ions", "Equal ion sizes", "Low melting points"],
+        correct: 1
+      },
+      {
+        question: "The electrical conductivity of intrinsic semiconductors increases with:",
+        options: ["Decreasing temperature", "Increasing temperature", "Increasing impurities", "Decreasing band gap"],
+        correct: 1
+      },
+      {
+        question: "Which type of solid is typically insoluble in water?",
+        options: ["Ionic solid", "Molecular solid", "Covalent solid", "Metallic solid"],
+        correct: 2
+      },
+      {
+        question: "The number of nearest neighbors in a face-centered cubic lattice is:",
+        options: ["6", "8", "12", "14"],
+        correct: 2
+      },
+      {
+        question: "Which defect does not alter the density of a crystal?",
+        options: ["Schottky defect", "Frenkel defect", "Vacancy defect", "Interstitial defect"],
+        correct: 1
+      },
+      {
+        question: "The band theory applies primarily to which type of solids?",
+        options: ["Ionic solids", "Molecular solids", "Metallic and covalent solids", "Amorphous solids"],
+        correct: 2
+      },
+      {
+        question: "Which solid is an example of an ionic solid?",
+        options: ["Diamond", "Graphite", "NaCl", "Copper"],
+        correct: 2
+      },
+      {
+        question: "The packing efficiency of a hexagonal close-packed lattice is:",
+        options: ["52.4%", "68%", "74%", "80%"],
+        correct: 2
+      },
+      {
+        question: "Which type of semiconductor has excess electrons as charge carriers?",
+        options: ["n-type", "p-type", "Intrinsic", "Compensated"],
+        correct: 0
+      },
+      {
+        question: "Which solid type is characterized by malleability and ductility?",
+        options: ["Ionic solid", "Covalent solid", "Metallic solid", "Molecular solid"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

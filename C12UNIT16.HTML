@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry in Everyday Life MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #ecf0f1;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background: #dfe6e9;
+        }
+        .option.correct {
+            background: #2ecc71 !important;
+            color: #fff;
+        }
+        .option.incorrect {
+            background: #e74c3c !important;
+            color: #fff;
+        }
+        #score {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 0 10px;
+            }
+            .question {
+                padding: 15px;
+            }
+            .option {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Chemistry in Everyday Life MCQ Quiz</h1>
+    <div id="quiz"></div>
+    <div id="score">Score: <span id="score-value">0</span>/100</div>
+
+    <script>
+        const questions = [
+            // Chemicals in Medicines (50 questions)
+            { question: "Analgesics are drugs used to:", options: ["Relieve pain", "Reduce fever", "Kill bacteria", "Induce sleep"], correct: "Relieve pain" },
+            { question: "An example of an analgesic is:", options: ["Aspirin", "Penicillin", "Chloramphenicol", "Cimetidine"], correct: "Aspirin" },
+            { question: "Tranquilizers are used to treat:", options: ["Mental disorders", "Bacterial infections", "Allergies", "Acidity"], correct: "Mental disorders" },
+            { question: "An example of a tranquilizer is:", options: ["Diazepam", "Paracetamol", "Ranitidine", "Tetracycline"], correct: "Diazepam" },
+            { question: "Antiseptics are applied to:", options: ["Living tissues", "Non-living surfaces", "Blood", "Internal organs"], correct: "Living tissues" },
+            { question: "An example of an antiseptic is:", options: ["Dettol", "Bleach", "Penicillin", "Aspirin"], correct: "Dettol" },
+            { question: "Disinfectants are used on:", options: ["Non-living surfaces", "Living tissues", "Wounds", "Internal organs"], correct: "Non-living surfaces" },
+            { question: "An example of a disinfectant is:", options: ["Phenol", "Iodine", "Aspirin", "Ranitidine"], correct: "Phenol" },
+            { question: "Antimicrobials are used to:", options: ["Kill or inhibit microorganisms", "Relieve pain", "Reduce acidity", "Prevent allergies"], correct: "Kill or inhibit microorganisms" },
+            { question: "An example of an antimicrobial is:", options: ["Sulphadiazine", "Paracetamol", "Cimetidine", "Norethindrone"], correct: "Sulphadiazine" },
+            { question: "Antifertility drugs are used for:", options: ["Birth control", "Pain relief", "Bacterial infections", "Allergy treatment"], correct: "Birth control" },
+            { question: "An example of an antifertility drug is:", options: ["Norethindrone", "Aspirin", "Penicillin", "Cetirizine"], correct: "Norethindrone" },
+            { question: "Antibiotics are used to treat:", options: ["Bacterial infections", "Viral infections", "Allergies", "Pain"], correct: "Bacterial infections" },
+            { question: "An example of an antibiotic is:", options: ["Penicillin", "Paracetamol", "Ranitidine", "Diazepam"], correct: "Penicillin" },
+            { question: "Antacids are used to treat:", options: ["Acidity", "Pain", "Infections", "Allergies"], correct: "Acidity" },
+            { question: "An example of an antacid is:", options: ["Ranitidine", "Aspirin", "Penicillin", "Cetirizine"], correct: "Ranitidine" },
+            { question: "Antihistamines are used to treat:", options: ["Allergies", "Acidity", "Infections", "Pain"], correct: "Allergies" },
+            { question: "An example of an antihistamine is:", options: ["Cetirizine", "Penicillin", "Aspirin", "Diazepam"], correct: "Cetirizine" },
+            { question: "Aspirin is both an:", options: ["Analgesic and antipyretic", "Antibiotic and antiseptic", "Antacid and antihistamine", "Tranquilizer and antimicrobial"], correct: "Analgesic and antipyretic" },
+            { question: "Which drug is used to reduce fever?", options: ["Paracetamol", "Penicillin", "Ranitidine", "Norethindrone"], correct: "Paracetamol" },
+            { question: "Chloramphenicol is a:", options: ["Broad-spectrum antibiotic", "Analgesic", "Antacid", "Tranquilizer"], correct: "Broad-spectrum antibiotic" },
+            { question: "Which drug is used for anxiety treatment?", options: ["Diazepam", "Aspirin", "Penicillin", "Ranitidine"], correct: "Diazepam" },
+            { question: "Iodine is commonly used as a:", options: ["Antiseptic", "Disinfectant", "Antibiotic", "Antacid"], correct: "Antiseptic" },
+            { question: "Sulpha drugs are examples of:", options: ["Antimicrobials", "Analgesics", "Antacids", "Antihistamines"], correct: "Antimicrobials" },
+            { question: "Which drug prevents pregnancy?", options: ["Norethindrone", "Cetirizine", "Paracetamol", "Penicillin"], correct: "Norethindrone" },
+            { question: "Tetracycline is an:", options: ["Antibiotic", "Analgesic", "Antacid", "Tranquilizer"], correct: "Antibiotic" },
+            { question: "Which drug neutralizes stomach acid?", options: ["Ranitidine", "Aspirin", "Diazepam", "Cetirizine"], correct: "Ranitidine" },
+            { question: "Which drug reduces allergic reactions?", options: ["Cetirizine", "Penicillin", "Aspirin", "Norethindrone"], correct: "Cetirizine" },
+            { question: "Morphine is an example of a:", options: ["Narcotic analgesic", "Non-narcotic analgesic", "Antibiotic", "Antacid"], correct: "Narcotic analgesic" },
+            { question: "Which drug is used for typhoid treatment?", options: ["Chloramphenicol", "Aspirin", "Ranitidine", "Diazepam"], correct: "Chloramphenicol" },
+            { question: "Antiseptics prevent:", options: ["Infection on living tissues", "Bacterial growth on surfaces", "Stomach acidity", "Allergic reactions"], correct: "Infection on living tissues" },
+            { question: "Disinfectants are not applied to:", options: ["Living tissues", "Floors", "Surgical instruments", "Toilets"], correct: "Living tissues" },
+            { question: "Which drug is a synthetic opioid analgesic?", options: ["Codeine", "Aspirin", "Penicillin", "Ranitidine"], correct: "Codeine" },
+            { question: "Barbiturates are used as:", options: ["Tranquilizers", "Antibiotics", "Antacids", "Analgesics"], correct: "Tranquilizers" },
+            { question: "Which drug is used for wound disinfection?", options: ["Hydrogen peroxide", "Aspirin", "Cetirizine", "Penicillin"], correct: "Hydrogen peroxide" },
+            { question: "Antimicrobials include:", options: ["Antibiotics and sulpha drugs", "Analgesics and antacids", "Antihistamines and tranquilizers", "Antacids and antifertility drugs"], correct: "Antibiotics and sulpha drugs" },
+            { question: "Which drug is used in oral contraceptives?", options: ["Ethinylestradiol", "Aspirin", "Penicillin", "Ranitidine"], correct: "Ethinylestradiol" },
+            { question: "Streptomycin is an:", options: ["Antibiotic", "Analgesic", "Antacid", "Antihistamine"], correct: "Antibiotic" },
+            { question: "Which drug reduces histamine effects?", options: ["Promethazine", "Aspirin", "Penicillin", "Diazepam"], correct: "Promethazine" },
+            { question: "Which drug is used for pain relief without addiction?", options: ["Ibuprofen", "Morphine", "Codeine", "Diazepam"], correct: "Ibuprofen" },
+            { question: "Which drug is used to treat insomnia?", options: ["Diazepam", "Aspirin", "Penicillin", "Ranitidine"], correct: "Diazepam" },
+            { question: "Boric acid is used as a:", options: ["Antiseptic", "Disinfectant", "Antibiotic", "Analgesic"], correct: "Antiseptic" },
+            { question: "Which drug treats peptic ulcers?", options: ["Omeprazole", "Aspirin", "Penicillin", "Cetirizine"], correct: "Omeprazole" },
+            { question: "Which drug is a broad-spectrum antimicrobial?", options: ["Sulphonamide", "Aspirin", "Ranitidine", "Diazepam"], correct: "Sulphonamide" },
+            { question: "Which drug is used for tuberculosis?", options: ["Streptomycin", "Aspirin", "Cetirizine", "Norethindrone"], correct: "Streptomycin" },
+            { question: "Which drug reduces inflammation?", options: ["Ibuprofen", "Penicillin", "Ranitidine", "Diazepam"], correct: "Ibuprofen" },
+            { question: "Which drug is used as a sedative?", options: ["Chlordiazepoxide", "Aspirin", "Penicillin", "Cetirizine"], correct: "Chlordiazepoxide" },
+            { question: "Which drug prevents bacterial cell wall synthesis?", options: ["Penicillin", "Aspirin", "Ranitidine", "Diazepam"], correct: "Penicillin" },
+            { question: "Which drug is used for heartburn relief?", options: ["Magnesium hydroxide", "Aspirin", "Penicillin", "Cetirizine"], correct: "Magnesium hydroxide" },
+            { question: "Which drug treats allergic rhinitis?", options: ["Loratadine", "Aspirin", "Penicillin", "Diazepam"], correct: "Loratadine" },
+
+            // Chemicals in Food (30 questions)
+            { question: "Food preservatives are used to:", options: ["Extend shelf life", "Enhance taste", "Increase nutrition", "Change color"], correct: "Extend shelf life" },
+            { question: "An example of a food preservative is:", options: ["Sodium benzoate", "Aspartame", "BHA", "Sucrose"], correct: "Sodium benzoate" },
+            { question: "Artificial sweetening agents are used to:", options: ["Replace sugar", "Preserve food", "Add color", "Enhance nutrition"], correct: "Replace sugar" },
+            { question: "An example of an artificial sweetener is:", options: ["Aspartame", "Sodium benzoate", "BHT", "Citric acid"], correct: "Aspartame" },
+            { question: "Antioxidants in food prevent:", options: ["Oxidation of fats", "Bacterial growth", "Sugar crystallization", "Color change"], correct: "Oxidation of fats" },
+            { question: "An example of an antioxidant is:", options: ["Butylated hydroxyanisole (BHA)", "Sodium benzoate", "Aspartame", "Saccharin"], correct: "Butylated hydroxyanisole (BHA)" },
+            { question: "Which preservative is used in soft drinks?", options: ["Sodium benzoate", "Aspartame", "BHT", "Sucrose"], correct: "Sodium benzoate" },
+            { question: "Saccharin is a:", options: ["Artificial sweetener", "Preservative", "Antioxidant", "Coloring agent"], correct: "Artificial sweetener" },
+            { question: "Which antioxidant is commonly used in oils?", options: ["Butylated hydroxytoluene (BHT)", "Sodium benzoate", "Aspartame", "Sorbic acid"], correct: "Butylated hydroxytoluene (BHT)" },
+            { question: "Sorbic acid is used as a:", options: ["Preservative", "Sweetener", "Antioxidant", "Flavoring agent"], correct: "Preservative" },
+            { question: "Which sweetener is used in diet foods?", options: ["Sucralose", "Sodium benzoate", "BHA", "Citric acid"], correct: "Sucralose" },
+            { question: "Food preservatives inhibit:", options: ["Microbial growth", "Oxidation", "Sweetness", "Color change"], correct: "Microbial growth" },
+            { question: "Which preservative is used in jams?", options: ["Potassium sorbate", "Aspartame", "BHT", "Sucrose"], correct: "Potassium sorbate" },
+            { question: "Acesulfame potassium is a:", options: ["Artificial sweetener", "Preservative", "Antioxidant", "Coloring agent"], correct: "Artificial sweetener" },
+            { question: "Antioxidants extend the shelf life of:", options: ["Fats and oils", "Sugars", "Proteins", "Vitamins"], correct: "Fats and oils" },
+            { question: "Which preservative is used in canned foods?", options: ["Sodium nitrite", "Aspartame", "BHA", "Sucralose"], correct: "Sodium nitrite" },
+            { question: "Cyclamate is a:", options: ["Artificial sweetener", "Preservative", "Antioxidant", "Flavoring agent"], correct: "Artificial sweetener" },
+            { question: "Which antioxidant is naturally found in fruits?", options: ["Vitamin C", "Sodium benzoate", "Aspartame", "Sorbic acid"], correct: "Vitamin C" },
+            { question: "Benzoic acid is used as a:", options: ["Preservative", "Sweetener", "Antioxidant", "Coloring agent"], correct: "Preservative" },
+            { question: "Which sweetener is 600 times sweeter than sugar?", options: ["Sucralose", "Sodium benzoate", "BHT", "Sorbic acid"], correct: "Sucralose" },
+            { question: "Propyl gallate is a:", options: ["Antioxidant", "Preservative", "Sweetener", "Flavoring agent"], correct: "Antioxidant" },
+            { question: "Which preservative is used in dried fruits?", options: ["Sulfur dioxide", "Aspartame", "BHA", "Sucralose"], correct: "Sulfur dioxide" },
+            { question: "Aspartame is not suitable for:", options: ["Phenylketonuria patients", "Diabetic patients", "Hypertensive patients", "Allergic patients"], correct: "Phenylketonuria patients" },
+            { question: "Which antioxidant prevents rancidity in butter?", options: ["BHA", "Sodium benzoate", "Aspartame", "Sorbic acid"], correct: "BHA" },
+            { question: "Which preservative is used in pickles?", options: ["Vinegar", "Aspartame", "BHT", "Sucralose"], correct: "Vinegar" },
+            { question: "Stevia is a:", options: ["Natural sweetener", "Preservative", "Antioxidant", "Coloring agent"], correct: "Natural sweetener" },
+            { question: "Which antioxidant is used in chewing gum?", options: ["BHT", "Sodium benzoate", "Aspartame", "Sorbic acid"], correct: "BHT" },
+            { question: "Which preservative is used in cheese?", options: ["Natamycin", "Aspartame", "BHA", "Sucralose"], correct: "Natamycin" },
+            { question: "Artificial sweeteners are primarily used to:", options: ["Reduce calorie intake", "Preserve food", "Prevent oxidation", "Enhance color"], correct: "Reduce calorie intake" },
+            { question: "Which antioxidant is used in packaged snacks?", options: ["TBHQ", "Sodium benzoate", "Aspartame", "Sorbic acid"], correct: "TBHQ" },
+
+            // Cleansing Agents (20 questions)
+            { question: "Soaps are salts of:", options: ["Fatty acids", "Amino acids", "Carboxylic acids", "Sulfonic acids"], correct: "Fatty acids" },
+            { question: "Detergents are:", options: ["Synthetic cleansing agents", "Natural cleansing agents", "Fatty acid salts", "Sugar-based cleaners"], correct: "Synthetic cleansing agents" },
+            { question: "The cleansing action of soap is due to:", options: ["Micelle formation", "Hydrogen bonding", "Peptide bonding", "Oxidation"], correct: "Micelle formation" },
+            { question: "Soaps are less effective in:", options: ["Hard water", "Soft water", "Hot water", "Distilled water"], correct: "Hard water" },
+            { question: "Detergents work well in:", options: ["Hard and soft water", "Soft water only", "Hot water only", "Distilled water only"], correct: "Hard and soft water" },
+            { question: "The hydrophobic part of soap is:", options: ["Hydrocarbon chain", "Carboxylate group", "Sodium ion", "Water molecule"], correct: "Hydrocarbon chain" },
+            { question: "The hydrophilic part of soap is:", options: ["Carboxylate group", "Hydrocarbon chain", "Sulfur group", "Nitrogen group"], correct: "Carboxylate group" },
+            { question: "Micelles trap:", options: ["Dirt and grease", "Water molecules", "Air bubbles", "Sugar particles"], correct: "Dirt and grease" },
+            { question: "Soaps are made by:", options: ["Saponification", "Esterification", "Polymerization", "Oxidation"], correct: "Saponification" },
+            { question: "Detergents are often:", options: ["Sodium salts of sulphonic acids", "Fatty acid salts", "Sugar derivatives", "Protein-based"], correct: "Sodium salts of sulphonic acids" },
+            { question: "Which cleansing agent is biodegradable?", options: ["Soap", "Synthetic detergent", "Sulfonic acid", "Phenol"], correct: "Soap" },
+            { question: "Hard water contains:", options: ["Calcium and magnesium ions", "Sodium and potassium ions", "Chloride and sulfate ions", "Nitrate and phosphate ions"], correct: "Calcium and magnesium ions" },
+            { question: "The cleansing action of detergents is similar to soap because of:", options: ["Micelle formation", "Hydrogen bonding", "Ester formation", "Redox reactions"], correct: "Micelle formation" },
+            { question: "Soaps form scum in:", options: ["Hard water", "Soft water", "Hot water", "Distilled water"], correct: "Hard water" },
+            { question: "Which part of soap interacts with grease?", options: ["Hydrophobic tail", "Hydrophilic head", "Sodium ion", "Water molecule"], correct: "Hydrophobic tail" },
+            { question: "Which part of soap interacts with water?", options: ["Hydrophilic head", "Hydrophobic tail", "Sulfur group", "Nitrogen group"], correct: "Hydrophilic head" },
+            { question: "Synthetic detergents are derived from:", options: ["Petroleum", "Vegetable oils", "Sugars", "Proteins"], correct: "Petroleum" },
+            { question: "The process of making soap involves:", options: ["Fat and alkali", "Sugar and acid", "Protein and base", "Starch and alkali"], correct: "Fat and alkali" },
+            { question: "Which cleansing agent is used in dishwashing liquids?", options: ["Detergent", "Soap", "Fatty acid", "Sulfonic acid"], correct: "Detergent" },
+            { question: "The advantage of detergents over soaps is:", options: ["Effectiveness in hard water", "Biodegradability", "Natural origin", "Low cost"], correct: "Effectiveness in hard water" }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById('quiz');
+        const scoreDisplay = document.getElementById('score-value');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateQuiz() {
+            shuffle(questions);
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+                
+                shuffle(q.options);
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option');
+                    optionDiv.textContent = option;
+                    optionDiv.addEventListener('click', () => handleAnswer(optionDiv, option, q.correct, questionDiv));
+                    questionDiv.appendChild(optionDiv);
+                });
+                
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswer(optionDiv, selected, correct, questionDiv) {
+            const options = questionDiv.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.textContent === correct) {
+                    opt.classList.add('correct');
+                } else if (opt.textContent === selected && selected !== correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            if (selected === correct) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        generateQuiz();
+    </script>
+</body>
+</html>

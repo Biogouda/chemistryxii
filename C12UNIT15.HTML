@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymers MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #ecf0f1;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background: #dfe6e9;
+        }
+        .option.correct {
+            background: #2ecc71 !important;
+            color: #fff;
+        }
+        .option.incorrect {
+            background: #e74c3c !important;
+            color: #fff;
+        }
+        #score {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 0 10px;
+            }
+            .question {
+                padding: 15px;
+            }
+            .option {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Polymers MCQ Quiz</h1>
+    <div id="quiz"></div>
+    <div id="score">Score: <span id="score-value">0</span>/50</div>
+
+    <script>
+        const questions = [
+            // Classification (10 questions)
+            { question: "Polymers are classified based on their origin as:", options: ["Natural and synthetic", "Addition and condensation", "Biodegradable and non-biodegradable", "Linear and branched"], correct: "Natural and synthetic" },
+            { question: "Which of the following is a natural polymer?", options: ["Nylon", "Rubber", "Polythene", "Bakelite"], correct: "Rubber" },
+            { question: "Synthetic polymers are:", options: ["Man-made polymers", "Naturally occurring", "Biodegradable only", "Always branched"], correct: "Man-made polymers" },
+            { question: "An example of a synthetic polymer is:", options: ["Cellulose", "Nylon", "Starch", "Protein"], correct: "Nylon" },
+            { question: "Natural polymers are derived from:", options: ["Plants and animals", "Petroleum", "Synthetic resins", "Minerals"], correct: "Plants and animals" },
+            { question: "Which polymer is found in plant cell walls?", options: ["Cellulose", "Nylon", "Polyester", "Bakelite"], correct: "Cellulose" },
+            { question: "Polymers can be classified based on their structure as:", options: ["Linear, branched, cross-linked", "Natural, synthetic, semi-synthetic", "Addition, condensation, copolymer", "Biodegradable, non-biodegradable"], correct: "Linear, branched, cross-linked" },
+            { question: "Which of the following is a semi-synthetic polymer?", options: ["Cellulose acetate", "Polythene", "Natural rubber", "Nylon"], correct: "Cellulose acetate" },
+            { question: "The classification of polymers based on monomer units includes:", options: ["Homopolymers and copolymers", "Natural and synthetic", "Linear and branched", "Biodegradable and non-biodegradable"], correct: "Homopolymers and copolymers" },
+            { question: "A homopolymer consists of:", options: ["One type of monomer", "Two or more types of monomers", "Natural monomers only", "Synthetic monomers only"], correct: "One type of monomer" },
+
+            // Methods of Polymerization (10 questions)
+            { question: "Addition polymerization involves:", options: ["Monomers with double bonds", "Loss of small molecules", "Two different monomers", "Cross-linking"], correct: "Monomers with double bonds" },
+            { question: "Condensation polymerization results in:", options: ["Loss of small molecules like water", "Addition of monomers without loss", "Formation of branched polymers only", "Homopolymers only"], correct: "Loss of small molecules like water" },
+            { question: "An example of a polymer formed by addition polymerization is:", options: ["Polythene", "Nylon", "Polyester", "Bakelite"], correct: "Polythene" },
+            { question: "Which polymer is formed by condensation polymerization?", options: ["Nylon", "Polythene", "PVC", "Polystyrene"], correct: "Nylon" },
+            { question: "Copolymerization involves:", options: ["Two or more different monomers", "One type of monomer", "Loss of large molecules", "Natural polymers only"], correct: "Two or more different monomers" },
+            { question: "An example of a copolymer is:", options: ["Styrene-butadiene rubber", "Polythene", "Nylon", "Bakelite"], correct: "Styrene-butadiene rubber" },
+            { question: "In addition polymerization, the molecular weight of the polymer is:", options: ["Equal to the sum of monomer weights", "Less than monomer weights", "Greater than monomer weights", "Unrelated to monomer weights"], correct: "Equal to the sum of monomer weights" },
+            { question: "Condensation polymerization typically forms:", options: ["Polyesters and polyamides", "Polyolefins", "Polystyrenes", "Polyvinyls"], correct: "Polyesters and polyamides" },
+            { question: "The initiator in addition polymerization is:", options: ["A free radical", "A small molecule", "A cross-linking agent", "A catalyst"], correct: "A free radical" },
+            { question: "Which method of polymerization is used for bakelite?", options: ["Condensation", "Addition", "Copolymerization", "Cross-linking"], correct: "Condensation" },
+
+            // Important Polymers (20 questions)
+            { question: "Polythene is used for:", options: ["Plastic bags and packaging", "Tires", "Clothing", "Electrical insulation"], correct: "Plastic bags and packaging" },
+            { question: "Nylon is commonly used in:", options: ["Textiles and ropes", "Plastic films", "Rubber tires", "Adhesives"], correct: "Textiles and ropes" },
+            { question: "Polyester is primarily used for:", options: ["Clothing and bottles", "Electrical wires", "Tires", "Pipes"], correct: "Clothing and bottles" },
+            { question: "Bakelite is used in:", options: ["Electrical insulators", "Clothing", "Packaging", "Tires"], correct: "Electrical insulators" },
+            { question: "Natural rubber is obtained from:", options: ["Latex of rubber trees", "Petroleum", "Coal", "Synthetic resins"], correct: "Latex of rubber trees" },
+            { question: "The monomer of polythene is:", options: ["Ethylene", "Propylene", "Styrene", "Vinyl chloride"], correct: "Ethylene" },
+            { question: "Nylon is a:", options: ["Polyamide", "Polyolefin", "Polyester", "Polysaccharide"], correct: "Polyamide" },
+            { question: "The monomers of nylon-6,6 are:", options: ["Hexamethylenediamine and adipic acid", "Ethylene and propylene", "Styrene and butadiene", "Phenol and formaldehyde"], correct: "Hexamethylenediamine and adipic acid" },
+            { question: "Polyester is formed from:", options: ["Dicarboxylic acid and diol", "Ethylene", "Styrene", "Vinyl chloride"], correct: "Dicarboxylic acid and diol" },
+            { question: "Bakelite is a:", options: ["Thermosetting polymer", "Thermoplastic", "Elastomer", "Natural polymer"], correct: "Thermosetting polymer" },
+            { question: "Rubber is an:", options: ["Elastomer", "Thermosetting polymer", "Thermoplastic", "Copolymer"], correct: "Elastomer" },
+            { question: "The monomer of natural rubber is:", options: ["Isoprene", "Ethylene", "Styrene", "Phenol"], correct: "Isoprene" },
+            { question: "Which polymer is used in PET bottles?", options: ["Polyester", "Polythene", "Nylon", "Bakelite"], correct: "Polyester" },
+            { question: "Vulcanized rubber is:", options: ["Stronger and more elastic", "Weaker and brittle", "Thermoplastic", "Non-elastic"], correct: "Stronger and more elastic" },
+            { question: "The process of vulcanization involves:", options: ["Adding sulfur to rubber", "Heating polythene", "Cooling nylon", "Mixing polyesters"], correct: "Adding sulfur to rubber" },
+            { question: "Which polymer is used in non-stick cookware?", options: ["Teflon", "Nylon", "Polythene", "Bakelite"], correct: "Teflon" },
+            { question: "The monomer of Teflon is:", options: ["Tetrafluoroethylene", "Ethylene", "Styrene", "Phenol"], correct: "Tetrafluoroethylene" },
+            { question: "Which polymer is resistant to heat and chemicals?", options: ["Bakelite", "Polythene", "Rubber", "Nylon"], correct: "Bakelite" },
+            { question: "Polythene is a:", options: ["Thermoplastic", "Thermosetting polymer", "Elastomer", "Natural polymer"], correct: "Thermoplastic" },
+            { question: "Which polymer is used in tire manufacturing?", options: ["Rubber", "Polythene", "Polyester", "Bakelite"], correct: "Rubber" },
+
+            // Biodegradable and Non-Biodegradable Polymers (10 questions)
+            { question: "Biodegradable polymers are:", options: ["Broken down by microorganisms", "Resistant to decomposition", "Always synthetic", "Non-recyclable"], correct: "Broken down by microorganisms" },
+            { question: "An example of a biodegradable polymer is:", options: ["Polylactic acid (PLA)", "Polythene", "Nylon", "Bakelite"], correct: "Polylactic acid (PLA)" },
+            { question: "Non-biodegradable polymers:", options: ["Persist in the environment", "Decompose naturally", "Are always natural", "Break down easily"], correct: "Persist in the environment" },
+            { question: "Which of the following is non-biodegradable?", options: ["Polythene", "Starch", "Cellulose", "PHA"], correct: "Polythene" },
+            { question: "Biodegradable polymers are often used in:", options: ["Medical implants and packaging", "Electrical insulation", "Tire manufacturing", "Non-stick coatings"], correct: "Medical implants and packaging" },
+            { question: "Which natural polymer is biodegradable?", options: ["Cellulose", "Nylon", "PVC", "Teflon"], correct: "Cellulose" },
+            { question: "Non-biodegradable polymers contribute to:", options: ["Environmental pollution", "Soil fertility", "Biodegradation", "Composting"], correct: "Environmental pollution" },
+            { question: "An example of a synthetic biodegradable polymer is:", options: ["Polyhydroxyalkanoates (PHA)", "Polythene", "Bakelite", "Nylon"], correct: "Polyhydroxyalkanoates (PHA)" },
+            { question: "Which polymer is difficult to recycle?", options: ["Bakelite", "Polylactic acid", "Starch", "Cellulose"], correct: "Bakelite" },
+            { question: "The advantage of biodegradable polymers is:", options: ["Reduced environmental impact", "High durability", "Low cost", "Heat resistance"], correct: "Reduced environmental impact" }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById('quiz');
+        const scoreDisplay = document.getElementById('score-value');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateQuiz() {
+            shuffle(questions);
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+                
+                shuffle(q.options);
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option');
+                    optionDiv.textContent = option;
+                    optionDiv.addEventListener('click', () => handleAnswer(optionDiv, option, q.correct, questionDiv));
+                    questionDiv.appendChild(optionDiv);
+                });
+                
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswer(optionDiv, selected, correct, questionDiv) {
+            const options = questionDiv.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.textContent === correct) {
+                    opt.classList.add('correct');
+                } else if (opt.textContent === selected && selected !== correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            if (selected === correct) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        generateQuiz();
+    </script>
+</body>
+</html>

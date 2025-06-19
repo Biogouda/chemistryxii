@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biomolecules MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #ecf0f1;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background: #dfe6e9;
+        }
+        .option.correct {
+            background: #2ecc71 !important;
+            color: #fff;
+        }
+        .option.incorrect {
+            background: #e74c3c !important;
+            color: #fff;
+        }
+        #score {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 0 10px;
+            }
+            .question {
+                padding: 15px;
+            }
+            .option {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Biomolecules MCQ Quiz</h1>
+    <div id="quiz"></div>
+    <div id="score">Score: <span id="score-value">0</span>/100</div>
+
+    <script>
+        const questions = [
+            // Carbohydrates (30 questions)
+            { question: "What is the general formula for carbohydrates?", options: ["Cn(H2O)n", "CnH2nOn", "Cn(H2O)2n", "CnHnOn"], correct: "Cn(H2O)n" },
+            { question: "Carbohydrates are classified based on the number of sugar units into:", options: ["Monosaccharides, disaccharides, polysaccharides", "Aldoses, ketoses, trioses", "Glucose, fructose, sucrose", "Starch, cellulose, glycogen"], correct: "Monosaccharides, disaccharides, polysaccharides" },
+            { question: "Which of the following is an aldose?", options: ["Fructose", "Glucose", "Sucrose", "Lactose"], correct: "Glucose" },
+            { question: "Which sugar is a ketose?", options: ["Glucose", "Fructose", "Maltose", "Cellulose"], correct: "Fructose" },
+            { question: "Monosaccharides are:", options: ["Simple sugars that cannot be hydrolyzed", "Complex sugars", "Disaccharides", "Polysaccharides"], correct: "Simple sugars that cannot be hydrolyzed" },
+            { question: "Glucose and fructose are examples of:", options: ["Disaccharides", "Monosaccharides", "Polysaccharides", "Oligosaccharides"], correct: "Monosaccharides" },
+            { question: "The D-L configuration of monosaccharides is based on:", options: ["Position of hydroxyl group at chiral carbon farthest from aldehyde/ketone", "Number of carbon atoms", "Type of functional group", "Molecular weight"], correct: "Position of hydroxyl group at chiral carbon farthest from aldehyde/ketone" },
+            { question: "Which of the following is a disaccharide?", options: ["Glucose", "Sucrose", "Starch", "Cellulose"], correct: "Sucrose" },
+            { question: "Sucrose is composed of:", options: ["Glucose and fructose", "Glucose and galactose", "Fructose and galactose", "Two glucose units"], correct: "Glucose and fructose" },
+            { question: "Lactose is made up of:", options: ["Glucose and fructose", "Glucose and galactose", "Fructose and galactose", "Two glucose units"], correct: "Glucose and galactose" },
+            { question: "Maltose consists of:", options: ["Two glucose units", "Glucose and fructose", "Glucose and galactose", "Fructose and galactose"], correct: "Two glucose units" },
+            { question: "Which of the following is a polysaccharide?", options: ["Sucrose", "Lactose", "Starch", "Fructose"], correct: "Starch" },
+            { question: "Starch is a polysaccharide used for:", options: ["Energy storage in plants", "Structural support", "Cell wall formation", "Enzyme activity"], correct: "Energy storage in plants" },
+            { question: "Cellulose is primarily found in:", options: ["Animal cell walls", "Plant cell walls", "Human muscles", "Fungal membranes"], correct: "Plant cell walls" },
+            { question: "Glycogen is stored in:", options: ["Plants", "Animals", "Bacteria", "Fungi"], correct: "Animals" },
+            { question: "The primary function of cellulose is:", options: ["Energy storage", "Structural support", "Enzyme catalysis", "Hormone signaling"], correct: "Structural support" },
+            { question: "Which carbohydrate is known as blood sugar?", options: ["Fructose", "Glucose", "Sucrose", "Lactose"], correct: "Glucose" },
+            { question: "Which polysaccharide is indigestible by humans?", options: ["Starch", "Glycogen", "Cellulose", "Maltose"], correct: "Cellulose" },
+            { question: "The bond linking monosaccharides in disaccharides is:", options: ["Peptide bond", "Glycosidic bond", "Ester bond", "Hydrogen bond"], correct: "Glycosidic bond" },
+            { question: "Which sugar is found in milk?", options: ["Sucrose", "Lactose", "Maltose", "Fructose"], correct: "Lactose" },
+            { question: "Carbohydrates are a major source of:", options: ["Energy", "Vitamins", "Minerals", "Enzymes"], correct: "Energy" },
+            { question: "Which of the following is not a function of carbohydrates?", options: ["Energy source", "Structural component", "Enzyme synthesis", "Cell recognition"], correct: "Enzyme synthesis" },
+            { question: "The sweetest naturally occurring sugar is:", options: ["Glucose", "Fructose", "Sucrose", "Lactose"], correct: "Fructose" },
+            { question: "Which carbohydrate is used for energy storage in animals?", options: ["Starch", "Cellulose", "Glycogen", "Sucrose"], correct: "Glycogen" },
+            { question: "Monosaccharides typically have how many carbon atoms?", options: ["3-7", "8-12", "1-3", "13-20"], correct: "3-7" },
+            { question: "Which disaccharide is known as table sugar?", options: ["Maltose", "Lactose", "Sucrose", "Fructose"], correct: "Sucrose" },
+            { question: "The structural difference between starch and cellulose is:", options: ["Type of glycosidic bond", "Number of carbon atoms", "Functional group", "Molecular weight"], correct: "Type of glycosidic bond" },
+            { question: "Which carbohydrate is a component of plant cell walls?", options: ["Starch", "Glycogen", "Cellulose", "Sucrose"], correct: "Cellulose" },
+            { question: "Oligosaccharides contain how many sugar units?", options: ["1-2", "2-10", "10-20", "More than 20"], correct: "2-10" },
+            { question: "The importance of carbohydrates includes:", options: ["Energy source and structural role", "Enzyme production", "Hormone synthesis", "Vitamin storage"], correct: "Energy source and structural role" },
+
+            // Proteins (30 questions)
+            { question: "Proteins are polymers of:", options: ["Amino acids", "Monosaccharides", "Nucleotides", "Fatty acids"], correct: "Amino acids" },
+            { question: "The bond linking amino acids in a protein is:", options: ["Glycosidic bond", "Peptide bond", "Ester bond", "Hydrogen bond"], correct: "Peptide bond" },
+            { question: "How many standard amino acids are there?", options: ["20", "10", "30", "40"], correct: "20" },
+            { question: "The primary structure of a protein refers to:", options: ["Sequence of amino acids", "Alpha helix formation", "3D folding", "Interaction of multiple polypeptides"], correct: "Sequence of amino acids" },
+            { question: "The secondary structure of a protein includes:", options: ["Alpha helix and beta sheet", "Amino acid sequence", "3D folding", "Multiple polypeptide chains"], correct: "Alpha helix and beta sheet" },
+            { question: "The tertiary structure of a protein is:", options: ["The overall 3D shape of a single polypeptide", "Amino acid sequence", "Alpha helix", "Interaction of multiple polypeptides"], correct: "The overall 3D shape of a single polypeptide" },
+            { question: "The quaternary structure involves:", options: ["Interaction of multiple polypeptide chains", "Alpha helix formation", "Amino acid sequence", "Single polypeptide folding"], correct: "Interaction of multiple polypeptide chains" },
+            { question: "Denaturation of proteins involves:", options: ["Loss of structure and function", "Formation of peptide bonds", "Synthesis of amino acids", "Increase in enzyme activity"], correct: "Loss of structure and function" },
+            { question: "Enzymes are primarily:", options: ["Proteins", "Carbohydrates", "Lipids", "Nucleic acids"], correct: "Proteins" },
+            { question: "The function of enzymes is to:", options: ["Catalyze chemical reactions", "Store energy", "Provide structural support", "Transport oxygen"], correct: "Catalyze chemical reactions" },
+            { question: "Hormones are involved in:", options: ["Regulation of body processes", "Energy storage", "Structural support", "DNA replication"], correct: "Regulation of body processes" },
+            { question: "Which of the following is a protein hormone?", options: ["Insulin", "Estrogen", "Testosterone", "Adrenaline"], correct: "Insulin" },
+            { question: "Denaturation can be caused by:", options: ["Heat or pH changes", "Peptide bond formation", "Amino acid synthesis", "Enzyme activation"], correct: "Heat or pH changes" },
+            { question: "The building blocks of proteins are:", options: ["Amino acids", "Glucose", "Nucleotides", "Fatty acids"], correct: "Amino acids" },
+            { question: "A polypeptide is:", options: ["A chain of amino acids", "A type of carbohydrate", "A lipid molecule", "A nucleic acid"], correct: "A chain of amino acids" },
+            { question: "The primary structure is held together by:", options: ["Peptide bonds", "Hydrogen bonds", "Disulfide bonds", "Ionic bonds"], correct: "Peptide bonds" },
+            { question: "Secondary structure is stabilized by:", options: ["Hydrogen bonds", "Peptide bonds", "Disulfide bonds", "Ionic bonds"], correct: "Hydrogen bonds" },
+            { question: "Tertiary structure is stabilized by:", options: ["Disulfide bonds and hydrophobic interactions", "Peptide bonds", "Glycosidic bonds", "Ester bonds"], correct: "Disulfide bonds and hydrophobic interactions" },
+            { question: "An example of a protein with quaternary structure is:", options: ["Hemoglobin", "Glucose", "Starch", "DNA"], correct: "Hemoglobin" },
+            { question: "Enzymes increase the rate of reaction by:", options: ["Lowering activation energy", "Increasing temperature", "Breaking peptide bonds", "Forming hydrogen bonds"], correct: "Lowering activation energy" },
+            { question: "Which level of protein structure is affected by denaturation?", options: ["Secondary, tertiary, quaternary", "Primary only", "Primary and secondary", "Quaternary only"], correct: "Secondary, tertiary, quaternary" },
+            { question: "Proteins function as:", options: ["Enzymes, hormones, and structural components", "Energy storage only", "Genetic material", "Lipid transport"], correct: "Enzymes, hormones, and structural components" },
+            { question: "The active site of an enzyme is:", options: ["Region where substrate binds", "Amino acid sequence", "Peptide bond", "Carbohydrate component"], correct: "Region where substrate binds" },
+            { question: "Which amino acid configuration is found in proteins?", options: ["L-amino acids", "D-amino acids", "Both L and D", "Neither L nor D"], correct: "L-amino acids" },
+            { question: "Denatured proteins lose their:", options: ["Biological activity", "Amino acid sequence", "Peptide bonds", "Molecular weight"], correct: "Biological activity" },
+            { question: "Collagen is an example of a protein with:", options: ["Structural function", "Enzymatic function", "Storage function", "Transport function"], correct: "Structural function" },
+            { question: "The specificity of an enzyme is due to:", options: ["Shape of its active site", "Amino acid sequence", "Peptide bonds", "Molecular weight"], correct: "Shape of its active site" },
+            { question: "Which protein structure is unique to multi-subunit proteins?", options: ["Quaternary", "Primary", "Secondary", "Tertiary"], correct: "Quaternary" },
+            { question: "Proteins are essential for:", options: ["Growth and repair of tissues", "Energy storage", "DNA replication", "Vitamin synthesis"], correct: "Growth and repair of tissues" },
+            { question: "An example of a structural protein is:", options: ["Keratin", "Insulin", "Amylase", "Hemoglobin"], correct: "Keratin" },
+
+            // Vitamins (20 questions)
+            { question: "Vitamins are:", options: ["Organic compounds required in small amounts", "Inorganic minerals", "Large proteins", "Carbohydrates"], correct: "Organic compounds required in small amounts" },
+            { question: "Vitamins are classified as:", options: ["Fat-soluble and water-soluble", "Acidic and basic", "Primary and secondary", "Simple and complex"], correct: "Fat-soluble and water-soluble" },
+            { question: "Which vitamin is fat-soluble?", options: ["Vitamin A", "Vitamin C", "Vitamin B1", "Vitamin B12"], correct: "Vitamin A" },
+            { question: "Which vitamin is water-soluble?", options: ["Vitamin C", "Vitamin D", "Vitamin E", "Vitamin K"], correct: "Vitamin C" },
+            { question: "Vitamin A is essential for:", options: ["Vision", "Blood clotting", "Energy production", "Bone formation"], correct: "Vision" },
+            { question: "Deficiency of Vitamin C causes:", options: ["Scurvy", "Rickets", "Night blindness", "Beriberi"], correct: "Scurvy" },
+            { question: "Vitamin D is important for:", options: ["Bone health", "Immune function", "Blood clotting", "Energy metabolism"], correct: "Bone health" },
+            { question: "Which vitamin is known as the sunshine vitamin?", options: ["Vitamin D", "Vitamin A", "Vitamin C", "Vitamin B12"], correct: "Vitamin D" },
+            { question: "Vitamin E functions as:", options: ["An antioxidant", "A clotting factor", "An enzyme", "A hormone"], correct: "An antioxidant" },
+            { question: "Vitamin K is essential for:", options: ["Blood clotting", "Bone health", "Vision", "Energy production"], correct: "Blood clotting" },
+            { question: "Deficiency of Vitamin B1 causes:", options: ["Beriberi", "Scurvy", "Rickets", "Pellagra"], correct: "Beriberi" },
+            { question: "Vitamin B12 is important for:", options: ["Red blood cell formation", "Bone health", "Vision", "Blood clotting"], correct: "Red blood cell formation" },
+            { question: "Which vitamin is synthesized by gut bacteria?", options: ["Vitamin K", "Vitamin C", "Vitamin A", "Vitamin D"], correct: "Vitamin K" },
+            { question: "Niacin deficiency causes:", options: ["Pellagra", "Scurvy", "Rickets", "Beriberi"], correct: "Pellagra" },
+            { question: "Vitamin C is also known as:", options: ["Ascorbic acid", "Retinol", "Calciferol", "Tocopherol"], correct: "Ascorbic acid" },
+            { question: "Which vitamin helps in collagen formation?", options: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin E"], correct: "Vitamin C" },
+            { question: "Fat-soluble vitamins are stored in:", options: ["Liver and adipose tissue", "Blood", "Muscles", "Bones"], correct: "Liver and adipose tissue" },
+            { question: "Water-soluble vitamins are:", options: ["Excreted in urine", "Stored in large amounts", "Toxic in excess", "Stable during cooking"], correct: "Excreted in urine" },
+            { question: "Vitamin A deficiency leads to:", options: ["Night blindness", "Scurvy", "Rickets", "Pellagra"], correct: "Night blindness" },
+            { question: "Which vitamin is crucial for nerve function?", options: ["Vitamin B1", "Vitamin A", "Vitamin D", "Vitamin K"], correct: "Vitamin B1" },
+
+            // Nucleic Acids (20 questions)
+            { question: "Nucleic acids are polymers of:", options: ["Nucleotides", "Amino acids", "Monosaccharides", "Fatty acids"], correct: "Nucleotides" },
+            { question: "The two main types of nucleic acids are:", options: ["DNA and RNA", "mRNA and tRNA", "Protein and lipid", "Starch and cellulose"], correct: "DNA and RNA" },
+            { question: "DNA stands for:", options: ["Deoxyribonucleic acid", "Dioxyribonucleic acid", "Denatured nucleic acid", "Dynamic nucleic acid"], correct: "Deoxyribonucleic acid" },
+            { question: "RNA stands for:", options: ["Ribonucleic acid", "Ribosomal nucleic acid", "Reactive nucleic acid", "Reduced nucleic acid"], correct: "Ribonucleic acid" },
+            { question: "The primary function of DNA is:", options: ["Store genetic information", "Catalyze reactions", "Provide energy", "Structural support"], correct: "Store genetic information" },
+            { question: "RNA is primarily involved in:", options: ["Protein synthesis", "Energy storage", "Cell wall formation", "Blood clotting"], correct: "Protein synthesis" },
+            { question: "The sugar in DNA is:", options: ["Deoxyribose", "Ribose", "Glucose", "Fructose"], correct: "Deoxyribose" },
+            { question: "The sugar in RNA is:", options: ["Ribose", "Deoxyribose", "Glucose", "Fructose"], correct: "Ribose" },
+            { question: "DNA is typically:", options: ["Double-stranded", "Single-stranded", "Triple-stranded", "Circular"], correct: "Double-stranded" },
+            { question: "RNA is typically:", options: ["Single-stranded", "Double-stranded", "Triple-stranded", "Circular"], correct: "Single-stranded" },
+            { question: "The nitrogenous bases in DNA are:", options: ["Adenine, Thymine, Cytosine, Guanine", "Adenine, Uracil, Cytosine, Guanine", "Thymine, Uracil, Cytosine, Guanine", "Adenine, Thymine, Uracil, Cytosine"], correct: "Adenine, Thymine, Cytosine, Guanine" },
+            { question: "The nitrogenous bases in RNA are:", options: ["Adenine, Uracil, Cytosine, Guanine", "Adenine, Thymine, Cytosine, Guanine", "Thymine, Uracil, Cytosine, Guanine", "Adenine, Thymine, Uracil, Cytosine"], correct: "Adenine, Uracil, Cytosine, Guanine" },
+            { question: "The backbone of nucleic acids consists of:", options: ["Sugar and phosphate", "Amino acids", "Fatty acids", "Glucose"], correct: "Sugar and phosphate" },
+            { question: "DNA is found primarily in:", options: ["Nucleus", "Cytoplasm", "Mitochondria", "Ribosomes"], correct: "Nucleus" },
+            { question: "RNA is synthesized from:", options: ["DNA template", "Protein template", "Carbohydrate template", "Lipid template"], correct: "DNA template" },
+            { question: "The process of RNA synthesis is called:", options: ["Transcription", "Translation", "Replication", "Denaturation"], correct: "Transcription" },
+            { question: "The process of protein synthesis from RNA is called:", options: ["Translation", "Transcription", "Replication", "Denaturation"], correct: "Translation" },
+            { question: "Which base pair is found in DNA?", options: ["Adenine-Thymine", "Adenine-Uracil", "Cytosine-Uracil", "Guanine-Thymine"], correct: "Adenine-Thymine" },
+            { question: "Which base pair is found in RNA?", options: ["Adenine-Uracil", "Adenine-Thymine", "Cytosine-Thymine", "Guanine-Uracil"], correct: "Adenine-Uracil" },
+            { question: "Nucleic acids are essential for:", options: ["Heredity and protein synthesis", "Energy storage", "Structural support", "Enzyme catalysis"], correct: "Heredity and protein synthesis" }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById('quiz');
+        const scoreDisplay = document.getElementById('score-value');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateQuiz() {
+            shuffle(questions);
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+                
+                shuffle(q.options);
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option');
+                    optionDiv.textContent = option;
+                    optionDiv.addEventListener('click', () => handleAnswer(optionDiv, option, q.correct, questionDiv));
+                    questionDiv.appendChild(optionDiv);
+                });
+                
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswer(optionDiv, selected, correct, questionDiv) {
+            const options = questionDiv.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.textContent === correct) {
+                    opt.classList.add('correct');
+                } else if (opt.textContent === selected && selected !== correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            if (selected === correct) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        generateQuiz();
+    </script>
+</body>
+</html>

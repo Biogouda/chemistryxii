@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p-Block Elements (Group 15) MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">p-Block Elements (Group 15) MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Group 15 elements belong to the:",
+        options: ["s-block", "p-block", "d-block", "f-block"],
+        correct: 1
+      },
+      {
+        question: "The general electronic configuration of Group 15 elements is:",
+        options: ["ns²np²", "ns²np³", "ns²np⁴", "ns²np⁵"],
+        correct: 1
+      },
+      {
+        question: "Which Group 15 element is the most abundant in the Earth's crust?",
+        options: ["Nitrogen", "Phosphorus", "Arsenic", "Antimony"],
+        correct: 1
+      },
+      {
+        question: "The common oxidation states of Group 15 elements are:",
+        options: ["+3, +5", "+2, +4", "+1, +3", "+4, +6"],
+        correct: 0
+      },
+      {
+        question: "The atomic radius of Group 15 elements generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Increases across a period"],
+        correct: 0
+      },
+      {
+        question: "The electronegativity of Group 15 elements:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Increases across a period"],
+        correct: 1
+      },
+      {
+        question: "Nitrogen is primarily obtained from:",
+        options: ["Fractional distillation of liquid air", "Electrolysis of water", "Haber’s process", "Decomposition of ammonia"],
+        correct: 0
+      },
+      {
+        question: "Nitrogen is chemically inert due to:",
+        options: ["Low electronegativity", "High bond energy of N≡N", "Small atomic size", "High ionization energy"],
+        correct: 1
+      },
+      {
+        question: "The main use of nitrogen is in the production of:",
+        options: ["Fertilizers", "Explosives", "Refrigerants", "Dyes"],
+        correct: 0
+      },
+      {
+        question: "Ammonia is prepared industrially by:",
+        options: ["Ostwald process", "Haber’s process", "Contact process", "Solvay process"],
+        correct: 1
+      },
+      {
+        question: "Ammonia is a:",
+        options: ["Strong acid", "Weak base", "Strong base", "Neutral compound"],
+        correct: 1
+      },
+      {
+        question: "The shape of the ammonia molecule is:",
+        options: ["Linear", "Trigonal planar", "Tetrahedral", "Trigonal pyramidal"],
+        correct: 3
+      },
+      {
+        question: "Nitric acid is prepared industrially by:",
+        options: ["Haber’s process", "Ostwald process", "Contact process", "Birkeland-Eyde process"],
+        correct: 1
+      },
+      {
+        question: "Nitric acid acts as a:",
+        options: ["Reducing agent", "Oxidizing agent", "Base", "Neutral compound"],
+        correct: 1
+      },
+      {
+        question: "The structure of N₂O (nitrous oxide) is:",
+        options: ["Linear", "Bent", "Trigonal", "Tetrahedral"],
+        correct: 0
+      },
+      {
+        question: "The oxidation state of nitrogen in NO₂ is:",
+        options: ["+2", "+3", "+4", "+5"],
+        correct: 2
+      },
+      {
+        question: "The structure of NO (nitric oxide) is:",
+        options: ["Linear", "Bent", "Trigonal", "Tetrahedral"],
+        correct: 0
+      },
+      {
+        question: "Which oxide of nitrogen is a neutral oxide?",
+        options: ["N₂O", "NO₂", "N₂O₅", "NO₃"],
+        correct: 0
+      },
+      {
+        question: "Phosphorus exists in several allotropic forms, including:",
+        options: ["White, red, and black", "White, yellow, and green", "Red, blue, and black", "White, red, and purple"],
+        correct: 0
+      },
+      {
+        question: "White phosphorus is highly reactive because of:",
+        options: ["Its polymeric structure", "Angular strain in P₄ molecule", "High electronegativity", "Strong P-P bonds"],
+        correct: 1
+      },
+      {
+        question: "Red phosphorus is less reactive than white phosphorus due to:",
+        options: ["Monomeric structure", "Polymeric structure", "High electronegativity", "Low bond energy"],
+        correct: 1
+      },
+      {
+        question: "Phosphine (PH₃) is prepared by:",
+        options: ["Heating phosphorus with NaOH", "Heating phosphorus with HCl", "Electrolysis of phosphorus", "Burning phosphorus in air"],
+        correct: 0
+      },
+      {
+        question: "Phosphine is a:",
+        options: ["Strong base", "Weak base", "Strong acid", "Neutral compound"],
+        correct: 1
+      },
+      {
+        question: "The shape of the phosphine molecule is:",
+        options: ["Linear", "Trigonal planar", "Tetrahedral", "Trigonal pyramidal"],
+        correct: 3
+      },
+      {
+        question: "PCl₃ is prepared by reacting phosphorus with:",
+        options: ["Chlorine gas", "Hydrochloric acid", "Sodium chloride", "Chlorine water"],
+        correct: 0
+      },
+      {
+        question: "The hybridization of phosphorus in PCl₃ is:",
+        options: ["sp", "sp²", "sp³", "sp³d"],
+        correct: 2
+      },
+      {
+        question: "PCl₅ in the solid state exists as:",
+        options: ["PCl₅ molecules", "[PCl₄]⁺[PCl₆]⁻", "[PCl₃]²⁺[Cl₂]²⁻", "PCl₅ dimers"],
+        correct: 1
+      },
+      {
+        question: "The shape of PCl₅ in the gas phase is:",
+        options: ["Tetrahedral", "Trigonal bipyramidal", "Octahedral", "Square pyramidal"],
+        correct: 1
+      },
+      {
+        question: "The hybridization of phosphorus in PCl₅ is:",
+        options: ["sp³", "sp³d", "sp³d²", "sp²"],
+        correct: 1
+      },
+      {
+        question: "An example of an oxoacid of phosphorus is:",
+        options: ["H₃PO₄", "HNO₃", "H₂SO₄", "HClO₄"],
+        correct: 0
+      },
+      {
+        question: "The oxidation state of phosphorus in H₃PO₄ is:",
+        options: ["+3", "+4", "+5", "+6"],
+        correct: 2
+      },
+      {
+        question: "The basicity of H₃PO₄ is:",
+        options: ["1", "2", "3", "4"],
+        correct: 2
+      },
+      {
+        question: "The trend in metallic character of Group 15 elements down the group:",
+        options: ["Increases", "Decreases", "Remains constant", "Fluctuates"],
+        correct: 0
+      },
+      {
+        question: "The boiling point of Group 15 hydrides (NH₃, PH₃, AsH₃, SbH₃) generally:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for NH₃"],
+        correct: 3
+      },
+      {
+        question: "The high boiling point of NH₃ compared to PH₃ is due to:",
+        options: ["Covalent bonding", "Hydrogen bonding", "Ionic bonding", "Metallic bonding"],
+        correct: 1
+      },
+      {
+        question: "The reducing character of Group 15 hydrides:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for NH₃"],
+        correct: 0
+      },
+      {
+        question: "Bismuth commonly exhibits the oxidation state:",
+        options: ["+3", "+5", "+3 and +5", "+2"],
+        correct: 0
+      },
+      {
+        question: "The most stable oxide of nitrogen is:",
+        options: ["N₂O", "NO", "NO₂", "N₂O₅"],
+        correct: 1
+      },
+      {
+        question: "The reaction of ammonia with excess chlorine produces:",
+        options: ["NCl₃", "NH₄Cl", "N₂", "NOCl"],
+        correct: 0
+      },
+      {
+        question: "Nitric acid reacts with metals to produce:",
+        options: ["H₂ gas", "NO or NO₂", "NH₃", "N₂O"],
+        correct: 1
+      },
+      {
+        question: "The structure of N₂O₅ is:",
+        options: ["Linear", "Planar", "Ionic in solid state", "Tetrahedral"],
+        correct: 2
+      },
+      {
+        question: "White phosphorus is stored under:",
+        options: ["Alcohol", "Water", "Kerosene", "Ether"],
+        correct: 1
+      },
+      {
+        question: "PCl₃ reacts with water to form:",
+        options: ["H₃PO₃", "H₃PO₄", "PCl₅", "PH₃"],
+        correct: 0
+      },
+      {
+        question: "PCl₅ is used as a:",
+        options: ["Reducing agent", "Chlorinating agent", "Oxidizing agent", "Catalyst"],
+        correct: 1
+      },
+      {
+        question: "The oxoacid H₃PO₃ is:",
+        options: ["Monobasic", "Dibasic", "Tribasic", "Neutral"],
+        correct: 1
+      },
+      {
+        question: "The bond angle in NH₃ is approximately:",
+        options: ["90°", "107°", "120°", "180°"],
+        correct: 1
+      },
+      {
+        question: "The thermal stability of Group 15 hydrides:",
+        options: ["Increases down the group", "Decreases down the group", "Remains constant", "Is highest for NH₃"],
+        correct: 1
+      },
+      {
+        question: "The compound used in the manufacture of safety matches is:",
+        options: ["White phosphorus", "Red phosphorus", "PCl₃", "PCl₅"],
+        correct: 1
+      },
+      {
+        question: "The oxidation state of nitrogen in NH₃ is:",
+        options: ["-3", "-2", "+3", "+5"],
+        correct: 0
+      },
+      {
+        question: "The Group 15 element used in semiconductors is:",
+        options: ["Nitrogen", "Phosphorus", "Arsenic", "Bismuth"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>

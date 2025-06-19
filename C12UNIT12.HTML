@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz on Aldehydes, Ketones, and Carboxylic Acids</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question-container {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+        }
+        .result {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>MCQ Quiz on Aldehydes, Ketones, and Carboxylic Acids</h1>
+    <div id="quiz-container"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the IUPAC name of CH3CHO?",
+                options: ["Methanal", "Ethanal", "Propanal", "Butanal"],
+                correct: "Ethanal"
+            },
+            {
+                question: "Which functional group is present in aldehydes?",
+                options: ["-COOH", "-CHO", "-C=O", "-OH"],
+                correct: "-CHO"
+            },
+            {
+                question: "The carbonyl group in aldehydes and ketones consists of:",
+                options: ["One sigma bond", "One pi bond", "One sigma and one pi bond", "Two pi bonds"],
+                correct: "One sigma and one pi bond"
+            },
+            {
+                question: "Which method is used to prepare aldehydes from primary alcohols?",
+                options: ["Reduction", "Oxidation", "Hydrolysis", "Esterification"],
+                correct: "Oxidation"
+            },
+            {
+                question: "What is the product when ethanal reacts with HCN?",
+                options: ["Ethanol", "Ethanenitrile", "Ethanal cyanohydrin", "Ethanoic acid"],
+                correct: "Ethanal cyanohydrin"
+            },
+            {
+                question: "Which aldehyde is most reactive towards nucleophilic addition?",
+                options: ["Methanal", "Ethanal", "Propanal", "Butanal"],
+                correct: "Methanal"
+            },
+            {
+                question: "The alpha hydrogen in aldehydes is acidic due to:",
+                options: ["Resonance stabilization", "Inductive effect", "Hyperconjugation", "Steric hindrance"],
+                correct: "Resonance stabilization"
+            },
+            {
+                question: "Which reagent is used to distinguish between aldehydes and ketones?",
+                options: ["Fehling’s solution", "Grignard reagent", "HCl", "NaOH"],
+                correct: "Fehling’s solution"
+            },
+            {
+                question: "What is the boiling point trend for aldehydes compared to alcohols of similar molecular weight?",
+                options: ["Higher", "Lower", "Same", "Unpredictable"],
+                correct: "Lower"
+            },
+            {
+                question: "Which of the following is a use of formaldehyde?",
+                options: ["Fuel", "Preservative", "Solvent", "Catalyst"],
+                correct: "Preservative"
+            },
+            {
+                question: "The IUPAC name of CH3COCH3 is:",
+                options: ["Propanone", "Ethanal", "Methanone", "Butanone"],
+                correct: "Propanone"
+            },
+            {
+                question: "Ketones are prepared by the oxidation of:",
+                options: ["Primary alcohols", "Secondary alcohols", "Tertiary alcohols", "Carboxylic acids"],
+                correct: "Secondary alcohols"
+            },
+            {
+                question: "Which ketone is least reactive towards nucleophilic addition?",
+                options: ["Acetone", "Butanone", "Pentanone", "Hexanone"],
+                correct: "Hexanone"
+            },
+            {
+                question: "The product of Clemmensen reduction of a ketone is:",
+                options: ["Alcohol", "Alkane", "Alkene", "Aldehyde"],
+                correct: "Alkane"
+            },
+            {
+                question: "Which test is negative for ketones?",
+                options: ["Iodoform test", "Tollens’ test", "Haloform test", "Ninhydrin test"],
+                correct: "Tollens’ test"
+            },
+            {
+                question: "What is the hybridization of the carbonyl carbon in ketones?",
+                options: ["sp", "sp²", "sp³", "dsp²"],
+                correct: "sp²"
+            },
+            {
+                question: "Which of the following is a physical property of ketones?",
+                options: ["High solubility in water", "Low boiling point", "Acidic nature", "Reactivity with metals"],
+                correct: "Low boiling point"
+            },
+            {
+                question: "Acetone is commonly used as:",
+                options: ["Antiseptic", "Nail polish remover", "Preservative", "Anesthetic"],
+                correct: "Nail polish remover"
+            },
+            {
+                question: "The mechanism of nucleophilic addition to carbonyls involves:",
+                options: ["Free radical formation", "Carbocation intermediate", "Nucleophile attacking carbon", "Electrophile attacking oxygen"],
+                correct: "Nucleophile attacking carbon"
+            },
+            {
+                question: "Which compound gives a positive iodoform test?",
+                options: ["Methanal", "Acetone", "Butanal", "Propanoic acid"],
+                correct: "Acetone"
+            },
+            {
+                question: "The IUPAC name of CH3CH2COOH is:",
+                options: ["Methanoic acid", "Ethanoic acid", "Propanoic acid", "Butanoic acid"],
+                correct: "Propanoic acid"
+            },
+            {
+                question: "Carboxylic acids are acidic due to:",
+                options: ["Resonance stabilization of carboxylate ion", "Inductive effect", "Hyperconjugation", "Steric effect"],
+                correct: "Resonance stabilization of carboxylate ion"
+            },
+            {
+                question: "Which method is used to prepare carboxylic acids from nitriles?",
+                options: ["Oxidation", "Hydrolysis", "Reduction", "Dehydration"],
+                correct: "Hydrolysis"
+            },
+            {
+                question: "The product of esterification of ethanoic acid with ethanol is:",
+                options: ["Ethyl ethanoate", "Methyl ethanoate", "Ethyl methanoate", "Methyl methanoate"],
+                correct: "Ethyl ethanoate"
+            },
+            {
+                question: "Which carboxylic acid is most acidic?",
+                options: ["Methanoic acid", "Ethanoic acid", "Propanoic acid", "Butanoic acid"],
+                correct: "Methanoic acid"
+            },
+            {
+                question: "Carboxylic acids react with alcohols in the presence of:",
+                options: ["Base", "Acid catalyst", "Neutral medium", "Oxidizing agent"],
+                correct: "Acid catalyst"
+            },
+            {
+                question: "What is the boiling point trend for carboxylic acids compared to alcohols?",
+                options: ["Lower", "Higher", "Same", "Unpredictable"],
+                correct: "Higher"
+            },
+            {
+                question: "Which of the following is a use of acetic acid?",
+                options: ["Vinegar", "Fuel", "Plasticizer", "Explosive"],
+                correct: "Vinegar"
+            },
+            {
+                question: "The reduction of carboxylic acids yields:",
+                options: ["Aldehydes", "Ketones", "Primary alcohols", "Secondary alcohols"],
+                correct: "Primary alcohols"
+            },
+            {
+                question: "Which reagent is used to prepare carboxylic acids from Grignard reagents?",
+                options: ["CO2", "O2", "H2O", "HCl"],
+                correct: "CO2"
+            },
+            {
+                question: "The general formula of aldehydes is:",
+                options: ["CnH2nO", "CnH2n+2O", "CnH2n-2O", "CnH2n+1O"],
+                correct: "CnH2nO"
+            },
+            {
+                question: "Which aldehyde is used in the manufacture of perfumes?",
+                options: ["Methanal", "Ethanal", "Benzaldehyde", "Propanal"],
+                correct: "Benzaldehyde"
+            },
+            {
+                question: "The product of Tollens’ test with an aldehyde is:",
+                options: ["Silver mirror", "Red precipitate", "Yellow precipitate", "No reaction"],
+                correct: "Silver mirror"
+            },
+            {
+                question: "Which compound does not undergo aldol condensation?",
+                options: ["Ethanal", "Propanal", "Methanal", "Butanal"],
+                correct: "Methanal"
+            },
+            {
+                question: "The solubility of aldehydes decreases with:",
+                options: ["Increasing carbon chain", "Decreasing carbon chain", "Presence of double bonds", "Presence of halogens"],
+                correct: "Increasing carbon chain"
+            },
+            {
+                question: "Which ketone is used as a solvent in paints?",
+                options: ["Acetone", "Butanone", "Pentanone", "Hexanone"],
+                correct: "Butanone"
+            },
+            {
+                question: "The product of Wolff-Kishner reduction of a ketone is:",
+                options: ["Alcohol", "Alkane", "Alkene", "Aldehyde"],
+                correct: "Alkane"
+            },
+            {
+                question: "Which functional group is more polar?",
+                options: ["Aldehyde", "Ketone", "Carboxylic acid", "Alcohol"],
+                correct: "Carboxylic acid"
+            },
+            {
+                question: "The decarboxylation of carboxylic acids yields:",
+                options: ["Alkane", "Alkene", "Alcohol", "Aldehyde"],
+                correct: "Alkane"
+            },
+            {
+                question: "Which test is used to identify carboxylic acids?",
+                options: ["Tollens’ test", "Fehling’s test", "Sodium bicarbonate test", "Iodoform test"],
+                correct: "Sodium bicarbonate test"
+            },
+            {
+                question: "The product of Cannizzaro reaction of methanal is:",
+                options: ["Methanol and formate", "Ethanol and acetate", "Methanol and ethanoate", "Ethanol and formate"],
+                correct: "Methanol and formate"
+            },
+            {
+                question: "Which aldehyde is used in the synthesis of bakelite?",
+                options: ["Methanal", "Ethanal", "Propanal", "Benzaldehyde"],
+                correct: "Methanal"
+            },
+            {
+                question: "The general formula of ketones is:",
+                options: ["CnH2nO", "CnH2n+2O", "CnH2n-2O", "CnH2n+1O"],
+                correct: "CnH2nO"
+            },
+            {
+                question: "Which compound gives a red precipitate with Fehling’s solution?",
+                options: ["Acetone", "Ethanal", "Propanone", "Butanone"],
+                correct: "Ethanal"
+            },
+            {
+                question: "The acidity of carboxylic acids decreases with:",
+                options: ["Increasing chain length", "Decreasing chain length", "Presence of electron-donating groups", "Presence of electron-withdrawing groups"],
+                correct: "Increasing chain length"
+            },
+            {
+                question: "Which reagent reduces aldehydes to primary alcohols?",
+                options: ["LiAlH4", "HCl", "NaOH", "KMnO4"],
+                correct: "LiAlH4"
+            },
+            {
+                question: "The product of oxidation of ethanal with KMnO4 is:",
+                options: ["Ethanol", "Ethanoic acid", "Acetone", "Ethene"],
+                correct: "Ethanoic acid"
+            },
+            {
+                question: "Which compound is used in the preparation of aspirin?",
+                options: ["Methanoic acid", "Ethanoic acid", "Salicylic acid", "Propanoic acid"],
+                correct: "Salicylic acid"
+            },
+            {
+                question: "The reactivity of carbonyl compounds towards nucleophilic addition decreases with:",
+                options: ["Increasing steric hindrance", "Decreasing steric hindrance", "Increasing electronegativity", "Decreasing electronegativity"],
+                correct: "Increasing steric hindrance"
+            },
+            {
+                question: "Which aldehyde is used as an antiseptic?",
+                options: ["Methanal", "Ethanal", "Propanal", "Butanal"],
+                correct: "Methanal"
+            },
+            {
+                question: "The product of Hell-Volhard-Zelinsky reaction of carboxylic acids is:",
+                options: ["α-Halo carboxylic acid", "β-Halo carboxylic acid", "Alcohol", "Aldehyde"],
+                correct: "α-Halo carboxylic acid"
+            },
+            {
+                question: "Which compound does not react with NaHSO3?",
+                options: ["Methanal", "Ethanal", "Acetone", "Benzaldehyde"],
+                correct: "Benzaldehyde"
+            },
+            {
+                question: "The boiling point of carboxylic acids is high due to:",
+                options: ["Hydrogen bonding", "Van der Waals forces", "Dipole-dipole interactions", "Ionic bonding"],
+                correct: "Hydrogen bonding"
+            },
+            {
+                question: "Which ketone is used in the manufacture of celluloid?",
+                options: ["Acetone", "Butanone", "Pentanone", "Hexanone"],
+                correct: "Acetone"
+            },
+            {
+                question: "The product of aldol condensation of ethanal is:",
+                options: ["3-Hydroxybutanal", "2-Hydroxypropanal", "4-Hydroxybutanal", "2-Hydroxybutanal"],
+                correct: "3-Hydroxybutanal"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of nylon?",
+                options: ["Ethanoic acid", "Adipic acid", "Propanoic acid", "Butanoic acid"],
+                correct: "Adipic acid"
+            },
+            {
+                question: "The product of reduction of acetone is:",
+                options: ["Propan-1-ol", "Propan-2-ol", "Propanal", "Propane"],
+                correct: "Propan-2-ol"
+            },
+            {
+                question: "Which compound gives a positive Schiff’s test?",
+                options: ["Acetone", "Ethanal", "Propanone", "Butanone"],
+                correct: "Ethanal"
+            },
+            {
+                question: "The esterification of carboxylic acids is a:",
+                options: ["Reversible reaction", "Irreversible reaction", "Free radical reaction", "Redox reaction"],
+                correct: "Reversible reaction"
+            },
+            {
+                question: "Which aldehyde is used in the preparation of urotropine?",
+                options: ["Methanal", "Ethanal", "Propanal", "Butanal"],
+                correct: "Methanal"
+            },
+            {
+                question: "The product of oxidation of a ketone is:",
+                options: ["Carboxylic acid", "Aldehyde", "Alcohol", "No reaction"],
+                correct: "No reaction"
+            },
+            {
+                question: "Which carboxylic acid is found in rancid butter?",
+                options: ["Ethanoic acid", "Propanoic acid", "Butanoic acid", "Pentanoic acid"],
+                correct: "Butanoic acid"
+            },
+            {
+                question: "The nucleophilic addition to carbonyls is favored by:",
+                options: ["Electron-withdrawing groups", "Electron-donating groups", "Steric hindrance", "Neutral groups"],
+                correct: "Electron-withdrawing groups"
+            },
+            {
+                question: "Which compound is used in the preparation of vinegar?",
+                options: ["Methanoic acid", "Ethanoic acid", "Propanoic acid", "Butanoic acid"],
+                correct: "Ethanoic acid"
+            },
+            {
+                question: "The product of haloform reaction of acetaldehyde is:",
+                options: ["Chloroform", "Iodoform", "Bromoform", "Fluoroform"],
+                correct: "Iodoform"
+            },
+            {
+                question: "Which aldehyde is used in the preparation of mirrors?",
+                options: ["Methanal", "Ethanal", "Propanal", "Benzaldehyde"],
+                correct: "Ethanal"
+            },
+            {
+                question: "The solubility of carboxylic acids decreases with:",
+                options: ["Increasing carbon chain", "Decreasing carbon chain", "Presence of double bonds", "Presence of halogens"],
+                correct: "Increasing carbon chain"
+            },
+            {
+                question: "Which ketone is used as an anesthetic?",
+                options: ["Acetone", "Butanone", "Pentanone", "Hexanone"],
+                correct: "Acetone"
+            },
+            {
+                question: "The product of reaction of carboxylic acid with ammonia is:",
+                options: ["Amide", "Ester", "Nitrile", "Amine"],
+                correct: "Amide"
+            },
+            {
+                question: "Which test is used to distinguish between aldehydes and ketones?",
+                options: ["Iodoform test", "Tollens’ test", "Haloform test", "Ninhydrin test"],
+                correct: "Tollens’ test"
+            },
+            {
+                question: "The product of Cannizzaro reaction of benzaldehyde is:",
+                options: ["Benzyl alcohol and benzoate", "Benzyl alcohol and formate", "Benzyl alcohol and ethanoate", "Benzyl alcohol and acetate"],
+                correct: "Benzyl alcohol and benzoate"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of soap?",
+                options: ["Methanoic acid", "Ethanoic acid", "Stearic acid", "Propanoic acid"],
+                correct: "Stearic acid"
+            },
+            {
+                question: "The reactivity of alpha hydrogen in aldehydes is due to:",
+                options: ["Resonance", "Inductive effect", "Hyperconjugation", "Steric hindrance"],
+                correct: "Resonance"
+            },
+            {
+                question: "Which compound is used in the preparation of formic acid?",
+                options: ["Methanol", "Ethanol", "Glycerol", "Acetone"],
+                correct: "Glycerol"
+            },
+            {
+                question: "The product of reaction of aldehyde with hydroxylamine is:",
+                options: ["Oxime", "Hydrazone", "Semicarbazone", "Cyanohydrin"],
+                correct: "Oxime"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of pickles?",
+                options: ["Methanoic acid", "Ethanoic acid", "Propanoic acid", "Butanoic acid"],
+                correct: "Ethanoic acid"
+            },
+            {
+                question: "The product of reaction of ketone with hydrazine is:",
+                options: ["Oxime", "Hydrazone", "Semicarbazone", "Cyanohydrin"],
+                correct: "Hydrazone"
+            },
+            {
+                question: "Which aldehyde is used in the preparation of dyes?",
+                options: ["Methanal", "Ethanal", "Propanal", "Benzaldehyde"],
+                correct: "Benzaldehyde"
+            },
+            {
+                question: "The product of decarboxylation of ethanoic acid is:",
+                options: ["Methane", "Ethane", "Propane", "Butane"],
+                correct: "Methane"
+            },
+            {
+                question: "Which compound gives a positive haloform test?",
+                options: ["Methanal", "Ethanal", "Propanal", "Butanal"],
+                correct: "Ethanal"
+            },
+            {
+                question: "The boiling point of aldehydes is lower than alcohols due to:",
+                options: ["Lack of hydrogen bonding", "Presence of hydrogen bonding", "Strong dipole-dipole interactions", "Ionic bonding"],
+                correct: "Lack of hydrogen bonding"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of perfumes?",
+                options: ["Methanoic acid", "Ethanoic acid", "Benzoic acid", "Propanoic acid"],
+                correct: "Benzoic acid"
+            },
+            {
+                question: "The product of reaction of aldehyde with semicarbazide is:",
+                options: ["Oxime", "Hydrazone", "Semicarbazone", "Cyanohydrin"],
+                correct: "Semicarbazone"
+            },
+            {
+                question: "Which ketone is used in the preparation of chloroform?",
+                options: ["Acetone", "Butanone", "Pentanone", "Hexanone"],
+                correct: "Acetone"
+            },
+            {
+                question: "The product of reaction of carboxylic acid with PCl5 is:",
+                options: ["Acid chloride", "Ester", "Amide", "Nitrile"],
+                correct: "Acid chloride"
+            },
+            {
+                question: "Which aldehyde is used in the preparation of explosives?",
+                options: ["Methanal", "Ethanal", "Propanal", "Benzaldehyde"],
+                correct: "Methanal"
+            },
+            {
+                question: "The product of aldol condensation of propanal is:",
+                options: ["3-Hydroxybutanal", "2-Hydroxypropanal", "4-Hydroxyhexanal", "2-Hydroxyhexanal"],
+                correct: "4-Hydroxyhexanal"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of insecticides?",
+                options: ["Methanoic acid", "Ethanoic acid", "Benzoic acid", "Propanoic acid"],
+                correct: "Benzoic acid"
+            },
+            {
+                question: "The product of reduction of propanal is:",
+                options: ["Propan-1-ol", "Propan-2-ol", "Propane", "Propanone"],
+                correct: "Propan-1-ol"
+            },
+            {
+                question: "Which compound gives a positive Fehling’s test?",
+                options: ["Acetone", "Ethanal", "Propanone", "Butanone"],
+                correct: "Ethanal"
+            },
+            {
+                question: "The esterification of carboxylic acids is catalyzed by:",
+                options: ["Acid", "Base", "Neutral medium", "Oxidizing agent"],
+                correct: "Acid"
+            },
+            {
+                question: "Which aldehyde is used in the preparation of resins?",
+                options: ["Methanal", "Ethanal", "Propanal", "Benzaldehyde"],
+                correct: "Methanal"
+            },
+            {
+                question: "The product of oxidation of a primary alcohol is:",
+                options: ["Ketone", "Aldehyde", "Carboxylic acid", "Ester"],
+                correct: "Aldehyde"
+            },
+            {
+                question: "Which carboxylic acid is used in the preparation of esters for flavoring?",
+                options: ["Methanoic acid", "Ethanoic acid", "Butanoic acid", "Propanoic acid"],
+                correct: "Butanoic acid"
+            },
+            {
+                question: "The nucleophilic addition to carbonyls involves attack on:",
+                options: ["Oxygen", "Carbon", "Hydrogen", "Double bond"],
+                correct: "Carbon"
+            },
+            {
+                question: "Which compound is used in the preparation of methanoic acid?",
+                options: ["Carbon monoxide", "Ethanol", "Acetone", "Benzene"],
+                correct: "Carbon monoxide"
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question-container');
+
+            const questionText = document.createElement('div');
+            questionText.classList.add('question');
+            questionText.textContent = `${index + 1}. ${q.question}`;
+            questionDiv.appendChild(questionText);
+
+            const optionsDiv = document.createElement('div');
+            optionsDiv.classList.add('options');
+
+            q.options.forEach(option => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-${index}`;
+                input.value = option;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${option}`));
+                optionsDiv.appendChild(label);
+            });
+
+            const submitBtn = document.createElement('button');
+            submitBtn.classList.add('submit-btn');
+            submitBtn.textContent = 'Submit Answer';
+            submitBtn.addEventListener('click', () => {
+                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
+                const resultDiv = questionDiv.querySelector('.result') || document.createElement('div');
+                resultDiv.classList.add('result');
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.value;
+                    const isCorrect = userAnswer === q.correct;
+
+                    optionsDiv.querySelectorAll('label').forEach(label => {
+                        const optionText = label.textContent.trim();
+                        if (optionText === q.correct) {
+                            label.classList.add('correct');
+                            label.classList.remove('incorrect');
+                        } else if (optionText === userAnswer && !isCorrect) {
+                            label.classList.add('incorrect');
+                            label.classList.remove('correct');
+                        } else {
+                            label.classList.remove('correct', 'incorrect');
+                        }
+                    });
+
+                    resultDiv.textContent = isCorrect ? 'Correct!' : `Incorrect. The correct answer is: ${q.correct}`;
+                } else {
+                    resultDiv.textContent = 'Please select an option.';
+                }
+
+                if (!questionDiv.contains(resultDiv)) {
+                    questionDiv.appendChild(resultDiv);
+                }
+            });
+
+            questionDiv.appendChild(optionsDiv);
+            questionDiv.appendChild(submitBtn);
+            quizContainer.appendChild(questionDiv);
+        });
+    </script>
+</body>
+</html>

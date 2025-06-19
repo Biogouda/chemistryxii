@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Compounds Containing Nitrogen MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #ecf0f1;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background: #dfe6e9;
+        }
+        .option.correct {
+            background: #2ecc71 !important;
+            color: #fff;
+        }
+        .option.incorrect {
+            background: #e74c3c !important;
+            color: #fff;
+        }
+        #score {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 0 10px;
+            }
+            .question {
+                padding: 15px;
+            }
+            .option {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Organic Compounds Containing Nitrogen MCQ Quiz</h1>
+    <div id="quiz"></div>
+    <div id="score">Score: <span id="score-value">0</span>/100</div>
+
+    <script>
+        const questions = [
+            // Amines: Nomenclature (10 questions)
+            { question: "The IUPAC name of CH3NH2 is:", options: ["Methanamine", "Methylamine", "Aminomethane", "Methylnitride"], correct: "Methanamine" },
+            { question: "What is the IUPAC name of (CH3)2NH?", options: ["Dimethylamine", "N-Methylmethanamine", "Methyldiamine", "Aminodimethyl"], correct: "N-Methylmethanamine" },
+            { question: "The IUPAC name of (CH3)3N is:", options: ["Trimethylamine", "N,N-Dimethylmethanamine", "Tert-methylamine", "Aminotrimethyl"], correct: "N,N-Dimethylmethanamine" },
+            { question: "The common name of C6H5NH2 is:", options: ["Aniline", "Phenylamine", "Aminobenzene", "Benzylamine"], correct: "Aniline" },
+            { question: "The IUPAC name of C2H5NH2 is:", options: ["Ethanamine", "Ethylamine", "Aminoethane", "Ethylnitride"], correct: "Ethanamine" },
+            { question: "What is the suffix used for amines in IUPAC nomenclature?", options: ["-amine", "-amide", "-nitrile", "-imine"], correct: "-amine" },
+            { question: "The IUPAC name of CH3CH2NHCH3 is:", options: ["N-Methylethanamine", "Ethylmethylamine", "Methylethylamine", "Aminomethylethane"], correct: "N-Methylethanamine" },
+            { question: "The common name of (C2H5)2NH is:", options: ["Diethylamine", "N-Ethylethanamine", "Ethylenediamine", "Aminodiethyl"], correct: "Diethylamine" },
+            { question: "The IUPAC name of NH2CH2CH2NH2 is:", options: ["Ethane-1,2-diamine", "Ethylenediamine", "Diaminoethane", "Aminoethylamine"], correct: "Ethane-1,2-diamine" },
+            { question: "The common name of CH3CH2CH2NH2 is:", options: ["Propylamine", "Propanamine", "Aminopropane", "Propylnitride"], correct: "Propylamine" },
+
+            // Amines: Classification and Structure (10 questions)
+            { question: "Amines are classified based on:", options: ["Number of alkyl groups attached to nitrogen", "Number of carbon atoms", "Type of functional group", "Molecular weight"], correct: "Number of alkyl groups attached to nitrogen" },
+            { question: "A primary amine has the general formula:", options: ["RNH2", "R2NH", "R3N", "RNH3"], correct: "RNH2" },
+            { question: "An example of a secondary amine is:", options: ["(CH3)2NH", "CH3NH2", "(CH3)3N", "C6H5NH2"], correct: "(CH3)2NH" },
+            { question: "A tertiary amine has the structure:", options: ["R3N", "RNH2", "R2NH", "RNH3"], correct: "R3N" },
+            { question: "The functional group in amines is:", options: ["-NH2", "-OH", "-COOH", "-CN"], correct: "-NH2" },
+            { question: "Which amine has a lone pair of electrons on nitrogen?", options: ["All amines", "Primary amines only", "Secondary amines only", "Tertiary amines only"], correct: "All amines" },
+            { question: "Aniline is an example of a:", options: ["Aromatic primary amine", "Aliphatic primary amine", "Secondary amine", "Tertiary amine"], correct: "Aromatic primary amine" },
+            { question: "The geometry around the nitrogen atom in a tertiary amine is:", options: ["Tetrahedral", "Trigonal planar", "Linear", "Bent"], correct: "Tetrahedral" },
+            { question: "Which type of amine can form hydrogen bonds?", options: ["Primary and secondary amines", "Tertiary amines only", "Primary amines only", "All amines"], correct: "Primary and secondary amines" },
+            { question: "The bond angle in a tertiary amine is approximately:", options: ["109.5°", "120°", "180°", "90°"], correct: "109.5°" },
+
+            // Amines: Methods of Preparation (15 questions)
+            { question: "Amines can be prepared by the reduction of:", options: ["Nitro compounds", "Alcohols", "Aldehydes", "Carboxylic acids"], correct: "Nitro compounds" },
+            { question: "The reduction of CH3NO2 produces:", options: ["CH3NH2", "(CH3)2NH", "(CH3)3N", "CH3CN"], correct: "CH3NH2" },
+            { question: "Hofmann bromamide reaction produces:", options: ["Primary amines", "Secondary amines", "Tertiary amines", "Amides"], correct: "Primary amines" },
+            { question: "The reagent used in Hofmann bromamide reaction is:", options: ["Br2 and NaOH", "H2 and Pd", "LiAlH4", "NaBH4"], correct: "Br2 and NaOH" },
+            { question: "Ammonolysis of alkyl halides produces:", options: ["Mixture of amines", "Primary amines only", "Secondary amines only", "Tertiary amines only"], correct: "Mixture of amines" },
+            { question: "The reaction of CH3Cl with NH3 produces:", options: ["CH3NH2", "(CH3)2NH", "(CH3)3N", "All of these"], correct: "All of these" },
+            { question: "Gabriel phthalimide synthesis is used to prepare:", options: ["Primary aliphatic amines", "Secondary amines", "Tertiary amines", "Aromatic amines"], correct: "Primary aliphatic amines" },
+            { question: "The reduction of cyanides produces:", options: ["Primary amines", "Secondary amines", "Tertiary amines", "Amides"], correct: "Primary amines" },
+            { question: "The reduction of CH3CN with LiAlH4 gives:", options: ["CH3CH2NH2", "CH3NH2", "(CH3)2NH", "(CH3)3N"], correct: "CH3CH2NH2" },
+            { question: "Which method is not used to prepare tertiary amines?", options: ["Gabriel phthalimide synthesis", "Ammonolysis", "Reduction of nitro compounds", "Hofmann bromamide"], correct: "Gabriel phthalimide synthesis" },
+            { question: "The reaction of amides with LiAlH4 produces:", options: ["Amines", "Nitriles", "Alcohols", "Carboxylic acids"], correct: "Amines" },
+            { question: "The preparation of aniline involves:", options: ["Reduction of nitrobenzene", "Ammonolysis of chlorobenzene", "Hydrolysis of benzonitrile", "Oxidation of benzene"], correct: "Reduction of nitrobenzene" },
+            { question: "Which reagent is used to reduce nitro compounds to amines?", options: ["Sn/HCl", "NaOH", "KMnO4", "H2SO4"], correct: "Sn/HCl" },
+            { question: "The product of CH3CONH2 with Br2/NaOH is:", options: ["CH3NH2", "CH3CN", "(CH3)2NH", "CH3COOH"], correct: "CH3NH2" },
+            { question: "The reduction of isocyanides produces:", options: ["Secondary amines", "Primary amines", "Tertiary amines", "Amides"], correct: "Secondary amines" },
+
+            // Amines: Physical and Chemical Properties (20 questions)
+            { question: "Amines are generally:", options: ["Basic", "Acidic", "Neutral", "Amphoteric"], correct: "Basic" },
+            { question: "The boiling point of amines compared to alkanes of similar molecular weight is:", options: ["Higher", "Lower", "Same", "Unrelated"], correct: "Higher" },
+            { question: "Primary and secondary amines can form:", options: ["Hydrogen bonds", "Ionic bonds", "Covalent bonds", "Metallic bonds"], correct: "Hydrogen bonds" },
+            { question: "Tertiary amines do not form hydrogen bonds because:", options: ["No hydrogen attached to nitrogen", "No lone pair on nitrogen", "High molecular weight", "Non-polar nature"], correct: "No hydrogen attached to nitrogen" },
+            { question: "Amines react with acids to form:", options: ["Ammonium salts", "Amides", "Nitriles", "Alcohols"], correct: "Ammonium salts" },
+            { question: "The reaction of CH3NH2 with HCl produces:", options: ["CH3NH3Cl", "CH3Cl", "CH3NHCl", "CH3OH"], correct: "CH3NH3Cl" },
+            { question: "Primary amines react with HNO2 to form:", options: ["Alcohols", "Diazonium salts", "Nitrosoamines", "Amides"], correct: "Alcohols" },
+            { question: "The reaction of (CH3)2NH with HNO2 produces:", options: ["N-Nitrosodimethylamine", "Alcohol", "Diazonium salt", "Amide"], correct: "N-Nitrosodimethylamine" },
+            { question: "Tertiary amines with HNO2 form:", options: ["Ammonium salts", "Alcohols", "Nitrosoamines", "No reaction"], correct: "No reaction" },
+            { question: "Amines react with alkyl halides to form:", options: ["Higher amines", "Amides", "Nitriles", "Alcohols"], correct: "Higher amines" },
+            { question: "The solubility of lower amines in water is due to:", options: ["Hydrogen bonding", "Covalent bonding", "Ionic bonding", "Van der Waals forces"], correct: "Hydrogen bonding" },
+            { question: "Aromatic amines like aniline are:", options: ["Less basic than aliphatic amines", "More basic than aliphatic amines", "Neutral", "Acidic"], correct: "Less basic than aliphatic amines" },
+            { question: "Amines undergo acylation with:", options: ["Acid chlorides", "Alcohols", "Alkenes", "Alkynes"], correct: "Acid chlorides" },
+            { question: "The product of CH3NH2 with CH3COCl is:", options: ["CH3NHCOCH3", "CH3CONH2", "CH3COOH", "CH3Cl"], correct: "CH3NHCOCH3" },
+            { question: "Carbylamine reaction involves:", options: ["Primary amines with CHCl3/KOH", "Secondary amines with HNO2", "Tertiary amines with HCl", "Amines with H2SO4"], correct: "Primary amines with CHCl3/KOH" },
+            { question: "The carbylamine test produces:", options: ["Isocyanide", "Cyanide", "Amide", "Alcohol"], correct: "Isocyanide" },
+            { question: "The smell of isocyanides is:", options: ["Foul", "Sweet", "Fruity", "Odorless"], correct: "Foul" },
+            { question: "Amines are more basic than:", options: ["Amides", "Alcohols", "Ethers", "Alkanes"], correct: "Amides" },
+            { question: "The basicity of tertiary amines is lower due to:", options: ["Steric hindrance", "High molecular weight", "Lack of lone pair", "Hydrogen bonding"], correct: "Steric hindrance" },
+            { question: "Aniline does not undergo Friedel-Crafts reaction because:", options: ["Nitrogen complexes with AlCl3", "Benzene ring is deactivated", "Nitrogen is non-reactive", "High molecular weight"], correct: "Nitrogen complexes with AlCl3" },
+
+            // Amines: Uses and Identification (15 questions)
+            { question: "Amines are used in the synthesis of:", options: ["Dyes and drugs", "Alcohols", "Carbohydrates", "Lipids"], correct: "Dyes and drugs" },
+            { question: "Aniline is used to prepare:", options: ["Azo dyes", "Alcohols", "Ethers", "Esters"], correct: "Azo dyes" },
+            { question: "Methylamine is used in:", options: ["Pesticide synthesis", "Sugar production", "Plastic manufacturing", "Glass production"], correct: "Pesticide synthesis" },
+            { question: "The Hinsberg test is used to identify:", options: ["Primary, secondary, tertiary amines", "Alcohols", "Aldehydes", "Carboxylic acids"], correct: "Primary, secondary, tertiary amines" },
+            { question: "In the Hinsberg test, primary amines form:", options: ["Sulphonamides soluble in alkali", "Insoluble sulphonamides", "No reaction", "Nitrosoamines"], correct: "Sulphonamides soluble in alkali" },
+            { question: "Secondary amines in the Hinsberg test form:", options: ["Insoluble sulphonamides", "Soluble sulphonamides", "Alcohols", "Diazonium salts"], correct: "Insoluble sulphonamides" },
+            { question: "Tertiary amines in the Hinsberg test:", options: ["Do not react", "Form soluble sulphonamides", "Form insoluble sulphonamides", "Form alcohols"], correct: "Do not react" },
+            { question: "The reagent used in the Hinsberg test is:", options: ["Benzenesulphonyl chloride", "Nitrous acid", "Chloroform", "Acetyl chloride"], correct: "Benzenesulphonyl chloride" },
+            { question: "The carbylamine test is specific for:", options: ["Primary amines", "Secondary amines", "Tertiary amines", "All amines"], correct: "Primary amines" },
+            { question: "Dimethylamine is used in:", options: ["Rubber industry", "Sugar industry", "Glass industry", "Ceramic industry"], correct: "Rubber industry" },
+            { question: "Azo dye test is used to identify:", options: ["Primary aromatic amines", "Primary aliphatic amines", "Secondary amines", "Tertiary amines"], correct: "Primary aromatic amines" },
+            { question: "The product of aniline in the azo dye test is:", options: ["Orange dye", "Blue dye", "Green dye", "Colorless compound"], correct: "Orange dye" },
+            { question: "Tertiary amines are used as:", options: ["Solvents", "Fuels", "Preservatives", "Fertilizers"], correct: "Solvents" },
+            { question: "The test that produces a foul-smelling compound is:", options: ["Carbylamine test", "Hinsberg test", "Azo dye test", "Nitrous acid test"], correct: "Carbylamine test" },
+            { question: "Which amine is used in the synthesis of explosives?", options: ["Aniline", "Methylamine", "Dimethylamine", "Trimethylamine"], correct: "Aniline" },
+
+            // Cyanides and Isocyanides (10 questions)
+            { question: "The general formula of cyanides is:", options: ["RCN", "RNC", "RNH2", "RCOOH"], correct: "RCN" },
+            { question: "The general formula of isocyanides is:", options: ["RNC", "RCN", "RNH2", "RNO2"], correct: "RNC" },
+            { question: "Cyanides are prepared by:", options: ["Reaction of alkyl halides with KCN", "Reduction of amines", "Oxidation of alcohols", "Hydrolysis of esters"], correct: "Reaction of alkyl halides with KCN" },
+            { question: "The product of CH3Cl with KCN is:", options: ["CH3CN", "CH3NC", "CH3NH2", "CH3OH"], correct: "CH3CN" },
+            { question: "Isocyanides are formed in:", options: ["Carbylamine reaction", "Hofmann reaction", "Gabriel synthesis", "Hinsberg test"], correct: "Carbylamine reaction" },
+            { question: "The reduction of cyanides produces:", options: ["Primary amines", "Secondary amines", "Tertiary amines", "Alcohols"], correct: "Primary amines" },
+            { question: "The reduction of isocyanides produces:", options: ["Secondary amines", "Primary amines", "Tertiary amines", "Amides"], correct: "Secondary amines" },
+            { question: "Cyanides are also called:", options: ["Nitriles", "Isocyanides", "Amines", "Amides"], correct: "Nitriles" },
+            { question: "The functional group in cyanides is:", options: ["-C≡N", "-N≡C", "-NH2", "-NO2"], correct: "-C≡N" },
+            { question: "The functional group in isocyanides is:", options: ["-N≡C", "-C≡N", "-NH2", "-CONH2"], correct: "-N≡C" },
+
+            // Diazonium Salts (20 questions)
+            { question: "Diazonium salts have the general formula:", options: ["ArN2+X-", "ArNH2", "ArCN", "ArNO2"], correct: "ArN2+X-" },
+            { question: "Diazonium salts are prepared by:", options: ["Reaction of aniline with HNO2 at 0-5°C", "Reduction of nitrobenzene", "Oxidation of amines", "Hydrolysis of nitriles"], correct: "Reaction of aniline with HNO2 at 0-5°C" },
+            { question: "The reagent used to prepare diazonium salts is:", options: ["NaNO2/HCl", "KCN", "CHCl3/KOH", "LiAlH4"], correct: "NaNO2/HCl" },
+            { question: "Diazonium salts are stable at:", options: ["Low temperatures (0-5°C)", "High temperatures", "Room temperature", "Any temperature"], correct: "Low temperatures (0-5°C)" },
+            { question: "The reaction of diazonium salts with phenol produces:", options: ["Azo dyes", "Alcohols", "Nitriles", "Amides"], correct: "Azo dyes" },
+            { question: "The coupling reaction of diazonium salts occurs with:", options: ["Phenols and anilines", "Alkyl halides", "Carboxylic acids", "Aldehydes"], correct: "Phenols and anilines" },
+            { question: "The product of C6H5N2Cl with CuCl/HCl is:", options: ["C6H5Cl", "C6H5OH", "C6H5CN", "C6H5NH2"], correct: "C6H5Cl" },
+            { question: "The Sandmeyer reaction involves:", options: ["Diazonium salts with Cu salts", "Amines with HNO2", "Nitriles with KCN", "Amides with Br2"], correct: "Diazonium salts with Cu salts" },
+            { question: "The reaction of diazonium salts with KI produces:", options: ["Aryl iodide", "Aryl chloride", "Aryl cyanide", "Aryl alcohol"], correct: "Aryl iodide" },
+            { question: "The Gattermann reaction is used to prepare:", options: ["Aryl halides", "Azo dyes", "Nitriles", "Amines"], correct: "Aryl halides" },
+            { question: "Diazonium salts with HBF4 and heat produce:", options: ["Fluorobenzene", "Chlorobenzene", "Bromobenzene", "Iodobenzene"], correct: "Fluorobenzene" },
+            { question: "The reaction of diazonium salts with ethanol produces:", options: ["Benzene", "Phenol", "Aniline", "Nitrobenzene"], correct: "Benzene" },
+            { question: "The importance of diazonium salts lies in:", options: ["Synthesis of aromatic compounds", "Preparation of amines", "Reduction reactions", "Oxidation reactions"], correct: "Synthesis of aromatic compounds" },
+            { question: "The product of diazonium salts with H2O at high temperature is:", options: ["Phenol", "Benzene", "Aniline", "Nitrobenzene"], correct: "Phenol" },
+            { question: "Diazonium salts are used in the preparation of:", options: ["Dyes and pharmaceuticals", "Alcohols and ethers", "Carbohydrates", "Lipids"], correct: "Dyes and pharmaceuticals" },
+            { question: "The Balz-Schiemann reaction produces:", options: ["Fluorobenzene", "Chlorobenzene", "Bromobenzene", "Iodobenzene"], correct: "Fluorobenzene" },
+            { question: "The reaction of diazonium salts with CuCN produces:", options: ["Aryl cyanide", "Aryl chloride", "Aryl alcohol", "Aryl amine"], correct: "Aryl cyanide" },
+            { question: "Diazonium salts are:", options: ["Highly reactive intermediates", "Stable compounds", "Non-reactive", "Acidic compounds"], correct: "Highly reactive intermediates" },
+            { question: "The coupling product of diazonium salts with aniline is:", options: ["Azo dye", "Aryl halide", "Nitrile", "Amide"], correct: "Azo dye" },
+            { question: "The color of azo dyes formed from diazonium salts is often:", options: ["Orange or red", "Blue", "Green", "Colorless"], correct: "Orange or red" }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById('quiz');
+        const scoreDisplay = document.getElementById('score-value');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateQuiz() {
+            shuffle(questions);
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+                
+                shuffle(q.options);
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option');
+                    optionDiv.textContent = option;
+                    optionDiv.addEventListener('click', () => handleAnswer(optionDiv, option, q.correct, questionDiv));
+                    questionDiv.appendChild(optionDiv);
+                });
+                
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswer(optionDiv, selected, correct, questionDiv) {
+            const options = questionDiv.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.textContent === correct) {
+                    opt.classList.add('correct');
+                } else if (opt.textContent === selected && selected !== correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            if (selected === correct) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        generateQuiz();
+    </script>
+</body>
+</html>

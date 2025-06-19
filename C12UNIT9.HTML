@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordination Compounds MCQ Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .option { cursor: pointer; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+    .correct { background-color: #34c759; color: white; }
+    .incorrect { background-color: #ff3b30; color: white; }
+    .selected { border: 2px solid #000; }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">Coordination Compounds MCQ Quiz</h1>
+    <div id="quiz">
+      <div id="question" class="mb-4 text-lg font-semibold"></div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center font-medium"></div>
+    </div>
+    <div class="mt-6 flex justify-between">
+      <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" disabled>Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+    </div>
+    <div id="result" class="mt-6 text-center font-bold"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Coordination compounds contain a central metal atom surrounded by:",
+        options: ["Anions", "Cations", "Ligands", "Molecules"],
+        correct: 2
+      },
+      {
+        question: "A ligand is a species that:",
+        options: ["Donates electron pairs to a metal", "Accepts electron pairs", "Forms ionic bonds", "Is always neutral"],
+        correct: 0
+      },
+      {
+        question: "The coordination number is the number of:",
+        options: ["Metal ions", "Ligands attached to the metal", "Oxidation states", "Electrons in d-orbitals"],
+        correct: 1
+      },
+      {
+        question: "The colour of coordination compounds is due to:",
+        options: ["d-d transitions", "s-s transitions", "p-p transitions", "Ligand vibrations"],
+        correct: 0
+      },
+      {
+        question: "Magnetic properties of coordination compounds depend on:",
+        options: ["Number of paired electrons", "Number of unpaired electrons", "Ligand size", "Coordination number"],
+        correct: 1
+      },
+      {
+        question: "The shape of a complex with coordination number 6 is typically:",
+        options: ["Tetrahedral", "Octahedral", "Linear", "Square planar"],
+        correct: 1
+      },
+      {
+        question: "According to Werner’s theory, primary valency corresponds to:",
+        options: ["Coordination number", "Oxidation state", "Number of ligands", "Secondary valency"],
+        correct: 1
+      },
+      {
+        question: "In Valence Bond Theory (VBT), the geometry of a complex is determined by:",
+        options: ["Hybridization of metal orbitals", "Ligand size", "Oxidation state", "Crystal field splitting"],
+        correct: 0
+      },
+      {
+        question: "Crystal Field Theory (CFT) explains bonding in terms of:",
+        options: ["Covalent bonding", "Electrostatic interactions", "Ionic bonding", "Metallic bonding"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of [Co(NH₃)₆]Cl₃ is:",
+        options: ["Hexaamminecobalt(III) chloride", "Cobalt(III) hexaammine chloride", "Hexaamminecobalt(II) chloride", "Cobalt hexaammine trichloride"],
+        correct: 0
+      },
+      {
+        question: "A monodentate ligand donates:",
+        options: ["One electron pair", "Two electron pairs", "Three electron pairs", "No electron pairs"],
+        correct: 0
+      },
+      {
+        question: "An example of a bidentate ligand is:",
+        options: ["NH₃", "Cl⁻", "en (ethylenediamine)", "H₂O"],
+        correct: 2
+      },
+      {
+        question: "The coordination number of [PtCl₂(NH₃)₂] is:",
+        options: ["2", "4", "6", "8"],
+        correct: 1
+      },
+      {
+        question: "The oxidation state of Co in [Co(NH₃)₅Cl]Cl₂ is:",
+        options: ["+1", "+2", "+3", "+4"],
+        correct: 2
+      },
+      {
+        question: "The shape of [Ni(CN)₄]²⁻ is:",
+        options: ["Tetrahedral", "Square planar", "Octahedral", "Linear"],
+        correct: 1
+      },
+      {
+        question: "The complex [Fe(H₂O)₆]²⁺ is paramagnetic due to:",
+        options: ["No unpaired electrons", "Unpaired d-electrons", "Complete d-orbitals", "Ligand field"],
+        correct: 1
+      },
+      {
+        question: "In CFT, the splitting of d-orbitals in an octahedral field produces:",
+        options: ["t₂g and e_g orbitals", "d_xy and d_z² orbitals", "s and p orbitals", "f and d orbitals"],
+        correct: 0
+      },
+      {
+        question: "The crystal field splitting energy (Δ) is larger for:",
+        options: ["Tetrahedral complexes", "Octahedral complexes", "Linear complexes", "Square planar complexes"],
+        correct: 1
+      },
+      {
+        question: "The complex [CoF₆]³⁻ is:",
+        options: ["Low spin", "High spin", "Diamagnetic", "Non-magnetic"],
+        correct: 1
+      },
+      {
+        question: "Geometrical isomerism is possible in:",
+        options: ["[Co(NH₃)₆]³⁺", "[Co(NH₃)₄Cl₂]⁺", "[CoF₆]³⁻", "[Ni(CN)₄]²⁻"],
+        correct: 1
+      },
+      {
+        question: "Optical isomerism is shown by complexes with coordination number:",
+        options: ["4 (tetrahedral)", "4 (square planar)", "6 (octahedral)", "2 (linear)"],
+        correct: 2
+      },
+      {
+        question: "The IUPAC name of [Pt(NH₃)₂Cl₂] is:",
+        options: ["Diamminedichloroplatinum(II)", "Platinum(II) diammine dichloride", "Diamminedichloroplatinum(IV)", "Platinum diammine chloride"],
+        correct: 0
+      },
+      {
+        question: "Coordination compounds are important in qualitative analysis for detecting:",
+        options: ["Metal ions", "Non-metals", "Organic compounds", "Gases"],
+        correct: 0
+      },
+      {
+        question: "The complex used in the extraction of gold is:",
+        options: ["[Au(CN)₂]⁻", "[Ag(CN)₂]⁻", "[Cu(NH₃)₄]²⁺", "[Ni(CN)₄]²⁻"],
+        correct: 0
+      },
+      {
+        question: "Haemoglobin contains a coordination complex of:",
+        options: ["Fe", "Cu", "Zn", "Mg"],
+        correct: 0
+      },
+      {
+        question: "Werner’s theory explains the nature of:",
+        options: ["Primary and secondary valencies", "Covalent bonds", "Ionic bonds", "Hydrogen bonds"],
+        correct: 0
+      },
+      {
+        question: "In VBT, the complex [Ni(H₂O)₆]²⁺ involves:",
+        options: ["sp³ hybridization", "sp³d² hybridization", "d²sp³ hybridization", "sp³d hybridization"],
+        correct: 1
+      },
+      {
+        question: "The ligand CN⁻ is a:",
+        options: ["Weak field ligand", "Strong field ligand", "Neutral ligand", "Non-coordinating ligand"],
+        correct: 1
+      },
+      {
+        question: "The complex [NiCl₄]²⁻ is:",
+        options: ["Diamagnetic", "Paramagnetic", "Low spin", "Octahedral"],
+        correct: 1
+      },
+      {
+        question: "The number of geometrical isomers of [Co(NH₃)₃Cl₃] is:",
+        options: ["0", "2", "3", "4"],
+        correct: 1
+      },
+      {
+        question: "The coordination compound used in chemotherapy is:",
+        options: ["Cisplatin", "EDTA", "DMG", "Haemoglobin"],
+        correct: 0
+      },
+      {
+        question: "The ligand EDTA is:",
+        options: ["Monodentate", "Bidentate", "Hexadentate", "Tridentate"],
+        correct: 2
+      },
+      {
+        question: "The IUPAC name of K₃[Fe(CN)₆] is:",
+        options: ["Potassium hexacyanoferrate(III)", "Potassium hexacyanoferrate(II)", "Potassium ferrocyanide", "Potassium ferricyanide"],
+        correct: 0
+      },
+      {
+        question: "The complex [Co(en)₃]³⁺ shows:",
+        options: ["Geometrical isomerism", "Optical isomerism", "Linkage isomerism", "Ionization isomerism"],
+        correct: 1
+      },
+      {
+        question: "The coordination number of [Cu(NH₃)₄]²⁺ is:",
+        options: ["2", "4", "6", "8"],
+        correct: 1
+      },
+      {
+        question: "The ligand that causes large crystal field splitting is:",
+        options: ["F⁻", "H₂O", "CN⁻", "Cl⁻"],
+        correct: 2
+      },
+      {
+        question: "The complex [Fe(CN)₆]⁴⁻ is:",
+        options: ["High spin", "Low spin", "Paramagnetic", "Tetrahedral"],
+        correct: 1
+      },
+      {
+        question: "Linkage isomerism is shown by ligands like:",
+        options: ["NO₂⁻", "NH₃", "H₂O", "Cl⁻"],
+        correct: 0
+      },
+      {
+        question: "The shape of [Zn(NH₃)₄]²⁺ is:",
+        options: ["Tetrahedral", "Square planar", "Octahedral", "Linear"],
+        correct: 0
+      },
+      {
+        question: "The complex used in the extraction of silver is:",
+        options: ["[Ag(CN)₂]⁻", "[Au(CN)₂]⁻", "[Cu(NH₃)₄]²⁺", "[Ni(CN)₄]²⁻"],
+        correct: 0
+      },
+      {
+        question: "Chlorophyll contains a coordination complex of:",
+        options: ["Fe", "Cu", "Mg", "Zn"],
+        correct: 2
+      },
+      {
+        question: "The oxidation state of Ni in [Ni(CN)₄]²⁻ is:",
+        options: ["0", "+1", "+2", "+3"],
+        correct: 2
+      },
+      {
+        question: "The complex [Cr(H₂O)₆]³⁺ is paramagnetic due to:",
+        options: ["No unpaired electrons", "Three unpaired d-electrons", "Complete d-orbitals", "Ligand field"],
+        correct: 1
+      },
+      {
+        question: "The IUPAC name of [Co(NH₃)₅(NO₂)]Cl₂ is:",
+        options: ["Pentaamminenitrocobalt(III) chloride", "Pentaamminenitritocobalt(III) chloride", "Pentaamminenitrocobalt(II) chloride", "Cobalt pentaammine nitrochloride"],
+        correct: 0
+      },
+      {
+        question: "Ionization isomerism is shown by:",
+        options: ["[Co(NH₃)₅Br]SO₄ and [Co(NH₃)₅SO₄]Br", "[Co(NH₃)₆]Cl₃", "[Ni(CN)₄]²⁻", "[Zn(NH₃)₄]²⁺"],
+        correct: 0
+      },
+      {
+        question: "The coordination compound used in qualitative analysis of Ni²⁺ is:",
+        options: ["DMG", "EDTA", "Cisplatin", "Haemoglobin"],
+        correct: 0
+      },
+      {
+        question: "In CFT, the t₂g orbitals are:",
+        options: ["Lower in energy than e_g", "Higher in energy than e_g", "Equal in energy to e_g", "Not split"],
+        correct: 0
+      },
+      {
+        question: "The complex [Mn(H₂O)₆]²⁺ is:",
+        options: ["Low spin", "High spin", "Diamagnetic", "Square planar"],
+        correct: 1
+      },
+      {
+        question: "The number of optical isomers of [Co(en)₂Cl₂]⁺ is:",
+        options: ["0", "1", "2", "3"],
+        correct: 2
+      },
+      {
+        question: "The importance of coordination compounds in biological systems includes:",
+        options: ["Haemoglobin and chlorophyll", "Sugar metabolism", "Fat synthesis", "Water purification"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      optionsEl.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.onclick = () => selectOption(index);
+        optionsEl.appendChild(div);
+      });
+      feedbackEl.textContent = '';
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const options = optionsEl.children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected');
+        if (i === q.correct) {
+          options[i].classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          options[i].classList.add('incorrect');
+        }
+      }
+      options[index].classList.add('selected');
+      if (index === q.correct) {
+        feedbackEl.textContent = 'Correct!';
+        if (!options[index].classList.contains('counted')) {
+          score++;
+          options[index].classList.add('counted');
+        }
+      } else {
+        feedbackEl.textContent = `Incorrect! The correct answer is: ${q.options[q.correct]}`;
+      }
+    }
+
+    prevBtn.onclick = () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        questionEl.textContent = 'Quiz Completed!';
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        resultEl.textContent = `Your Score: ${score} out of ${questions.length}`;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>
